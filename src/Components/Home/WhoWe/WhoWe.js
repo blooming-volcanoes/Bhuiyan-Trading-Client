@@ -7,7 +7,7 @@ export default function WhoWe() {
       <div className="container mx-auto flex h-[550px] items-center justify-center px-20">
         <div className="w-[50%]">
           <h3 className="mb-3 text-4xl text-white">Who we are?</h3>
-          <p className="text-xl text-white">
+          <p className="text-justify text-xl text-white">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dicta
             iste nam perferendis fugit. Numquam, repudiandae! Ipsa rerum,
             aspernatur incidunt nemo odio ratione accusamus nam eligendi eius
