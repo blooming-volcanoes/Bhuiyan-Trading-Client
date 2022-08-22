@@ -1,6 +1,7 @@
 import Banner from "./Banner/Banner";
 import Header from "./Header/Header";
 import OurProducts from "./OurProducts/OurProducts";
+import WhoWe from "./WhoWe/WhoWe";
 
 function Home() {
   return (
@@ -8,6 +9,7 @@ function Home() {
       <Header />
       <Banner />
       <OurProducts />
+      <WhoWe />
     </div>
   );
 }
