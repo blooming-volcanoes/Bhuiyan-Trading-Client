@@ -1,10 +1,13 @@
 import React from "react";
-import whowe from "../../../assets/Images/whowe.png";
+import shipequipment from "../../../assets/Images/shipequipment.jpg";
 
-export default function WhoWe() {
+export default function ShipEquipment() {
   return (
-    <section className="whowe-bg py-5">
-      <div className="container mx-auto items-center justify-center px-20 lg:flex ">
+    <section className="whowe-bg">
+      <div className="mx-auto items-center justify-between pr-20 lg:flex ">
+        <div className="lg:w-[50%]">
+          <img className="w-full " src={shipequipment} alt="" />
+        </div>
         <div className="lg:w-[50%]">
           <h3 className="mb-3 text-4xl text-white">Who we are?</h3>
           <p className="text-justify text-xl text-white">
@@ -17,9 +20,6 @@ export default function WhoWe() {
             sint necessitatibus ullam eos! Quo nemo et quod maiores harum.
             Numquam enim nisi id.
           </p>
-        </div>
-        <div className="lg:w-[50%]">
-          <img className="w-full p-6" src={whowe} alt="" />
         </div>
       </div>
     </section>
