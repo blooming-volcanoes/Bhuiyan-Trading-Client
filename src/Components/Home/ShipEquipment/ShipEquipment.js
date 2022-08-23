@@ -3,12 +3,12 @@ import shipequipment from "../../../assets/Images/shipequipment.jpg";
 
 export default function ShipEquipment() {
   return (
-    <section className="whowe-bg">
+    <section className=" bg-blue-900">
       <div className="mx-auto items-center justify-between pr-20 lg:flex ">
         <div className="lg:w-[50%]">
           <img className="w-full " src={shipequipment} alt="" />
         </div>
-        <div className="lg:w-[50%]">
+        <div className="px-4 lg:w-[50%]">
           <h3 className="mb-3 text-4xl text-white">Who we are?</h3>
           <p className="text-justify text-xl text-white">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum
