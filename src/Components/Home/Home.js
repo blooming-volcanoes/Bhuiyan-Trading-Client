@@ -1,4 +1,5 @@
 import Banner from "./Banner/Banner";
+import Footer from "./Footer/Footer";
 import Future from "./Future/Future";
 import Header from "./Header/Header";
 import OurProducts from "./OurProducts/OurProducts";
@@ -18,6 +19,7 @@ function Home() {
       <ShipEquipment />
       <Search />
       <PopularProducts />
+      <Footer />
     </div>
   );
 }

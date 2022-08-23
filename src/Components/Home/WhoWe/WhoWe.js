@@ -3,9 +3,9 @@ import whowe from "../../../assets/Images/whowe.png";
 
 export default function WhoWe() {
   return (
-    <section className="whowe-bg py-5">
-      <div className="container mx-auto items-center justify-center px-20 lg:flex ">
-        <div className="lg:w-[50%]">
+    <section className="whowe-bg py-20">
+      <div className="mx-5 flex max-w-full flex-col items-center justify-center lg:mx-auto lg:max-w-6xl lg:flex-row">
+        <div className="order-2 mt-5 md:order-2 lg:order-1 lg:mt-0 lg:w-[50%]">
           <h3 className="mb-3 text-4xl text-white">Who we are?</h3>
           <p className="text-justify text-xl text-white">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum
@@ -18,8 +18,8 @@ export default function WhoWe() {
             Numquam enim nisi id.
           </p>
         </div>
-        <div className="lg:w-[50%]">
-          <img className="w-full p-6" src={whowe} alt="" />
+        <div className="order-1 md:order-1 lg:order-2 lg:w-[50%]">
+          <img className="mx-auto w-full lg:w-[400px]" src={whowe} alt="" />
         </div>
       </div>
     </section>

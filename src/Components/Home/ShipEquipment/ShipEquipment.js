@@ -4,12 +4,12 @@ import shipequipment from "../../../assets/Images/shipequipment.jpg";
 export default function ShipEquipment() {
   return (
     <section className=" bg-blue-900">
-      <div className="mx-auto items-center justify-between pr-20 lg:flex ">
+      <div className="mx-auto items-center  justify-center lg:flex lg:justify-between ">
         <div className="lg:w-[50%]">
           <img className="w-full " src={shipequipment} alt="" />
         </div>
         <div className="px-4 lg:w-[50%]">
-          <h3 className="mb-3 text-4xl text-white">Who we are?</h3>
+          <h3 className="mb-3 text-4xl text-white">Our Research</h3>
           <p className="text-justify text-xl text-white">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum
             excepturi esse ipsum hic aspernatur doloribus vel ad eligendi est,
