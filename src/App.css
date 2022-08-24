@@ -10,3 +10,9 @@
     rgba(126, 23, 31, 1) 100%
   );
 }
+
+@layer components {
+  .main-container {
+    @apply mx-5 max-w-full lg:mx-auto lg:max-w-6xl;
+  }
+}
