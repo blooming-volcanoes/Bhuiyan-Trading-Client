@@ -1,7 +1,18 @@
 import React from "react";
 import bgTop from "../../assets/Images/bg-top.png";
+import dummy from "../../assets/Images/dummy.jpg";
 import fish1 from "../../assets/Images/fish1.jpg";
 import PageLayout from "../../layouts/PageLayout";
+
+const blogs = [
+  {
+    title: "This is the title This is the title",
+    img: dummy,
+    timeStamps: new Date().toLocaleDateString(),
+    content:
+      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated ",
+  },
+];
 
 function LatestNews() {
   return (
@@ -43,6 +54,26 @@ function LatestNews() {
               facere qui possimus, excepturi
             </p>
           </div>
+        </div>
+
+        {/* All blogs */}
+        <div className=" main-container grid grid-cols-1 gap-6 py-10 md:grid-cols-2 lg:grid-cols-4">
+          {Array(8)
+            .fill(blogs[0])
+            .map((blog, i) => (
+              <div
+                className="space-y-2 rounded-lg bg-white py-4 px-2 shadow-2xl"
+                key={i}
+              >
+                <img className="rounded" src={dummy} alt="" />
+                <p className="text-lg font-semibold">{blog.title}</p>
+                <p className="text-xs font-semibold">
+                  Date : {new Date().toLocaleDateString()} Time :{" "}
+                  {new Date().toLocaleTimeString()}
+                </p>
+                <p className="font-semibold">{blog.content}</p>
+              </div>
+            ))}
         </div>
       </section>
     </PageLayout>
