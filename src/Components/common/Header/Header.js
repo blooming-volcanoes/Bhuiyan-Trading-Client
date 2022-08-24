@@ -1,53 +1,51 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import logo from "../../../assets/Images/logo.png";
 
-const menus = [
-  {
-    name: "Home",
-  },
-  {
-    name: "Our Products",
-  },
-  {
-    name: "Contact Us",
-  },
-];
-
-function Header() {
+const Header = () => {
+  let Links = [
+    { name: "HOME", link: "/" },
+    { name: "SERVICE", link: "/" },
+    { name: "ABOUT", link: "/" },
+    { name: "BLOG'S", link: "/" },
+    { name: "CONTACT", link: "/" },
+  ];
+  let [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-gray-200 bg-gray-100">
-      <nav className="max-w-3xl px-4 py-2 md:mx-auto md:max-w-7xl lg:mx-auto lg:max-w-7xl ">
-        <div className="flex justify-between">
-          {/* left side */}
-          <div className="flex items-center space-x-3 ">
-            {/* logo */}
-            <div>
-              <div className="relative  cursor-pointer py-2">
-                <Link to="/">
-                  <img
-                    className=" w-[90px]"
-                    src={logo}
-                    alt=""
-                    layout="fill"
-                    objectFit="contain"
-                  />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* right side */}
-          <ul className="flex items-center space-x-5">
-            {menus.map((menu, i) => (
-              <li className=" font-medium text-red-500" key={i}>
-                {menu.name}
-              </li>
-            ))}
-          </ul>
+    <div className="fixed top-0 left-0 w-full shadow-md">
+      <div className="items-center justify-between bg-white py-4 px-7 md:flex md:px-10">
+        <div>
+          <img className="h-10" src={logo} alt="" />
         </div>
-      </nav>
-    </header>
+
+        <div
+          onClick={() => setOpen(!open)}
+          className="absolute right-8 top-6 cursor-pointer text-3xl md:hidden"
+        >
+          <ion-icon name={open ? "close" : "menu"}></ion-icon>
+        </div>
+
+        <ul
+          className={`absolute left-0 z-[-1] w-full bg-white pb-12 pl-9 transition-all duration-500 ease-in md:static md:z-auto md:flex md:w-auto md:items-center md:pb-0 md:pl-0 ${
+            open ? "top-20 " : "top-[-490px]"
+          }`}
+        >
+          {Links.map((link) => (
+            <li key={link.name} className="my-7 text-xl md:my-0 md:ml-8">
+              <a
+                href={link.link}
+                className="text-gray-800 duration-500 hover:text-gray-400"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+          {/* <Button>
+          Get Started
+        </Button> */}
+        </ul>
+      </div>
+    </div>
   );
-}
+};
 
 export default Header;
