@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../../assets/Images/logo.png";
 
 const menus = [
@@ -22,13 +23,15 @@ function Header() {
             {/* logo */}
             <div>
               <div className="relative  cursor-pointer py-2">
-                <img
-                  className=" w-[90px]"
-                  src={logo}
-                  alt=""
-                  layout="fill"
-                  objectFit="contain"
-                />
+                <Link to="/">
+                  <img
+                    className=" w-[90px]"
+                    src={logo}
+                    alt=""
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                </Link>
               </div>
             </div>
           </div>

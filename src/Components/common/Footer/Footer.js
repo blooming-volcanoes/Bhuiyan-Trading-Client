@@ -19,7 +19,7 @@ function Footer() {
             {Array(4)
               .fill("")
               .map((_, i) => (
-                <a href="#">
+                <a key={i} href="#">
                   <img className="h-10 w-10" src={facebook} alt="" />
                 </a>
               ))}
@@ -29,12 +29,15 @@ function Footer() {
         {Array(3)
           .fill("")
           .map((_, i) => (
-            <ul className="mb-4 space-y-3 text-center lg:mb-0 lg:text-start">
+            <ul
+              key={i}
+              className="mb-4 space-y-3 text-center lg:mb-0 lg:text-start"
+            >
               <li className="font-medium">Who we are</li>
               {Array(7)
                 .fill("About")
-                .map((menus) => (
-                  <li>{menus}</li>
+                .map((menus, i) => (
+                  <li key={i}>{menus}</li>
                 ))}
             </ul>
           ))}
