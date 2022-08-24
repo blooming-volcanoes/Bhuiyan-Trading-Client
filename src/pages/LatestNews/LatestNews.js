@@ -1,0 +1,52 @@
+import React from "react";
+import bgTop from "../../assets/Images/bg-top.png";
+import fish1 from "../../assets/Images/fish1.jpg";
+import PageLayout from "../../layouts/PageLayout";
+
+function LatestNews() {
+  return (
+    <PageLayout>
+      <section>
+        {/* latest News Banner */}
+
+        <div
+          className="bg-[#BCCEFF] bg-right-top bg-no-repeat"
+          style={{ backgroundImage: `url('${bgTop}')` }}
+        >
+          <div className="main-container flex h-full min-h-[300px] items-center">
+            <h1 className="text-4xl font-medium">Latest News</h1>
+          </div>
+        </div>
+
+        {/* Recent Blog */}
+        <div className="main-container grid grid-cols-1 gap-x-10 gap-y-10 py-10 md:grid-cols-2 lg:grid-cols-2 lg:gap-y-0">
+          {/* blog Image */}
+          <img className="rounded" src={fish1} alt="" />
+
+          {/* blog contents */}
+          <div className="space-y-4">
+            <p className="text-sm font-semibold">
+              Date : {new Date().toLocaleDateString()} Time :{" "}
+              {new Date().toLocaleTimeString()}
+            </p>
+
+            <h1 className="text-3xl font-semibold">This is the title</h1>
+            <p className="text-justify font-semibold">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Deleniti, magni exercitationem aliquid et recusandae praesentium.
+              Molestiae, velit cupiditate dolore similique soluta ea provident
+              eius dolor voluptatem tenetur sapiente maiores, officiis fugiat
+              nesciunt nostrum laboriosam? Sit itaque nam illum, repellendus
+              impedit doloribus enim, ad repudiandae sunt, aliquam aperiam
+              repellat veritatis obcaecati. Autem ipsam eos perferendis labore
+              porro voluptates tempore eum nesciunt non illum minima laudantium
+              facere qui possimus, excepturi
+            </p>
+          </div>
+        </div>
+      </section>
+    </PageLayout>
+  );
+}
+
+export default LatestNews;
