@@ -3,7 +3,11 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "shipment-bg": "url('/src/assets/Images/shipment-bg.jpg')",
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };
