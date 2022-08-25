@@ -1,7 +1,7 @@
 import React from 'react';
+import facebook from "../../assets/Images/facebook.png";
 import fish1 from "../../assets/Images/fish1.jpg";
 import PageLayout from '../../layouts/PageLayout';
-
 const BlogPage = () => {
   return (
     <PageLayout>
@@ -18,10 +18,25 @@ const BlogPage = () => {
       </div>
 
       {/* Recent Blog */}
-      <div className="flex h-96 py-7">
+      <div className="grid  md:grid-cols-6 gap-1 ">
         {/* blog Image */}
-        <img className="rounded" src={fish1} alt=""   width="80%" />
+        <div className="col-span-5 ">
 
+        <img className="rounded object-cover md:h-96 md:w-full" src={fish1} alt=""  />
+        </div>
+    <div  className="md:my-auto mx-auto ml-4">
+    <ul className='gap-x-3'>
+          <li className="flex gap-3 md:flex-col   md:space-y-3">
+            {Array(3)
+              .fill("")
+              .map((_, i) => (
+                <a key={i} href="#">
+                  <img className="h-10 w-10" src={facebook} alt="" />
+                </a>
+              ))}
+          </li>
+        </ul>
+    </div>
         {/* blog contents */}
   
       </div>
@@ -39,9 +54,6 @@ const BlogPage = () => {
             porro voluptates tempore eum nesciunt non illum minima laudantium
             facere qui possimus, excepturi
           </p>
-          <div>
-            
-          </div>
           <p className="text-justify font-semibold">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit.
             Deleniti, magni exercitationem aliquid et recusandae praesentium.
@@ -53,6 +65,10 @@ const BlogPage = () => {
             porro voluptates tempore eum nesciunt non illum minima laudantium
             facere qui possimus, excepturi
           </p>
+          <div>
+            
+          </div>
+          
         </div>
       </div>
      
