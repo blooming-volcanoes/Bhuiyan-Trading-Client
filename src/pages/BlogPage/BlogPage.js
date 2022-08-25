@@ -12,7 +12,7 @@ const BlogPage = () => {
         <div
           className=""
         >
-          <div className="max-w-4xl mx-auto flex h-full min-h-[300px] items-center mx-5">
+          <div className="max-w-4xl md:mx-auto flex h-full min-h-[300px] items-center mx-5">
            
             <div className='mt-20'>
             <h1 className="text-4xl font-medium">This is title where i am going to write the tile of a page. this is title. 
@@ -39,7 +39,7 @@ const BlogPage = () => {
                 {Array(3)
                   .fill("")
                   .map((_, i) => (
-                    <a key={i} href="#">
+                    <a key={i} href="/">
                       <img className="h-10 w-10" src={facebook} alt="" />
                     </a>
                   ))}
@@ -69,13 +69,13 @@ const BlogPage = () => {
                 <h3 className='font-bold'>Category</h3>
                 <hr />
               <li className="  gap-3  md:space-y-3">
-              {'>'} <a href='#' >Fish</a>
+              {'>'} <a href='/' >Fish</a>
               </li>
               <li className=" gap-3  md:space-y-3">
-             {'>'} <a href='#' >Fish</a>
+             {'>'} <a href='/' >Fish</a>
               </li>
               <li className=" gap-3 md:space-y-3">
-              {'>'} <a href='#' >Fish</a>
+              {'>'} <a href='/' >Fish</a>
                     
               </li>
             </ol>
@@ -122,7 +122,7 @@ const BlogPage = () => {
                 {Array(3)
                   .fill("")
                   .map((_, i) => (
-                    <a key={i} href="#">
+                    <a key={i} href="/">
                       <img className="h-10 w-10" src={facebook} alt="" />
                     </a>
                   ))}
