@@ -66,16 +66,17 @@ const BlogPage = () => {
               facere qui possimus, excepturi
               </p>
               <ol className='md:gap-x-3 py-5 mx-auto '>
-                <h3>Category</h3>
+                <h3 className='font-bold'>Category</h3>
                 <hr />
-              <li className="flex font-bold gap-3 md:flex-col   md:space-y-3">
-                    Fish
+              <li className="  gap-3  md:space-y-3">
+              {'>'} <a href='#' >Fish</a>
               </li>
-              <li className="flex font-bold gap-3 md:flex-col   md:space-y-3">
-                    Fish
+              <li className=" gap-3  md:space-y-3">
+             {'>'} <a href='#' >Fish</a>
               </li>
-              <li className="flex font-bold   gap-3 md:flex-col   md:space-y-3">
-                    Fish
+              <li className=" gap-3 md:space-y-3">
+              {'>'} <a href='#' >Fish</a>
+                    
               </li>
             </ol>
               </div>
