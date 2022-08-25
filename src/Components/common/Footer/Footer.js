@@ -4,7 +4,7 @@ import logo from "../../../assets/Images/logo.png";
 
 function Footer() {
   return (
-    <section className="bg-[/282828] pb-5 text-white ">
+    <section className="bg-[#282828] pb-5 text-white ">
       <div className="mx-auto mb-20 grid w-2/3 grid-cols-1 pt-5 lg:w-full lg:max-w-6xl lg:grid-cols-4">
         {/* Contact Us */}
         <ul className="mx-auto mb-4 space-y-2 lg:mx-0">
