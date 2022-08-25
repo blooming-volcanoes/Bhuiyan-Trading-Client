@@ -1,21 +1,21 @@
+import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import BlogPage from "./pages/BlogPage/BlogPage";
-
-import Category from "./pages/Category/Category";
-
 import Home from "./pages/Homepage/Home";
-import LatestNews from "./pages/LatestNews/LatestNews";
+
+const LatestNews = React.lazy(() => import("./pages/LatestNews/LatestNews"));
+const Category = React.lazy(() => import("./pages/Category/Category"));
+const BlogPage = React.lazy(() => import("./pages/BlogPage/BlogPage"));
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/latestNews" element={<LatestNews />} />
-
-      <Route path="/blogPage" element={<BlogPage />} />
-
-      <Route path="/categories" element={<Category />} />
-    </Routes>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/latestNews" element={<LatestNews />} />
+        <Route path="/blogPage" element={<BlogPage />} />
+        <Route path="/categories" element={<Category />} />
+      </Routes>
+    </Suspense>
   );
 }
 
