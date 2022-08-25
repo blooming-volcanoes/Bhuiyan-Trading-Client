@@ -81,9 +81,6 @@ const BlogPage = () => {
             </ol>
               </div>
             <p className="text-justify font-semibold col-auto ">
-             
-
-
              <br />
              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
              Deleniti, magni exercitationem aliquid et recusandae praesentium.
@@ -116,41 +113,11 @@ const BlogPage = () => {
           
             
           </div>
-          {/* <div className='grow-0'>
-            <ul className='gap-x-3'>
-              <li className="flex gap-3 md:flex-col   md:space-y-3">
-                {Array(3)
-                  .fill("")
-                  .map((_, i) => (
-                    <a key={i} href="/">
-                      <img className="h-10 w-10" src={facebook} alt="" />
-                    </a>
-                  ))}
-              </li>
-            </ul>
-          </div> */}
+         
         </div>
 
 
-        {/* All blogs */}
-        {/* <div className=" main-container grid grid-cols-1 gap-6 py-10 md:grid-cols-2 lg:grid-cols-4">
-        {Array(8)
-          .fill(blogs[0])
-          .map((blog, i) => (
-            <div
-              className="space-y-2 rounded-lg bg-white py-4 px-2 shadow-2xl"
-              key={i}
-            >
-              <img className="rounded" src={dummy} alt="" />
-              <p className="text-lg font-semibold">{blog.title}</p>
-              <p className="text-xs font-semibold">
-                Date : {new Date().toLocaleDateString()} Time :{" "}
-                {new Date().toLocaleTimeString()}
-              </p>
-              <p className="font-semibold">{blog.content}</p>
-            </div>
-          ))}
-      </div> */}
+       
       </section>
     </PageLayout>
   )
