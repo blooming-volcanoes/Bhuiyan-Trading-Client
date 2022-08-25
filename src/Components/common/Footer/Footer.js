@@ -12,14 +12,14 @@ function Footer() {
             <img src={logo} alt="" />
           </li>
           <li className="space-x-2 text-2xl">
-            <a href="#">About. </a>
-            <a href="#">Contact Us</a>
+            <a href="/">About. </a>
+            <a href="/">Contact Us</a>
           </li>
           <li className="flex space-x-3">
             {Array(4)
               .fill("")
               .map((_, i) => (
-                <a key={i} href="#">
+                <a key={i} href="/">
                   <img className="h-10 w-10" src={facebook} alt="" />
                 </a>
               ))}
