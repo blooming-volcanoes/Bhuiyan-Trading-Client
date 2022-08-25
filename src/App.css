@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.banner-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(./assets/Images/bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .whowe-bg {
   background: rgb(206, 25, 49);
   background: linear-gradient(
@@ -10,9 +18,11 @@
     rgba(126, 23, 31, 1) 100%
   );
 }
-
 @layer components {
   .main-container {
     @apply mx-5 max-w-full lg:mx-auto lg:max-w-6xl;
+  }
+  .banner-btn {
+    @apply mt-6 rounded-lg border-2 border-red-700 bg-white py-2 px-4 text-2xl font-bold text-red-700;
   }
 }

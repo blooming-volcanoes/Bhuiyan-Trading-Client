@@ -1,26 +1,19 @@
-import bg from "../../../assets/Images/bg.jpg";
-
 function Banner() {
   return (
-    <section
-      className="flex h-full min-h-[550px] bg-center bg-no-repeat p-20"
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${bg}')`,
-      }}
-    >
-      <div className="flex w-full flex-col items-center justify-center space-y-10 lg:items-start lg:justify-start">
-        <h1 className="text-center text-6xl font-bold text-white lg:text-start lg:text-7xl ">
-          <span className="text-xl font-medium lg:text-3xl"> Welcome</span>{" "}
-          <br /> Bhuiya Trading <br />{" "}
-          <span className="text-2xl font-medium lg:text-4xl">Corporation</span>
-        </h1>
-
-        <button
-          className="w-full rounded border-2 border-red-500 bg-white py-2  px-6 font-medium text-red-500 hover:bg-gray-100 lg:w-[200px]"
-          type="button"
-        >
-          Our Products
-        </button>
+    <section className="banner-bg h-screen">
+      <div className="main-container flex h-full items-center justify-center md:justify-start">
+        <div className="text-center md:text-left">
+          <h3 className="text-2xl font-bold text-white md:text-4xl">Welcome</h3>
+          <h1 className="text-[50px] font-bold text-white md:text-[70px]">
+            Bhuiyan Trading
+          </h1>
+          <h3 className="text-2xl font-bold text-white md:text-4xl">
+            Corporation
+          </h3>
+          <button className="banner-btn" type="button">
+            Our Products
+          </button>
+        </div>
       </div>
     </section>
   );
