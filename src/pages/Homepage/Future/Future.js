@@ -3,18 +3,22 @@ import future from "../../../assets/Images/future.png";
 
 export default function Future() {
   return (
-    <section className="py-5">
-      <div className="container mx-auto items-center justify-center px-20 lg:flex ">
-        <div className="lg:w-[50%]">
-          <img className="w-full p-6" src={future} alt="" />
-        </div>
-        <div className="lg:w-[50%]">
-          <p className="text-justify text-xl font-bold text-black">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque,
-            maiores, nihil fuga unde amet quia deleniti explicabo vitae
-            molestiae optio ipsam, asperiores harum eligendi excepturi! At
-            placeat quas et sint?
-          </p>
+    <section className="py-4">
+      <div className="main-container">
+        <div className="grid-cols-2 items-center md:grid">
+          <div className="">
+            <img className="w-full p-4" src={future} alt="" />
+          </div>
+          <div className="">
+            <p className="text-justify text-xl font-bold text-black">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
+              repellendus impedit placeat adipisci quibusdam iure vel sequi
+              reprehenderit nobis. Facilis tempora nam sapiente sequi, officiis
+              dolorem quos inventore aspernatur facere. Autem sint accusamus
+              minus corrupti animi, veritatis neque aut distinctio doloremque
+              veniam molestiae delectus magni totam eum libero error a?
+            </p>
+          </div>
         </div>
       </div>
     </section>
