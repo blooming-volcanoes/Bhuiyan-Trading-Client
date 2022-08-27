@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import logo from "../../../assets/Images/logo.png";
 
-const Header = () => {
+const Header = ({ color }) => {
   let Links = [
     { name: "Home", link: "/" },
-    { name: "Our Products", link: "/" },
-    { name: "Contact Us", link: "/" },
+    { name: "Category", link: "/categories" },
+    { name: "Contact Us", link: "/contact" },
+    { name: "Latest News", link: "/latestNews" },
+    { name: "Blog", link: "/blogPage" },
   ];
   let [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 bg-[#243e4aa6]  shadow-md">
+    <header
+      style={{
+        backgroundColor: `${color ? `rgba(${color.R}, ${color.G}, ${color.B}, 0.8)` : '#243e4aa6'}`
+      }}
+      className="sticky top-0 shadow-md z-10">
       <nav className="main-container items-center justify-between md:flex">
         <div className="rounded-b-lg bg-white px-2 pt-5 pb-3">
           <img className="h-16" src={logo} alt="" />
@@ -23,9 +29,8 @@ const Header = () => {
         </div>
 
         <ul
-          className={`absolute left-0 z-[-1] w-full bg-[#243e4aa6] pb-5 pl-9 transition-all duration-500 ease-in md:static md:z-auto md:flex md:w-auto md:items-center md:bg-transparent md:pb-0 md:pl-0 ${
-            open ? "top-20 " : "top-[-490px]"
-          }`}
+          className={`absolute left-0 z-[-1] w-full bg-[#243e4aa6] pb-5 pl-9 transition-all duration-500 ease-in md:static md:z-auto md:flex md:w-auto md:items-center md:bg-transparent md:pb-0 md:pl-0 ${open ? "top-20 " : "top-[-490px]"
+            }`}
         >
           {Links.map((link) => (
             <li key={link.name} className="my-7 text-lg md:my-0 md:ml-8">
