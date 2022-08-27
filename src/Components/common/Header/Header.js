@@ -9,7 +9,7 @@ const Header = () => {
   ];
   let [open, setOpen] = useState(false);
   return (
-    <header className="fixed top-0 left-0 w-full bg-[#243e4aa6]  shadow-md">
+    <header className="fixed top-0 left-0 z-10 w-full bg-[#243e4aa6]  shadow-md">
       <nav className="main-container items-center justify-between md:flex">
         <div className="rounded-b-lg bg-white px-2 pt-5 pb-3">
           <img className="h-16" src={logo} alt="" />

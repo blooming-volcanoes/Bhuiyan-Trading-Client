@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         "shipment-bg": "url('/src/assets/Images/shipment-bg.jpg')",
+        "rope-as-bg": "url('/src/assets/Images/rope.jpg')",
       },
     },
   },
