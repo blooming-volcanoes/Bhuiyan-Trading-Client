@@ -10,6 +10,22 @@
   background-size: cover;
 }
 
+.boat-as-bg {
+  background-image: linear-gradient(
+      to top,
+      #000000c9,
+      #3b3b3ba9,
+      #77777765,
+      #b9b9b900,
+      #ffffff00
+    ),
+    url(./assets/Images/boat.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 273px;
+}
+
 .whowe-bg {
   background: rgb(206, 25, 49);
   background: linear-gradient(
@@ -23,6 +39,6 @@
     @apply mx-5 max-w-full lg:mx-auto lg:max-w-6xl;
   }
   .banner-btn {
-    @apply mt-6 rounded-lg border-2 border-red-700 bg-white py-2 px-4 text-2xl font-bold text-red-700;
+    @apply mt-6 rounded-lg border-2 border-red-700 bg-white py-2 px-4 text-2xl font-bold text-red-700 transition-all ease-in hover:bg-red-700 hover:text-white;
   }
 }
