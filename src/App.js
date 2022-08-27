@@ -5,6 +5,7 @@ import Home from "./pages/Homepage/Home";
 const LatestNews = React.lazy(() => import("./pages/LatestNews/LatestNews"));
 const Category = React.lazy(() => import("./pages/Category/Category"));
 const BlogPage = React.lazy(() => import("./pages/BlogPage/BlogPage"));
+const Contact = React.lazy(() => import("./pages/Contact/Contact"));
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/latestNews" element={<LatestNews />} />
         <Route path="/blogPage" element={<BlogPage />} />
         <Route path="/categories" element={<Category />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Suspense>
   );
