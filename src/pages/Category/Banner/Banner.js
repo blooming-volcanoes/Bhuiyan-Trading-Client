@@ -1,15 +1,16 @@
 import React from 'react';
-import bannerBgImage from '../../../assets/Images/pexels-kindel-media-8352350.jpg'
+import bannerRoundedImg from '../../../assets/Images/pexels-奥尼尔-孙-2871757.jpg';
 
-const Banner = () => {
+const Banner = ({ bannerImage }) => {
     return (
         <div
             style={{
-                backgroundImage: `url(${bannerBgImage})`,
-                height: '516px'
+                backgroundImage: `url(${bannerImage})`,
             }}
-            className='bg-no-repeat bg-cover bg-center'
-        />
+            className='w-full h-80 sm:h-96 lg:h-screen bg-no-repeat bg-cover bg-center mb-14'
+        >
+            <img className='absolute right-0 -bottom-72 rounded-full w-96 h-96' src={bannerRoundedImg} alt="rounded" />
+        </div>
     );
 };
 
