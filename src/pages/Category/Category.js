@@ -10,7 +10,7 @@ const Category = () => {
 
     const image = useRef();
     const [color, setColor] = useState(null);
-    const [imageUrl] = useState('https://picsum.photos/id/188/500/300')
+    const [imageUrl] = useState('https://picsum.photos/id/788/500/300')
 
     useEffect(() => {
         image.current.onload = () => {
