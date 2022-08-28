@@ -35,12 +35,12 @@ const Sliders = () => {
             autoplay
             breakpoints={
                 {
-                    480: {
+                    100: {
                         slidesPerView: 1,
                     },
-                    640: {
-                        slidesPerView: 1,
-                    },
+                    // 640: {
+                    //     slidesPerView: 1,
+                    // },
                     768: {
                         slidesPerView: 2,
                         spaceBetween: 15,

@@ -5,6 +5,7 @@ const Header = ({ color }) => {
   let Links = [
     { name: "Home", link: "/" },
     { name: "Category", link: "/categories" },
+    { name: "Product Detail", link: "/product-detail" },
     { name: "Contact Us", link: "/contact" },
     { name: "Latest News", link: "/latestNews" },
     { name: "Blog", link: "/blogPage" },
