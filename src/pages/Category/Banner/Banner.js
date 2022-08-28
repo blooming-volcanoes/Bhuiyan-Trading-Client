@@ -7,9 +7,9 @@ const Banner = ({ bannerImage }) => {
             style={{
                 backgroundImage: `url(${bannerImage})`,
             }}
-            className='w-full h-80 sm:h-96 lg:h-screen bg-no-repeat bg-cover bg-center mb-14'
+            className='w-full h-56 md:h-96 lg:h-screen bg-no-repeat bg-cover bg-center mb-14'
         >
-            <img className='absolute right-0 -bottom-72 rounded-full w-96 h-96' src={bannerRoundedImg} alt="rounded" />
+            <img className='absolute w-40 h-40 md:w-60 md:h-60 lg:w-96 lg:h-96 right-0 bottom-60 md:bottom-12 lg:-bottom-72 rounded-full  ' src={bannerRoundedImg} alt="rounded" />
         </div>
     );
 };
