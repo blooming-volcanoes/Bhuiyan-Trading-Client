@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../../Components/common/Header/Header';
-import Main from './Main/Main';
+import PdDetailMain from './PdDetailMain/PdDetailMain';
 
 const ProductDetail = () => {
     return (
         <>
             <Header />
-            <Main />
+            <PdDetailMain />
         </>
     );
 };
