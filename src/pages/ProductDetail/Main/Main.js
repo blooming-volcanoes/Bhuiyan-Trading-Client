@@ -4,7 +4,7 @@ import PdDetailsAndDescription from '../PdDetailsAndDescription/PdDetailsAndDesc
 
 const Main = () => {
     return (
-        <div>
+        <div className='flex'>
             <PdImageSliders />
             <PdDetailsAndDescription />
         </div>
