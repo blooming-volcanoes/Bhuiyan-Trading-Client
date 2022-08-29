@@ -1,0 +1,6 @@
+.client-banner-bg {
+  background-image: url("../../../assets/Images/client-banner-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
