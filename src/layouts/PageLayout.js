@@ -2,10 +2,10 @@ import React from "react";
 import Footer from "./../Components/common/Footer/Footer";
 import Header from "./../Components/common/Header/Header";
 
-function PageLayout({ children }) {
+function PageLayout({ children, color }) {
   return (
     <>
-      <Header />
+      <Header color={color} />
       {children}
       <Footer />
     </>

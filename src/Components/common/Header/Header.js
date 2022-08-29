@@ -9,6 +9,7 @@ const Header = ({ color }) => {
     { name: "Contact Us", link: "/contact" },
     { name: "Latest News", link: "/latestNews" },
     { name: "Blog", link: "/blogPage" },
+    { name: "Our Clients", link: "/ClinetsPage" },
   ];
   let [open, setOpen] = useState(false);
   return (
@@ -22,7 +23,9 @@ const Header = ({ color }) => {
     >
       <nav className="main-container items-center justify-between md:flex">
         <div className="rounded-b-lg bg-white px-2 pt-5 pb-3">
-          <img className="h-16" src={logo} alt="" />
+          <Link to="/">
+            <img className="h-16" src={logo} alt="" />
+          </Link>
         </div>
 
         <div
