@@ -16,7 +16,7 @@ const Sliders = () => {
                     className='bg-no-repeat bg-cover bg-center h-72 lg:h-48 flex items-end'
                     style={{
                         backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 70%, rgba(74, 74, 74, 100)), 
-                        url(https://picsum.photos/id/${i + 1}/500/300`,
+                        url(https://picsum.photos/id/${i + 1}/500/300)`,
                     }}>
                     <p className='text-white font-bold text-xl ml-3 mb-3'>Bata Fish</p>
                 </div>

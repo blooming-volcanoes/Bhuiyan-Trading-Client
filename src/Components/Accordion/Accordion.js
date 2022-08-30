@@ -4,9 +4,9 @@ const Accordion = () => {
     return (
         <div className='relative w-full overflow-hidden'>
             <input type="checkbox" className='peer absolute top-0 inset-x-0 w-full h-12 opacity-0 z-10 cursor-pointer' />
-            <div className="bg-gray-100 h-12 w-full pl-5 flex items-center">
+            <div className="h-12 w-full flex items-center">
                 <h1 className='text-lg font-semibold'>
-                    What is tailwind?
+                    Why should I buy your product? Convince me!
                 </h1>
             </div>
             {/* Arrow icons */}
@@ -17,7 +17,7 @@ const Accordion = () => {
             </div>
 
             {/* Content */}
-            <div className='bg-white pl-5 overflow-hidden transition-all duration-500 max-h-0 peer-checked:max-h-40'>
+            <div className='pl-5 overflow-hidden transition-all duration-500 max-h-0 peer-checked:max-h-40'>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat optio laboriosam facere! Maxime maiores vel autem recusandae voluptatum accusamus doloremque, aliquam sit nesciunt, corrupti possimus dolorem repudiandae optio eaque aperiam!</p>
             </div>
         </div>
