@@ -18,7 +18,7 @@ const Accordion = () => {
 
             {/* Content */}
             <div className='pl-5 overflow-hidden transition-all duration-500 max-h-0 peer-checked:max-h-40'>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat optio laboriosam facere! Maxime maiores vel autem recusandae voluptatum accusamus doloremque, aliquam sit nesciunt, corrupti possimus dolorem repudiandae optio eaque aperiam!</p>
+                <p className='pb-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat optio laboriosam facere! Maxime maiores vel autem recusandae voluptatum accusamus doloremque, aliquam sit nesciunt, corrupti possimus dolorem repudiandae optio eaque aperiam!</p>
             </div>
         </div>
     );

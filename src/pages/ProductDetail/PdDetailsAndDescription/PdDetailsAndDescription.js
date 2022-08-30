@@ -18,9 +18,9 @@ const PdDetailsAndDescription = ({ bgImage }) => {
             <p className='text-2xl mb-10'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, velit quae! Quae nisi ipsa quasi ea nobis dolore ex vero!</p>
             <PdDescriptionAccordion />
 
-            <button className='mb-3 font-bold text-white text-lg px-3 py-2 bg-red-900 rounded-lg'>Contact us to purchase</button>
+            <button className='mb-5 font-bold text-white text-lg px-3 py-2 bg-red-900 rounded-lg'>Contact us to purchase</button>
 
-            <div className='w-full flex mb-3'>
+            <div className='w-full flex'>
                 <button className='flex w-1/2 items-center justify-center bg-gray-100 h-20 hover:bg-gray-200 border-slate-500'>
                     <IoIosArrowDropleftCircle className='text-3xl' />
                     <span className='text-2xl ml-1'>Category Page</span>
