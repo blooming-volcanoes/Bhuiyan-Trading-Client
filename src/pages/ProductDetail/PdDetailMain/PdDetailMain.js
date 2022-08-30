@@ -4,7 +4,7 @@ import PdDetailsAndDescription from '../PdDetailsAndDescription/PdDetailsAndDesc
 const PdDetailMain = ({ images }) => {
 
     return (
-        <div className='flex'>
+        <div className='flex flex-col lg:flex-row'>
             <PdImageSliders bgImages={images} />
             <PdDetailsAndDescription bgImage={images.primary} />
 

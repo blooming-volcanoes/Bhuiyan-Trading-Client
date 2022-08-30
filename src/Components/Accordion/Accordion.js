@@ -2,10 +2,10 @@ import React from 'react';
 
 const Accordion = () => {
     return (
-        <div className='relative w-full overflow-hidden'>
+        <div className='relative w-full overflow-hidden mb-2 lg:mb-0'>
             <input type="checkbox" className='peer absolute top-0 inset-x-0 w-full h-12 opacity-0 z-10 cursor-pointer' />
-            <div className="h-12 w-full flex items-center">
-                <h1 className='text-lg font-semibold'>
+            <div className="h-12 w-full flex items-center mb-2 lg:mb-0">
+                <h1 className='text-lg font-semibold pr-8 lg:pr-0'>
                     Why should I buy your product? Convince me!
                 </h1>
             </div>

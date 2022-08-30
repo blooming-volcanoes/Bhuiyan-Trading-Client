@@ -4,7 +4,7 @@ import 'swiper/css/bundle';
 import 'swiper/css/autoplay';
 
 import SwiperCore, { Pagination, Autoplay, Thumbs, Controller } from 'swiper';
-SwiperCore.use([Pagination, Controller]);
+SwiperCore.use([Pagination, Controller, Thumbs]);
 
 const PdImageSliders = ({ bgImages }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -14,6 +14,7 @@ const PdImageSliders = ({ bgImages }) => {
     for (let i = 0; i < 5; i++) {
         slides.push(
             <SwiperSlide key={`slide-${i}`}>
+
                 <div
                     className='bg-no-repeat bg-cover bg-center h-[300px] lg:h-[500px] flex items-end'
                     style={{
@@ -39,7 +40,7 @@ const PdImageSliders = ({ bgImages }) => {
     }
     return (
 
-        <div className='w-1/2'>
+        <div className='w-full lg:w-1/2'>
             <div className='mb-2'>
                 <Swiper
                     id='main'
