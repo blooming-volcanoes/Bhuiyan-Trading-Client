@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ShipEquipment() {
   return (
-    <section className="bg-[#012962] bg-cover bg-center bg-no-repeat py-5 md:bg-shipment-bg">
+    <section className="bg-[#012962] bg-cover bg-center bg-no-repeat py-16 md:bg-shipment-bg">
       <div className="main-container">
         <div className="grid-cols-2 items-center md:grid">
           <div>

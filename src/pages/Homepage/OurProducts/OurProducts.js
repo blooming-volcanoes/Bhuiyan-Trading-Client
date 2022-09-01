@@ -28,7 +28,7 @@ function OurProducts() {
 
         {/* categories */}
 
-        <div className="my-20 grid grid-cols-1 gap-y-20  md:grid-cols-2 lg:grid-cols-4 lg:gap-3">
+        <div className="my-20 grid grid-cols-2 gap-y-20  md:grid-cols-2 lg:grid-cols-4 lg:gap-3">
           {Array(4)
             .fill("")
             .map((_, i) => (
