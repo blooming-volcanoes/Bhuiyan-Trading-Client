@@ -1,6 +1,9 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Homepage/Home";
+AOS.init();
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 
 const LatestNews = React.lazy(() => import("./pages/LatestNews/LatestNews"));

@@ -9,7 +9,7 @@ const data = [
 
 function PopularProducts() {
   return (
-    <section className="py-6">
+    <section className="py-16" data-aos="fade-up">
       <div className="main-container">
         {/* title */}
         <h1 className="mx-auto mb-10 w-[290px] border-b-2  border-red-400 pb-2 text-4xl font-medium lg:mx-0">
@@ -17,13 +17,13 @@ function PopularProducts() {
         </h1>
 
         {/* All products */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {Array(6)
             .fill("")
             .map((_, i) => (
-              <div className="relative " key={i}>
+              <div className="relative" key={i}>
                 <img
-                  className="h-[100px] w-full overflow-hidden rounded object-cover lg:w-[400px]"
+                  className="h-[100px] w-full overflow-hidden rounded-lg rounded object-cover lg:w-[400px]"
                   src={data[0].img}
                   alt=""
                 />

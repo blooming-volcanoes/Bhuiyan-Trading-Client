@@ -3,7 +3,7 @@ import future from "../../../assets/Images/future.png";
 
 export default function Future() {
   return (
-    <section className="py-4">
+    <section className="py-16" data-aos="zoom-in-up">
       <div className="main-container">
         <div className="grid-cols-2 items-center md:grid">
           <div className="">

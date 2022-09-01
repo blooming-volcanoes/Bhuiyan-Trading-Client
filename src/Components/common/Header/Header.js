@@ -1,3 +1,4 @@
+import "animate.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/Images/logo.png";
@@ -20,7 +21,7 @@ const Header = ({ color }) => {
           color ? `rgba(${color.R}, ${color.G}, ${color.B}, 0.8)` : "#243e4aa6"
         }`,
       }}
-      className="sticky top-0 z-10 shadow-md"
+      className="animate__fadeInDown animate__animated fixed top-0 z-10 w-full shadow-md"
     >
       <nav className="main-container items-center justify-between md:flex">
         <div className="rounded-b-lg bg-white px-2 pt-5 pb-3">

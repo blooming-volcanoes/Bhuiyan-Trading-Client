@@ -31,7 +31,7 @@ function Footer() {
           .map((_, i) => (
             <ul
               key={i}
-              className="mb-4 space-y-3 text-center lg:mb-0 lg:text-start"
+              className="mb-4 mt-6 space-y-3 text-center lg:mb-0 lg:text-start"
             >
               <li className="font-medium">Who we are</li>
               {Array(7)

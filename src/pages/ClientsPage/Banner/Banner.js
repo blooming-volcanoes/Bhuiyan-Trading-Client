@@ -19,7 +19,7 @@ function Banner() {
         </div>
 
         <div className="md:top-50 md:absolute md:right-0 md:w-[40%]">
-          <img className="w-full p-6 md:p-0" src={fish} alt="" />
+          <img className="w-full rounded-l-lg md:p-0" src={fish} alt="" />
         </div>
       </div>
     </section>

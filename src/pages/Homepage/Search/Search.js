@@ -2,9 +2,9 @@ import React from "react";
 
 function Search() {
   return (
-    <section className="whowe-bg py-4">
+    <section className="whowe-bg py-16" data-aos="fade-up">
       <div className="main-container">
-        <div className="grid grid-cols-1 items-center gap-3 md:grid-cols-3">
+        <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3">
           <div className="">
             <h3 className="mb-3 text-2xl font-bold text-white">
               What we are looking for?
@@ -19,8 +19,8 @@ function Search() {
               Ex- Ship, Fish, Plastic
             </p>
           </div>
-          <div className="h-[273px] bg-rope-as-bg"></div>
-          <div className="boat-as-bg flex flex-col items-center justify-end">
+          <div className="h-[273px] rounded-lg bg-rope-as-bg"></div>
+          <div className="boat-as-bg flex flex-col items-center justify-end rounded-lg">
             <h3 className="mb-3 text-2xl font-bold text-white">
               What we are looking for?
             </h3>
