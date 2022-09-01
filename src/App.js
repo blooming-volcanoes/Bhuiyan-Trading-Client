@@ -4,6 +4,7 @@ import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Homepage/Home";
 AOS.init();
+import ProductDetail from "./pages/ProductDetail/ProductDetail";
 
 const LatestNews = React.lazy(() => import("./pages/LatestNews/LatestNews"));
 const Category = React.lazy(() => import("./pages/Category/Category"));
@@ -20,6 +21,7 @@ function App() {
         <Route path="/blogPage" element={<BlogPage />} />
         <Route path="/categories" element={<Category />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/ClinetsPage" element={<ClientsPage />} />
       </Routes>
     </Suspense>
