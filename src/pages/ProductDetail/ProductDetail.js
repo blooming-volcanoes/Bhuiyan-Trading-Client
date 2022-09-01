@@ -18,6 +18,7 @@ const ProductDetail = () => {
         ]
     });
 
+    // commented unnecessary text
 
     useEffect(() => {
         image.current.onload = () => {
