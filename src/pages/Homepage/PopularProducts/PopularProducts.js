@@ -9,7 +9,7 @@ const data = [
 
 function PopularProducts() {
   return (
-    <section className="py-16">
+    <section className="py-16" data-aos="fade-up">
       <div className="main-container">
         {/* title */}
         <h1 className="mx-auto mb-10 w-[290px] border-b-2  border-red-400 pb-2 text-4xl font-medium lg:mx-0">

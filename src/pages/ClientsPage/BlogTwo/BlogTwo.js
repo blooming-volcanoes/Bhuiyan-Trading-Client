@@ -8,7 +8,7 @@ export default function BlogTwo() {
     <section className="bg-[#EFF7CF]">
       <div className="main-container py-20">
         <Heading></Heading>
-        <div className="my-3 grid gap-4 md:grid-cols-2">
+        <div className="my-3 grid gap-6 md:grid-cols-2">
           <div>
             <p className="text-justify text-xl text-black">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum

@@ -2,7 +2,7 @@ import React from "react";
 
 function Search() {
   return (
-    <section className="whowe-bg py-16">
+    <section className="whowe-bg py-16" data-aos="fade-up">
       <div className="main-container">
         <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3">
           <div className="">

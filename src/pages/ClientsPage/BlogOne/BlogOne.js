@@ -5,7 +5,7 @@ export default function BlogOne() {
   return (
     <section>
       <div className="main-container py-20">
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
           <Heading></Heading>
           <div>
             <p className="text-justify text-xl text-black">

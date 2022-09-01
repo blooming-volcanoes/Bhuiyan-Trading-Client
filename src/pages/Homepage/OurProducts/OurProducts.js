@@ -3,6 +3,7 @@ import bgTop from "../../../assets/Images/bg-top.png";
 import fish1 from "../../../assets/Images/pexels-chevanon-photography-325044.jpg";
 import fashion from "../../../assets/Images/pexels-juan-mendez-1536619.jpg";
 import plastic from "../../../assets/Images/pexels-pixabay-65612.jpg";
+// ..
 
 const data = [
   { name: "fish", img: fish1 },
@@ -13,6 +14,9 @@ const data = [
 function OurProducts() {
   return (
     <div
+      data-aos="fade-up"
+      data-aos-duration="3000"
+      data-aos-once="false"
       style={{ backgroundImage: `url('${bgTop}')` }}
       className={`w-full bg-right-top bg-no-repeat`}
     >
