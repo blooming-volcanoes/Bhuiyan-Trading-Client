@@ -3,6 +3,7 @@ import "aos/dist/aos.css";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Homepage/Home";
+import ProductDetail from "./pages/ProductDetail/ProductDetail.js";
 AOS.init();
 
 const LatestNews = React.lazy(() => import("./pages/LatestNews/LatestNews"));
@@ -20,6 +21,7 @@ function App() {
         <Route path="/blogPage" element={<BlogPage />} />
         <Route path="/categories" element={<Category />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/ClinetsPage" element={<ClientsPage />} />
       </Routes>
     </Suspense>
