@@ -3,12 +3,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
 import 'swiper/css/autoplay';
 
-import SwiperCore, { Pagination, Autoplay, Thumbs, Controller } from 'swiper';
-SwiperCore.use([Pagination, Controller, Thumbs]);
+import { Navigation, Thumbs } from 'swiper';
+// SwiperCore.use([Pagination, Controller, Thumbs]);
 
 const PdImageSliders = ({ bgImages }) => {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [controlledSwiper, setControlledSwiper] = useState(null);
+    // const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    // const [controlledSwiper, setControlledSwiper] = useState(null);
+    const [activeThumb, setActiveThumb] = useState({});
 
     const slides = [];
     for (let i = 0; i < 5; i++) {
@@ -43,27 +44,35 @@ const PdImageSliders = ({ bgImages }) => {
         <div className='w-full lg:w-1/2'>
             <div className='mb-2'>
                 <Swiper
-                    id='main'
-
-                    spaceBetween={20}
-                    slidesPerView={1}
-                    autoplay
-                    controller={{ control: controlledSwiper }}
+                    loop={true}
+                    spaceBetween={10}
+                    // navigation={true}
+                    modules={[Navigation, Thumbs]}
+                    grabCursor={true}
+                // thumbs={{ swiper: activeThumb }}
+                // id='main'
+                // slidesPerView={1}
+                // autoplay
+                // controller={{ control: controlledSwiper }}
                 >
                     {slides}
                 </Swiper >
             </div>
-            <div>
+            <div className='mb-2'>
                 <Swiper
-                    id="controller"
-                    // onSwiper={setControlledSwiper}
-                    slidesPerView={4}
+                    // onSwiper={setActiveThumb}
+                    loop={true}
                     spaceBetween={10}
-                    navigation
-                    pagination
+                    slidesPerView={4}
+                    modules={[Navigation, Thumbs]}
+                    grabCursor={true}
+                // id='main'
+                // slidesPerView={1}
+                // autoplay
+                // controller={{ control: controlledSwiper }}
                 >
                     {thumbs}
-                </Swiper>
+                </Swiper >
             </div>
         </div>
 
