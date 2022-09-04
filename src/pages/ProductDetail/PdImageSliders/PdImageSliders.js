@@ -9,7 +9,7 @@ import { Navigation, Thumbs } from 'swiper';
 const PdImageSliders = ({ bgImages }) => {
     // const [thumbsSwiper, setThumbsSwiper] = useState(null);
     // const [controlledSwiper, setControlledSwiper] = useState(null);
-    const [activeThumb, setActiveThumb] = useState({});
+    const [activeThumb, setActiveThumb] = useState(null);
 
     const slides = [];
     for (let i = 0; i < 5; i++) {

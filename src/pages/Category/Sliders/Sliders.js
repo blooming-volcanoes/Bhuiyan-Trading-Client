@@ -13,7 +13,7 @@ const Sliders = () => {
         slides.push(
             <SwiperSlide>
                 <div
-                    className='bg-no-repeat bg-cover bg-center h-72 lg:h-48 flex items-end'
+                    className='bg-no-repeat bg-cover bg-center h-72 lg:h-48 flex items-end rounded-lg'
                     style={{
                         backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 70%, rgba(74, 74, 74, 100)), 
                         url(https://picsum.photos/id/${i + 1}/500/300)`,
@@ -30,7 +30,7 @@ const Sliders = () => {
             id='main'
             navigation
             pagination
-            spaceBetween={20}
+            spaceBetween={30}
             slidesPerView={3}
             autoplay
             breakpoints={
