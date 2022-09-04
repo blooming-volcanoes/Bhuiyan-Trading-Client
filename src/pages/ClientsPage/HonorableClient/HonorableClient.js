@@ -11,16 +11,16 @@ export default function HonorableClient() {
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-4">
           <div>
-            <img src={honorable} alt="" className="w-full" data-aos="fade-up" data-aos-duration="500" />
+            <img src={honorable} alt="" className="w-full rounded-lg" data-aos="fade-up" data-aos-duration="500" />
           </div>
           <div>
-            <img src={honorable} alt="" className="w-full" data-aos="fade-up" data-aos-duration="600" />
+            <img src={honorable} alt="" className="w-full rounded-lg" data-aos="fade-up" data-aos-duration="600" />
           </div>
           <div>
-            <img src={honorable} alt="" className="w-full" data-aos="fade-up" data-aos-duration="700" />
+            <img src={honorable} alt="" className="w-full rounded-lg" data-aos="fade-up" data-aos-duration="700" />
           </div>
           <div>
-            <img src={honorable} alt="" className="w-full" data-aos="fade-up" data-aos-duration="800" />
+            <img src={honorable} alt="" className="w-full rounded-lg" data-aos="fade-up" data-aos-duration="800" />
           </div>
         </div>
         <h3 className="text-right text-2xl font-bold text-black">
