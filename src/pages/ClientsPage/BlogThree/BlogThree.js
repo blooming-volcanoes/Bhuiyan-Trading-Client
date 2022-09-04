@@ -11,10 +11,10 @@ export default function BlogThree() {
           <div></div>
           <Heading></Heading>
           <div>
-            <img className="w-full" src={fish} alt="" />
+            <img className="w-full" src={fish} alt="" data-aos="zoom-in" />
           </div>
           <div>
-            <p className="text-justify text-xl text-black">
+            <p className="text-justify text-xl text-black" data-aos="fade-left">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum
               cupiditate, ducimus modi quos veniam facilis eveniet quaerat
               laboriosam illo eum a, dolor quas sit dolores, est repudiandae

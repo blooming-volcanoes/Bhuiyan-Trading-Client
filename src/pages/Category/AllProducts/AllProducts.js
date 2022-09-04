@@ -7,7 +7,7 @@ const AllProducts = () => {
     for (let i = 0; i < 16; i++) {
         products.push(
             <div
-                className='bg-no-repeat bg-cover bg-center h-56 lg:h-52 flex items-end'
+                className='bg-no-repeat bg-cover bg-center h-56 lg:h-52 flex items-end rounded-lg'
                 style={{
                     backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 70%, rgba(74, 74, 74, 100)), 
                         url(https://picsum.photos/id/${i + 1}/500/300`,
@@ -17,7 +17,7 @@ const AllProducts = () => {
         )
     }
     return (
-        <div className='container mx-auto'>
+        <div className='container mx-auto mb-20'>
             <div className='flex flex-col lg:flex-row justify-between items-center'>
                 {/* title and serch box */}
                 <div className='flex justify-end mb-4 items-center pl-2 md:pl-0'>
@@ -38,7 +38,7 @@ const AllProducts = () => {
                 </div>
             </div>
             {/* products */}
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-3 md:gap-y-4 md:gap-x-5 lg:gap-y-7 gap-x-10 mb-10'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-3 md:gap-y-4 md:gap-x-5 lg:gap-y-9 lg:gap-x-9 gap-x-10 mb-10'>
                 {products}
             </div>
 

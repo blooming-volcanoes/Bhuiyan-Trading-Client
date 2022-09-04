@@ -14,12 +14,12 @@ const Header = ({ color }) => {
     { name: "Our Clients", link: "/ClinetsPage" },
   ];
   let [open, setOpen] = useState(false);
+  console.log('COLOR', color);
   return (
     <header
       style={{
-        backgroundColor: `${
-          color ? `rgba(${color.R}, ${color.G}, ${color.B}, 0.8)` : "#243e4aa6"
-        }`,
+        backgroundColor: `${color ? `rgba(${color.R}, ${color.G}, ${color.B}, 0.8)` : "#243e4aa6"
+          }`,
       }}
       className="animate__fadeInDown animate__animated fixed top-0 z-10 w-full shadow-md"
     >
@@ -38,9 +38,8 @@ const Header = ({ color }) => {
         </div>
 
         <ul
-          className={`absolute left-0 z-[-1] w-full bg-[#243e4aa6] pb-5 pl-9 transition-all duration-500 ease-in md:static md:z-auto md:flex md:w-auto md:items-center md:bg-transparent md:pb-0 md:pl-0 ${
-            open ? "top-20 " : "top-[-490px]"
-          }`}
+          className={`absolute left-0 z-[-1] w-full bg-[#243e4aa6] pb-5 pl-9 transition-all duration-500 ease-in md:static md:z-auto md:flex md:w-auto md:items-center md:bg-transparent md:pb-0 md:pl-0 ${open ? "top-20 " : "top-[-490px]"
+            }`}
         >
           {Links.map((link) => (
             <li key={link.name} className="my-7 text-lg md:my-0 md:ml-8">

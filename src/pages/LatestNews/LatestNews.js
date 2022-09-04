@@ -42,7 +42,7 @@ function LatestNews() {
             </p>
 
             <h1 className="text-3xl font-semibold">This is the title</h1>
-            <p className="text-justify font-semibold">
+            <p className="text-justify font-semibold mt-5 text-gray-500 pt-3">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Deleniti, magni exercitationem aliquid et recusandae praesentium.
               Molestiae, velit cupiditate dolore similique soluta ea provident
@@ -51,7 +51,7 @@ function LatestNews() {
               impedit doloribus enim, ad repudiandae sunt, aliquam aperiam
               repellat veritatis obcaecati. Autem ipsam eos perferendis labore
               porro voluptates tempore eum nesciunt non illum minima laudantium
-              facere qui possimus, excepturi
+              facere qui possimus, excepturizz
             </p>
           </div>
         </div>
@@ -62,7 +62,7 @@ function LatestNews() {
             .fill(blogs[0])
             .map((blog, i) => (
               <div
-                className="space-y-2 rounded-lg bg-white py-4 px-2 shadow-2xl"
+                className="space-y-2 rounded-lg bg-white py-4 px-2 shadow-lg"
                 key={i}
               >
                 <img className="rounded" src={dummy} alt="" />

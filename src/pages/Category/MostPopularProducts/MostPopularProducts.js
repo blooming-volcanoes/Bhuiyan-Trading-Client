@@ -4,7 +4,7 @@ import Sliders from '../Sliders/Sliders';
 
 const MostPopularProducts = () => {
     return (
-        <div className='container mx-auto mb-14'>
+        <div className='container mx-auto mb-20'>
             {/* Title */}
             <div className='pl-2 md:pl-0'>
                 <h1>

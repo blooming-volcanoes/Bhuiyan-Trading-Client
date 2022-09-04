@@ -9,7 +9,7 @@ export default function BlogTwo() {
       <div className="main-container py-20">
         <Heading></Heading>
         <div className="my-3 grid gap-6 md:grid-cols-2">
-          <div>
+          <div data-aos="fade-right" data-aos-duration="500">
             <p className="text-justify text-xl text-black">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum
               cupiditate, ducimus modi quos veniam facilis eveniet quaerat
@@ -20,7 +20,7 @@ export default function BlogTwo() {
             </p>
           </div>
           <div>
-            <img className="w-full" src={fish} alt="" />
+            <img className="w-full" data-aos="zoom-in" src={fish} alt="" />
           </div>
         </div>
         <BottomText></BottomText>

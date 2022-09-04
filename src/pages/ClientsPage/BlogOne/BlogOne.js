@@ -7,7 +7,7 @@ export default function BlogOne() {
       <div className="main-container py-20">
         <div className="grid gap-6 md:grid-cols-2">
           <Heading></Heading>
-          <div>
+          <div data-aos="fade-left">
             <p className="text-justify text-xl text-black">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum
               cupiditate, ducimus modi quos veniam facilis eveniet quaerat
