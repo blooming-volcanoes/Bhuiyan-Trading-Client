@@ -6,7 +6,16 @@ export default function ContactForm() {
       <div className="main-container py-10">
         {/* titles */}
         <div className="flex flex-col justify-between space-y-6  md:flex-row lg:flex-row lg:space-y-0">
-          <h1 className="w-2/4 text-3xl font-medium">Connect with us-</h1>
+          <h1 className="w-2/4 text-3xl font-medium">
+            Connect with us-
+            <br />
+            <span className="text-lg">Address Here</span>
+            <br />
+            <span className="text-lg">Address Here</span>
+            <br />
+            <span className="text-lg">Address Here</span>
+            <br />
+          </h1>
           <p className="w-full text-lg font-medium lg:w-2/6">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum eaque
             fugit ad nostrum quos qui

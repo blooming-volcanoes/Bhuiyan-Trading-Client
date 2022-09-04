@@ -8,7 +8,7 @@ const ProductDetail = () => {
     const image = useRef();
     const [color, setColor] = useState(null);
     const [images] = useState({
-        primary: 'https://picsum.photos/id/501/500/300',
+        primary: 'https://picsum.photos/id/701/500/300',
         secondary: [
             'https://picsum.photos/id/102/500/300',
             'https://picsum.photos/id/103/500/300',
@@ -18,7 +18,6 @@ const ProductDetail = () => {
         ]
     });
 
-    // commented unnecessary text
 
     useEffect(() => {
         image.current.onload = () => {

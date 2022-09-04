@@ -4,11 +4,8 @@ import 'swiper/css/bundle';
 import 'swiper/css/autoplay';
 
 import { Navigation, Thumbs } from 'swiper';
-// SwiperCore.use([Pagination, Controller, Thumbs]);
 
 const PdImageSliders = ({ bgImages }) => {
-    // const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    // const [controlledSwiper, setControlledSwiper] = useState(null);
     const [activeThumb, setActiveThumb] = useState(null);
 
     const slides = [];
@@ -50,10 +47,6 @@ const PdImageSliders = ({ bgImages }) => {
                     modules={[Navigation, Thumbs]}
                     grabCursor={true}
                 // thumbs={{ swiper: activeThumb }}
-                // id='main'
-                // slidesPerView={1}
-                // autoplay
-                // controller={{ control: controlledSwiper }}
                 >
                     {slides}
                 </Swiper >
@@ -66,9 +59,6 @@ const PdImageSliders = ({ bgImages }) => {
                     slidesPerView={4}
                     modules={[Navigation, Thumbs]}
                     grabCursor={true}
-                // id='main'
-                // slidesPerView={1}
-                // autoplay
                 // controller={{ control: controlledSwiper }}
                 >
                     {thumbs}

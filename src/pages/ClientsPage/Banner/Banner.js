@@ -6,7 +6,7 @@ function Banner() {
   return (
     <section className="client-banner-bg h-screen ">
       <div className="main-container flex h-full flex-col items-center justify-center md:static md:flex-row md:justify-start">
-        <div className="text-center md:text-left">
+        <div className="text-center md:text-left" data-aos="fade-right">
           <h3 className="text-2xl font-bold text-black md:text-4xl">
             Lorem, ipsum.
           </h3>
@@ -18,7 +18,7 @@ function Banner() {
           </h3>
         </div>
 
-        <div className="md:top-50 md:absolute md:right-0 md:w-[40%]">
+        <div className="md:top-50 md:absolute md:right-0 md:w-[40%]" data-aos="fade-left">
           <img className="w-full rounded-l-lg md:p-0" src={fish} alt="" />
         </div>
       </div>
