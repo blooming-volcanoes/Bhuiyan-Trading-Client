@@ -1,9 +1,12 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import axios from "axios";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Homepage/Home";
+import Login from "./pages/Login/Login";
 import ProductDetail from "./pages/ProductDetail/ProductDetail.js";
+import Register from "./pages/Register/Register";
 AOS.init();
 
 const LatestNews = React.lazy(() => import("./pages/LatestNews/LatestNews"));
@@ -11,6 +14,8 @@ const Category = React.lazy(() => import("./pages/Category/Category"));
 const BlogPage = React.lazy(() => import("./pages/BlogPage/BlogPage"));
 const Contact = React.lazy(() => import("./pages/Contact/Contact"));
 const ClientsPage = React.lazy(() => import("./pages/ClientsPage/ClientsPage"));
+
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
@@ -22,7 +27,9 @@ function App() {
         <Route path="/categories" element={<Category />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/product-detail" element={<ProductDetail />} />
-        <Route path="/ClinetsPage" element={<ClientsPage />} />
+        <Route path="/ClientsPage" element={<ClientsPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
       </Routes>
     </Suspense>
   );
