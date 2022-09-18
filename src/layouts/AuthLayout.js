@@ -12,7 +12,7 @@ function AuthLayout({ children }) {
       navigate("/");
       return;
     }
-  }, []);
+  }, [user]);
   return (
     <>
       <Header />
