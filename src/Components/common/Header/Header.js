@@ -54,7 +54,7 @@ const Header = ({ color }) => {
               </Link>
             </li>
           ))}
-          {user.email ? (
+          {user?.email ? (
             <li className="my-7 text-lg md:my-0 md:ml-8 ">
               <button className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500">
                 Logout
