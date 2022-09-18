@@ -8,7 +8,7 @@ function AuthLayout({ children }) {
   const { user } = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   useEffect(() => {
-    if (user.email) {
+    if (user?.email) {
       navigate("/");
       return;
     }
