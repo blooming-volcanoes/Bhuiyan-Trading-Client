@@ -1,20 +1,21 @@
 import "animate.css";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/Images/logo.png";
+let Links = [
+  { name: "Home", link: "/" },
+  { name: "Category", link: "/categories" },
+  // { name: "Product Detail", link: "/product-detail" },
+  { name: "Contact Us", link: "/contact" },
+  { name: "Latest News", link: "/latestNews" },
+  // { name: "Blog", link: "/blogPage" },
+  { name: "Our Clients", link: "/ClientsPage" },
+];
 
 const Header = ({ color }) => {
-  let Links = [
-    { name: "Home", link: "/" },
-    { name: "Category", link: "/categories" },
-    // { name: "Product Detail", link: "/product-detail" },
-    { name: "Contact Us", link: "/contact" },
-    { name: "Latest News", link: "/latestNews" },
-    // { name: "Blog", link: "/blogPage" },
-    { name: "Our Clients", link: "/ClientsPage" },
-  ];
-  let [open, setOpen] = useState(false);
-  console.log("COLOR", color);
+  const [open, setOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth.user);
   return (
     <header
       style={{
@@ -53,22 +54,32 @@ const Header = ({ color }) => {
               </Link>
             </li>
           ))}
-          <li className="my-7 text-lg md:my-0 md:ml-8">
-            <Link
-              to="/login"
-              className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500"
-            >
-              Login
-            </Link>
-          </li>
-          <li className="my-7 text-lg md:my-0 md:ml-8">
-            <Link
-              to="/signup"
-              className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500"
-            >
-              Register
-            </Link>
-          </li>
+          {user.email ? (
+            <li className="my-7 text-lg md:my-0 md:ml-8 ">
+              <button className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500">
+                Logout
+              </button>
+            </li>
+          ) : (
+            <>
+              <li className="my-7 text-lg md:my-0 md:ml-8">
+                <Link
+                  to="/login"
+                  className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500"
+                >
+                  Login
+                </Link>
+              </li>
+              <li className="my-7 text-lg md:my-0 md:ml-8">
+                <Link
+                  to="/signup"
+                  className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500"
+                >
+                  Register
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>
