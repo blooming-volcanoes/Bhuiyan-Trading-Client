@@ -1,7 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../assets/Images/logo.png";
+import LoadingButton from "../../Components/custom/LoadingButton";
+import { addUser, authLoading } from "../../redux/auth/authAction";
+import httpAuthService from "../../services/auth.service";
 import PageLayout from "./../../layouts/PageLayout";
 
 const inputFields = [
@@ -29,13 +34,27 @@ const inputFields = [
 
 function Register() {
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.authLoading);
+
+  const onSubmit = async (inputData) => {
+    dispatch(authLoading(true));
+    try {
+      const data = await httpAuthService.register(inputData);
+      dispatch(addUser(data));
+      toast.success("Successfully Signed up");
+    } catch (error) {
+      const { msg } = error.response.data;
+      toast.error(msg);
+      dispatch(authLoading(false));
+    }
+    dispatch(authLoading(false));
     reset();
   };
 
   return (
     <PageLayout>
+      <Toaster />
       <div className="flex min-h-screen flex-col rounded bg-gray-100 py-36">
         <div className="container mx-auto flex max-w-lg flex-1 flex-col items-center justify-center px-2">
           <form
@@ -56,12 +75,20 @@ function Register() {
               />
             ))}
 
-            <button
-              type="submit"
-              className="w-full rounded bg-red-400 py-2 font-semibold text-white"
-            >
-              Create Account
-            </button>
+            {loading ? (
+              <LoadingButton
+                text="Loading"
+                styles="w-full bg-red-400 text-white py-2 flex justify-center"
+              />
+            ) : (
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full rounded  bg-red-400 py-2 font-semibold text-white"
+              >
+                Create Account
+              </button>
+            )}
           </form>
 
           <div className="text-gray-dark mt-6 flex space-x-2">
