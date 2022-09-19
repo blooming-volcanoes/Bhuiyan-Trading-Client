@@ -1,5 +1,5 @@
 import React from "react";
-import Accordion from "./../../../Components/custom/Accordion/Accordion";
+import Accordion from "./../../../components/custom/Accordion/Accordion";
 
 const PdDescriptionAccordion = () => {
   return (

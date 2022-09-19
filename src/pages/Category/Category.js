@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Footer from '../../Components/common/Footer/Footer';
-import Header from '../../Components/common/Header/Header';
+import Footer from '../../components/common/Footer/Footer';
+import Header from '../../components/common/Header/Header';
 import { getAverageColor } from '../../lib/lib';
 import AllProducts from './AllProducts/AllProducts';
 import Banner from './Banner/Banner';

@@ -1,5 +1,5 @@
-import Footer from "../../Components/common/Footer/Footer";
-import Header from "../../Components/common/Header/Header";
+import Footer from "../../components/common/Footer/Footer";
+import Header from "../../components/common/Header/Header";
 import Banner from "./Banner/Banner";
 import Future from "./Future/Future";
 import OurProducts from "./OurProducts/OurProducts";

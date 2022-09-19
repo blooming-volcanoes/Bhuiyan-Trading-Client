@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../assets/Images/logo.png";
-import LoadingButton from "../../Components/custom/Buttons/LoadingButton";
+import LoadingButton from "../../components/custom/Buttons/LoadingButton";
 import AuthLayout from "../../layouts/AuthLayout";
 import { addUser, authLoading } from "../../redux/auth/authAction";
 import httpAuthService from "../../services/auth.service";
