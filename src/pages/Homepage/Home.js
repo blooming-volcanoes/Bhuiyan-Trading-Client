@@ -1,4 +1,3 @@
-import Header from "../../components/common/Header/Header";
 import Banner from "./Banner/Banner";
 import Future from "./Future/Future";
 import OurProducts from "./OurProducts/OurProducts";
@@ -10,7 +9,6 @@ import WhoWe from "./WhoWe/WhoWe";
 function Home() {
   return (
     <div>
-      <Header />
       <Banner />
       <OurProducts />
       <WhoWe />

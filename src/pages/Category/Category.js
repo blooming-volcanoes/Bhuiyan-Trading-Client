@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import Header from "../../components/common/Header/Header";
 import { getAverageColor } from "../../lib/lib";
 import AllProducts from "./AllProducts/AllProducts";
 import Banner from "./Banner/Banner";
@@ -19,7 +18,6 @@ const Category = () => {
   }, []);
   return (
     <>
-      <Header color={color} />
       <Banner bannerImage={imageUrl} />
       <MostPopularProducts />
       <AllProducts />

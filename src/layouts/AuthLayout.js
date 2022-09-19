@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/common/Header/Header";
 
 function AuthLayout({ children }) {
   const { user } = useSelector((state) => state.auth.user);
@@ -12,12 +11,7 @@ function AuthLayout({ children }) {
       return;
     }
   }, [user]);
-  return (
-    <>
-      <Header />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
 
 export default AuthLayout;
