@@ -1,3 +1,4 @@
+import PageLayout from "../../layouts/PageLayout";
 import Banner from "./Banner/Banner";
 import Future from "./Future/Future";
 import OurProducts from "./OurProducts/OurProducts";
@@ -8,7 +9,7 @@ import WhoWe from "./WhoWe/WhoWe";
 
 function Home() {
   return (
-    <div>
+    <PageLayout>
       <Banner />
       <OurProducts />
       <WhoWe />
@@ -16,7 +17,7 @@ function Home() {
       <ShipEquipment />
       <Search />
       <PopularProducts />
-    </div>
+    </PageLayout>
   );
 }
 
