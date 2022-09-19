@@ -1,8 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import logo from "../../assets/Images/logo.png";
-import PageLayout from "./../../layouts/PageLayout";
+import LoadingButton from "../../Components/custom/LoadingButton";
+import AuthLayout from "../../layouts/AuthLayout";
+import { addUser, authLoading } from "../../redux/auth/authAction";
+import httpAuthService from "../../services/auth.service";
 
 const inputFields = [
   {
@@ -19,13 +25,33 @@ const inputFields = [
 
 function Login() {
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.authLoading);
+
+  const onSubmit = async (inputData) => {
+    dispatch(authLoading(true));
+    try {
+      const data = await httpAuthService.login(inputData);
+      Swal.fire({
+        position: "top-bottom",
+        icon: "success",
+        title: "Logged in successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      dispatch(addUser(data));
+    } catch (error) {
+      const { msg } = error.response.data;
+      toast.error(msg);
+      dispatch(authLoading(false));
+    }
+    dispatch(authLoading(false));
     reset();
   };
 
   return (
-    <PageLayout>
+    <AuthLayout>
+      <Toaster />
       <div className="flex min-h-screen flex-col rounded bg-gray-100 py-36">
         <div className="container mx-auto flex max-w-lg flex-1 flex-col items-center justify-center px-2">
           <form
@@ -46,12 +72,20 @@ function Login() {
               />
             ))}
 
-            <button
-              type="submit"
-              className="w-full rounded bg-red-400 py-2 font-semibold text-white"
-            >
-              Login
-            </button>
+            {loading ? (
+              <LoadingButton
+                text="Loading"
+                styles="w-full bg-red-400 text-white py-2 flex justify-center"
+              />
+            ) : (
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full rounded  bg-red-400 py-2 font-semibold text-white"
+              >
+                Login
+              </button>
+            )}
           </form>
 
           <div className="text-gray-dark mt-6 flex space-x-2">
@@ -63,7 +97,7 @@ function Login() {
           </div>
         </div>
       </div>
-    </PageLayout>
+    </AuthLayout>
   );
 }
 

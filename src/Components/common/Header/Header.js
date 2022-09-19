@@ -1,8 +1,9 @@
 import "animate.css";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/Images/logo.png";
+import { removeUser } from "./../../../redux/auth/authAction";
 let Links = [
   { name: "Home", link: "/" },
   { name: "Category", link: "/categories" },
@@ -16,6 +17,8 @@ let Links = [
 const Header = ({ color }) => {
   const [open, setOpen] = useState(false);
   const { user } = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
   return (
     <header
       style={{
@@ -56,7 +59,10 @@ const Header = ({ color }) => {
           ))}
           {user?.email ? (
             <li className="my-7 text-lg md:my-0 md:ml-8 ">
-              <button className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500">
+              <button
+                onClick={() => dispatch(removeUser())}
+                className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500"
+              >
                 Logout
               </button>
             </li>
