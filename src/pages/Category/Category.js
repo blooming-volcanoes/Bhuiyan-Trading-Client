@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import Footer from "../../components/common/Footer/Footer";
 import Header from "../../components/common/Header/Header";
 import { getAverageColor } from "../../lib/lib";
-import Footer from "./../../components/common/Footer/Footer";
 import AllProducts from "./AllProducts/AllProducts";
 import Banner from "./Banner/Banner";
 import MostPopularProducts from "./MostPopularProducts/MostPopularProducts";
