@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Footer from "../../components/common/Footer/Footer";
 
 import Header from "../../components/common/Header/Header";
 import { getAverageColor } from "../../lib/lib";
@@ -29,7 +28,6 @@ const ProductDetail = () => {
     <>
       <Header color={color} />
       <PdDetailMain images={images} />
-      <Footer />
 
       {/* the image below is not shown on the UI, rather used to find the average color of the banner image */}
       <img
