@@ -23,7 +23,7 @@ function PopularProducts() {
             .map((_, i) => (
               <div className="relative" key={i}>
                 <img
-                  className="h-[100px] w-full overflow-hidden rounded-lg rounded object-cover lg:w-[400px]"
+                  className="h-[100px] w-full overflow-hidden rounded-lg object-cover lg:w-[400px]"
                   src={data[0].img}
                   alt=""
                 />
