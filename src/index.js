@@ -1,6 +1,3 @@
-/* eslint-disable no-use-before-define */
-// eslint-disable-next-line no-use-before-define
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
