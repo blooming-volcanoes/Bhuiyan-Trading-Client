@@ -1,5 +1,4 @@
-import Footer from "../../Components/common/Footer/Footer";
-import Header from "../../Components/common/Header/Header";
+import PageLayout from "../../layouts/PageLayout";
 import Banner from "./Banner/Banner";
 import Future from "./Future/Future";
 import OurProducts from "./OurProducts/OurProducts";
@@ -10,8 +9,7 @@ import WhoWe from "./WhoWe/WhoWe";
 
 function Home() {
   return (
-    <div>
-      <Header />
+    <PageLayout>
       <Banner />
       <OurProducts />
       <WhoWe />
@@ -19,8 +17,7 @@ function Home() {
       <ShipEquipment />
       <Search />
       <PopularProducts />
-      <Footer />
-    </div>
+    </PageLayout>
   );
 }
 
