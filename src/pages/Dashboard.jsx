@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import Datepicker from "../partials/actions/Datepicker";
 import FilterButton from "../partials/actions/FilterButton";
-import Banner from "../partials/Banner";
 import DashboardAvatars from "../partials/dashboard/DashboardAvatars";
 import DashboardCard01 from "../partials/dashboard/DashboardCard01";
 import DashboardCard02 from "../partials/dashboard/DashboardCard02";
@@ -19,6 +18,7 @@ import DashboardCard12 from "../partials/dashboard/DashboardCard12";
 import DashboardCard13 from "../partials/dashboard/DashboardCard13";
 import Header from "../partials/Header";
 import Sidebar from "../partials/Sidebar";
+import WelcomeBanner from "./../partials/dashboard/WelcomeBanner";
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -35,6 +35,8 @@ function Dashboard() {
 
         <main>
           <div className="mx-auto w-full max-w-9xl px-4 py-8 sm:px-6 lg:px-8">
+            {/* Welcome banner */}
+            <WelcomeBanner />
             {/* Dashboard actions */}
             <div className="mb-8 sm:flex sm:items-center sm:justify-between">
               {/* Left: Avatars */}
@@ -90,8 +92,6 @@ function Dashboard() {
             </div>
           </div>
         </main>
-
-        <Banner />
       </div>
     </div>
   );
