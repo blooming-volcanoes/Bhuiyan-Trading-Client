@@ -11,7 +11,6 @@ import Register from "./pages/Register/Register";
 import "./styles/css/style.css";
 
 import "./Components/dashboard/charts/ChartjsConfig";
-import AdminRoutes from "./routes/AdminRoutes";
 
 AOS.init();
 
@@ -44,7 +43,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         {/* Admin Routes are here */}
-        <Route path="/admin/dashboard/*" element={<AdminRoutes />} />
+        <Route path="/admin/dashboard/*" element={<Home />} />
       </Routes>
     </Suspense>
   );
