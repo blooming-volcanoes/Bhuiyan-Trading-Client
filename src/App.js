@@ -12,6 +12,7 @@ import "./styles/css/style.css";
 
 import "./Components/dashboard/charts/ChartjsConfig";
 import AdminRoutes from "./routes/AdminRoutes";
+
 AOS.init();
 
 const LatestNews = React.lazy(() => import("./pages/LatestNews/LatestNews"));
