@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Login/Login";
+import NotFound from "../pages/NotFound";
 import Register from "./../pages/Register/Register";
 const LatestNews = React.lazy(() => import("../pages/LatestNews/LatestNews"));
 const Category = React.lazy(() => import("../pages/Category/Category"));
@@ -26,6 +27,7 @@ function PublicRoutes() {
 
       {/* <Route path="/blogPage" element={<BlogPage />} /> */}
       {/* <Route path="/product-detail" element={<ProductDetail />} /> */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

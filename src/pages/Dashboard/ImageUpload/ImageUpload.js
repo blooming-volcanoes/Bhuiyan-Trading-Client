@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import DashboardLayout from "../../../layouts/DashboardLayout";
+import httpDashboardService from "../../../services/dashboard.service";
 
 function ImageUpload() {
   const fileRef = useRef();
@@ -7,8 +8,16 @@ function ImageUpload() {
 
   async function handelSubmit(e) {
     e.preventDefault();
-
-    console.log(files);
+    if (files?.type) {
+      const formData = new FormData();
+      formData.append("img", files);
+      try {
+        const data = await httpDashboardService.uploadImage(formData);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
   function handelFiles(e) {
