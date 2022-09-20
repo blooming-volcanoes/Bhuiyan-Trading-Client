@@ -6,7 +6,7 @@ function DashboardLayout({ children }) {
   const { user } = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(user);
+
   useEffect(() => {
     if (!user?.email) {
       return navigate("/login", { state: location?.pathname });

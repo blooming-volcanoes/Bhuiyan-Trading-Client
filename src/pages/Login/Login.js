@@ -43,9 +43,9 @@ function Login() {
       data.user.password = null;
       dispatch(addUser(data));
     } catch (error) {
+      dispatch(authLoading(false));
       const { msg } = error.response.data;
       toast.error(msg);
-      dispatch(authLoading(false));
     }
     dispatch(authLoading(false));
     reset();
