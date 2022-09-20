@@ -7,6 +7,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import "./styles/css/style.css";
 
 import "./Components/dashboard/charts/ChartjsConfig";
+import NotFound from "./pages/NotFound";
 import AdminRoutes from "./routes/AdminRoutes";
 import PublicRoutes from "./routes/PublicRoutes";
 
@@ -29,6 +30,8 @@ function App() {
         <Route path="/*" element={<PublicRoutes />} />
         {/* Admin Routes are here */}
         <Route path="/admin/dashboard/*" element={<AdminRoutes />} />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );
