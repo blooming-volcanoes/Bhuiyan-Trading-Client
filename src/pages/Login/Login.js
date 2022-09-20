@@ -40,6 +40,7 @@ function Login() {
         showConfirmButton: false,
         timer: 1500,
       });
+      data.user.password = null;
       dispatch(addUser(data));
     } catch (error) {
       const { msg } = error.response.data;

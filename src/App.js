@@ -3,7 +3,6 @@ import "aos/dist/aos.css";
 import axios from "axios";
 import React, { Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Dashboard from "./pages/Dashboard/Dashboard";
 import Home from "./pages/Homepage/Home";
 import Login from "./pages/Login/Login";
 import ProductDetail from "./pages/ProductDetail/ProductDetail.js";
@@ -12,6 +11,7 @@ import Register from "./pages/Register/Register";
 import "./styles/css/style.css";
 
 import "./Components/dashboard/charts/ChartjsConfig";
+import AdminRoutes from "./routes/AdminRoutes";
 AOS.init();
 
 const LatestNews = React.lazy(() => import("./pages/LatestNews/LatestNews"));
@@ -42,7 +42,8 @@ function App() {
         <Route path="/ClientsPage" element={<ClientsPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* Admin Routes are here */}
+        <Route path="/admin/dashboard/*" element={<AdminRoutes />} />
       </Routes>
     </Suspense>
   );
