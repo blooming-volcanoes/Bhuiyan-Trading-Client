@@ -2,6 +2,7 @@ import "animate.css";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import logo from "../../../assets/Images/logo.png";
 import { removeUser } from "./../../../redux/auth/authAction";
 let Links = [
@@ -18,6 +19,24 @@ const Header = ({ color }) => {
   const [open, setOpen] = useState(false);
   const { user } = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+
+  const handelLogout = () => {
+    Swal.fire({
+      title: "Are you sure you want to Logout?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        dispatch(removeUser());
+        Swal.fire("Logged out!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Ok no Problem", "", "info");
+      }
+    });
+  };
 
   return (
     <header
@@ -57,10 +76,21 @@ const Header = ({ color }) => {
               </Link>
             </li>
           ))}
+          {user?.role === "admin" && (
+            <li className="my-7 text-lg md:my-0 md:ml-8">
+              <Link
+                to="/admin/dashboard"
+                className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500"
+              >
+                Dashboard
+              </Link>
+            </li>
+          )}
+          {/* If user logged in or not */}
           {user?.email ? (
             <li className="my-7 text-lg md:my-0 md:ml-8 ">
               <button
-                onClick={() => dispatch(removeUser())}
+                onClick={handelLogout}
                 className="font-bold text-white duration-100 hover:border-b-4 hover:border-red-500"
               >
                 Logout
