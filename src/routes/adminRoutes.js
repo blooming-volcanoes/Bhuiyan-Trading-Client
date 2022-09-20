@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../pages/Dashboard/Dashboard";
 
-function adminRoutes() {
+function AdminRoutes() {
   return (
     <Routes>
       <Route index element={<Dashboard />} />
@@ -11,4 +11,4 @@ function adminRoutes() {
   );
 }
 
-export default adminRoutes;
+export default AdminRoutes;
