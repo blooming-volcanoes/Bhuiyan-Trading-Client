@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* body {
+  font-family: "Poppins", sans-serif;
+} */
+
+.banner-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(../../assets/Images/bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.boat-as-bg {
+  background-image: linear-gradient(
+      to top,
+      #000000c9,
+      #3b3b3ba9,
+      #77777765,
+      #b9b9b900,
+      #ffffff00
+    ),
+    url(../../assets/Images/boat.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 273px;
+}
+
+.whowe-bg {
+  background: rgb(206, 25, 49);
+  background: linear-gradient(
+    90deg,
+    rgba(206, 25, 49, 1) 0%,
+    rgba(126, 23, 31, 1) 100%
+  );
+}
+@layer components {
+  .main-container {
+    @apply mx-5 max-w-full lg:mx-auto lg:max-w-6xl;
+  }
+  .banner-btn {
+    @apply mt-6 rounded-lg border-2 border-red-700 bg-white py-2 px-4 text-2xl font-bold text-red-700 transition-all ease-in hover:bg-red-700 hover:text-white;
+  }
+}

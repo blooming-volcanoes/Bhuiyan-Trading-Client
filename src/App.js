@@ -3,15 +3,15 @@ import "aos/dist/aos.css";
 import axios from "axios";
 import React, { Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import Home from "./pages/Homepage/Home";
 import Login from "./pages/Login/Login";
 import ProductDetail from "./pages/ProductDetail/ProductDetail.js";
 import Register from "./pages/Register/Register";
 
-import "./css/style.css";
+import "./styles/css/style.css";
 
-import "./charts/ChartjsConfig";
+import "./Components/dashboard/charts/ChartjsConfig";
 AOS.init();
 
 const LatestNews = React.lazy(() => import("./pages/LatestNews/LatestNews"));
