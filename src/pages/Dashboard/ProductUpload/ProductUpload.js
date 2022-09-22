@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import FeatureUplaod from "../../../Components/dashboard/ProductUpload/FeatureUplaod";
+import useFileFeatureUploader from "../../../hooks/useFileUploaders/useFileFeatureUploader";
 import DashboardLayout from "../../../layouts/DashboardLayout";
+import LoadingButton from "./../../../Components/custom/Buttons/LoadingButton";
+import httpProductService from "./../../../services/product.service";
 
 const inputFields = [
   {
@@ -37,7 +42,34 @@ const inputFields = [
 
 function ProductUpload() {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const [uploadedFeature, setUploadedFeature] = useState(null);
+  const [loader, setLoader] = useState(false);
+  const { file, repairSingleFile, setFile } = useFileFeatureUploader();
+  const [readFeatureImage, setReadFeatureImage] = useState(null);
+
+  const handelSaveFeatureImage = async () => {
+    setLoader(true);
+    try {
+      const data = await httpProductService.uploadFeatureImage(file);
+      setFile(data?.url);
+      setReadFeatureImage(data?.url);
+      setUploadedFeature(data?.url);
+      toast.success("Feature Image Successfully Saved");
+    } catch (error) {
+      setLoader(false);
+      console.log(error);
+    }
+    setLoader(false);
+  };
+
+  const onSubmit = (data) => {
+    if (file) {
+      console.log({ ...data, featureImg: uploadedFeature });
+    }
+    if (!file) {
+      toast.error("Please Select or save your feature Image");
+    }
+  };
 
   return (
     <DashboardLayout>
@@ -83,6 +115,23 @@ function ProductUpload() {
                   placeholder={input.placeholder}
                 ></textarea>
               ))}
+            {/* Feature Upload component */}
+            {loader ? (
+              <LoadingButton
+                styles="flex justify-center"
+                svg="w-10 h-10 text-indigo-500"
+              />
+            ) : (
+              <FeatureUplaod
+                file={file}
+                repairSingleFile={repairSingleFile}
+                setFile={setFile}
+                handelSaveFeatureImage={handelSaveFeatureImage}
+                readFeatureImage={readFeatureImage}
+                setReadFeatureImage={setReadFeatureImage}
+                setUploadedFeature={setUploadedFeature}
+              />
+            )}
 
             <button className="dashboard-btn" type="submit">
               Submit

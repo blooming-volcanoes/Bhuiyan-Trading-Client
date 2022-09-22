@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../Components/dashboard/partials/Header";
@@ -20,6 +21,7 @@ function DashboardLayout({ children }) {
   }, [user, location, navigate]);
   return (
     <>
+      <Toaster />
       {user?.role !== "admin" ? (
         "loading..."
       ) : (
