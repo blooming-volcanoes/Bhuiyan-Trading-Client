@@ -44,14 +44,15 @@ function ProductUpload() {
   const { register, handleSubmit } = useForm();
   const [uploadedFeature, setUploadedFeature] = useState(null);
   const [loader, setLoader] = useState(false);
-  const { file, repairSingleFile, setFile } = useFileFeatureUploader();
+  const { featureFile, repairSingleFile, setFeatureFile } =
+    useFileFeatureUploader();
   const [readFeatureImage, setReadFeatureImage] = useState(null);
 
   const handelSaveFeatureImage = async () => {
     setLoader(true);
     try {
-      const data = await httpProductService.uploadFeatureImage(file);
-      setFile(data?.url);
+      const data = await httpProductService.uploadFeatureImage(featureFile);
+      setFeatureFile(data?.url);
       setReadFeatureImage(data?.url);
       setUploadedFeature(data?.url);
       toast.success("Feature Image Successfully Saved");
@@ -62,11 +63,13 @@ function ProductUpload() {
     setLoader(false);
   };
 
+  console.log(uploadedFeature);
+
   const onSubmit = (data) => {
-    if (file) {
+    if (featureFile && uploadedFeature) {
       console.log({ ...data, featureImg: uploadedFeature });
     }
-    if (!file) {
+    if (!featureFile || !uploadedFeature) {
       toast.error("Please Select or save your feature Image");
     }
   };
@@ -117,15 +120,17 @@ function ProductUpload() {
               ))}
             {/* Feature Upload component */}
             {loader ? (
-              <LoadingButton
-                styles="flex justify-center"
-                svg="w-10 h-10 text-indigo-500"
-              />
+              <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
+                <LoadingButton
+                  styles="flex justify-center"
+                  svg="w-10 h-10 text-indigo-500"
+                />
+              </div>
             ) : (
               <FeatureUplaod
-                file={file}
+                file={featureFile}
                 repairSingleFile={repairSingleFile}
-                setFile={setFile}
+                setFile={setFeatureFile}
                 handelSaveFeatureImage={handelSaveFeatureImage}
                 readFeatureImage={readFeatureImage}
                 setReadFeatureImage={setReadFeatureImage}

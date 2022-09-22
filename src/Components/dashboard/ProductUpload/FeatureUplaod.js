@@ -55,7 +55,7 @@ function FeatureUplaod({
               e.stopPropagation();
               setFile(null);
               setReadFeatureImage(null);
-              setReadFeatureImage(null);
+              setUploadedFeature(null);
             }}
             className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500"
           >
