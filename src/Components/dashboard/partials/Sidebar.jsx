@@ -239,18 +239,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               className="block truncate text-slate-400 transition duration-150 hover:text-slate-200"
                             >
                               <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                                Analytics
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/"
-                              className="block truncate text-slate-400 transition duration-150 hover:text-slate-200"
-                            >
-                              <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                                Fintech
+                                Gallery
                               </span>
                             </NavLink>
                           </li>
@@ -309,7 +298,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               />
                             </svg>
                             <span className="ml-3 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                              E-Commerce
+                              Products
                             </span>
                           </div>
                           {/* Icon */}
@@ -330,11 +319,14 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/"
-                              className="block truncate text-slate-400 transition duration-150 hover:text-slate-200"
+                              className={({ isActive }) =>
+                                "block truncate text-slate-400 transition duration-150 hover:text-slate-200 " +
+                                (isActive ? "!text-indigo-500" : "")
+                              }
+                              to="/admin/dashboard/product/upload"
                             >
                               <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                                Customers
+                                Product Upload
                               </span>
                             </NavLink>
                           </li>
