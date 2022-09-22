@@ -29,8 +29,10 @@ function App() {
 
   // Check if the token is expired or not
   useEffect(() => {
-    checkUser();
-  }, [user?.token]);
+    if (user?.token) {
+      checkUser();
+    }
+  }, [user]);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
