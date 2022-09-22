@@ -9,6 +9,7 @@ function GalleryUpload({
   setRenderGalleryImages,
   handelGalleryImages,
   setUploadedGalleryImage,
+  galleryLoader,
 }) {
   const fileRef = useRef();
 
@@ -62,6 +63,7 @@ function GalleryUpload({
       {galleryFiles && renderGalleryImages?.length === 4 ? (
         <div className="flex w-full justify-center space-x-6">
           <button
+            disabled={galleryLoader}
             type="button"
             className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500"
             onClick={handelGalleryImages}
@@ -69,6 +71,7 @@ function GalleryUpload({
             Save
           </button>
           <button
+            disabled={galleryLoader}
             type="button"
             onClick={(e) => {
               e.stopPropagation();
