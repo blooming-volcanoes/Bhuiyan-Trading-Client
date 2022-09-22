@@ -4,36 +4,48 @@ import AllProducts from "./AllProducts/AllProducts";
 import Banner from "./Banner/Banner";
 import MostPopularProducts from "./MostPopularProducts/MostPopularProducts";
 
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import bannerImage from "../../assets/Images/pexels-kindel-media-8352350.jpg";
+import LoadingButton from "../../Components/custom/Buttons/LoadingButton";
+import PageLayout from "./../../layouts/PageLayout";
 import httpProductService from "./../../services/product.service";
 
 const Product = () => {
   const [imageUrl] = useState(bannerImage);
-  const user = useSelector((state) => state.auth.user);
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   let { id } = useParams();
 
   useEffect(() => {
+    setLoading(true);
     httpProductService
-      .getProductByCateGory(id, {
-        headers: {
-          authorization: `Bearer ${user?.token}`,
-        },
-      })
+      .getProductByCateGory(id)
       .then((data) => {
         setProducts(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }, [id, user]);
+  }, [id]);
 
   console.log(products);
 
   return (
     <>
-      <Banner bannerImage={imageUrl} />
-      <MostPopularProducts products={products} />
-      <AllProducts products={products} />
+      {loading ? (
+        <div className="flex h-screen justify-center space-y-4">
+          <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
+        </div>
+      ) : (
+        <PageLayout>
+          <Banner bannerImage={imageUrl} />
+          <MostPopularProducts products={products} />
+          <AllProducts products={products} />
+        </PageLayout>
+      )}
     </>
   );
 };
