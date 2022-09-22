@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import boatPng from "../../../assets/Images/boat.jpg";
 import httpCateGoryService from "../../../services/category.service";
 const data = [
@@ -21,7 +23,7 @@ function PopularProducts() {
       }
     }
     getProducts();
-  }, []);
+  }, [cateGories.length]);
 
   console.log(cateGories);
 
@@ -42,9 +44,12 @@ function PopularProducts() {
                 src={data[0].img}
                 alt=""
               />
-              <h1 className="center absolute bottom-0 left-0 right-0 w-full bg-black bg-opacity-30 p-2 text-2xl font-medium text-white">
+              <Link
+                to={`/product/${category.id}`}
+                className="center absolute bottom-0 left-0 right-0 w-full bg-black bg-opacity-30 p-2 text-2xl font-medium text-white"
+              >
                 {category.categoryName}
-              </h1>
+              </Link>
             </div>
           ))}
         </div>
