@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import FeatureUplaod from "../../../Components/dashboard/ProductUpload/FeatureUplaod";
@@ -6,6 +6,7 @@ import GalleryUpload from "../../../Components/dashboard/ProductUpload/GalleryUp
 import useFileFeatureUploader from "../../../hooks/useFileUploaders/useFileFeatureUploader";
 import useGalleryUploader from "../../../hooks/useFileUploaders/useGalleryUploder";
 import DashboardLayout from "../../../layouts/DashboardLayout";
+import httpCateGoryService from "../../../services/category.service";
 import LoadingButton from "./../../../Components/custom/Buttons/LoadingButton";
 import httpProductService from "./../../../services/product.service";
 
@@ -47,6 +48,32 @@ function ProductUpload() {
   const [featureLoader, setFeatureLoader] = useState(false);
   const [galleryLoader, setGalleryLoader] = useState(false);
 
+  // Category states
+  const [cateGories, setCateGories] = useState([]);
+  const [cateGoryLoading, setCateGoryLoading] = useState(false);
+  const [categoryId, setCategoryId] = useState(null);
+
+  // Fetch all Categories
+  useEffect(() => {
+    async function getProducts() {
+      setCateGoryLoading(true);
+      try {
+        const data = await httpCateGoryService.getAllCategory();
+        setCateGories(data);
+      } catch (error) {
+        setCateGoryLoading(false);
+        console.log(error);
+      }
+
+      setCateGoryLoading(false);
+    }
+    getProducts();
+  }, []);
+
+  const handelCategories = (e) => {
+    setCategoryId(e.target.value);
+  };
+
   // Feature Image All states
   const [uploadedFeature, setUploadedFeature] = useState(null);
   const { featureFile, repairSingleFile, setFeatureFile } =
@@ -82,7 +109,7 @@ function ProductUpload() {
   // feature Image functions
   const handelSaveFeatureImage = async () => {
     if (uploadedFeature === featureFile) {
-      toast.success("File Already saved");
+      toast.success("The Feature image have already been saved.");
       return;
     }
     setFeatureLoader(true);
@@ -94,18 +121,24 @@ function ProductUpload() {
       toast.success("Feature Image Successfully Saved");
     } catch (error) {
       setFeatureLoader(false);
-      console.log(error);
+      console.log(error.response);
+      if (error.response.status) {
+        toast.error("File is too large or Internal Server Error");
+      }
     }
     setFeatureLoader(false);
   };
 
+  console.log(categoryId);
+
   // Main form here
   const onSubmit = async (data) => {
-    if (uploadedFeature && uploadedGalleryImage) {
+    if (uploadedFeature && uploadedGalleryImage && categoryId) {
       const modifiedData = {
         ...data,
         featureImg: uploadedFeature,
         gallaryImg: uploadedGalleryImage?.join(";"),
+        categoryId,
       };
       try {
         console.log(modifiedData);
@@ -121,6 +154,7 @@ function ProductUpload() {
       setFeatureFile(null);
       setReadFeatureImage(null);
       setUploadedFeature(null);
+      setCategoryId(null);
       reset();
     }
     if (!uploadedFeature) {
@@ -128,6 +162,9 @@ function ProductUpload() {
     }
     if (!uploadedGalleryImage?.length) {
       toast.error("Please Select or save your Gallery Images");
+    }
+    if (!categoryId) {
+      toast.error("Please Select a category");
     }
   };
 
@@ -175,6 +212,29 @@ function ProductUpload() {
                   placeholder={input.placeholder}
                 ></textarea>
               ))}
+
+            {/* CateGory dropdown */}
+            {cateGoryLoading ? (
+              <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
+                <LoadingButton
+                  styles="flex justify-center"
+                  svg="w-10 h-10 text-indigo-500"
+                />
+              </div>
+            ) : (
+              <select
+                onChange={handelCategories}
+                className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
+              >
+                <option>Select a Category</option>
+                {cateGories.map((category) => (
+                  <option key={category?.id} value={category?.id}>
+                    {category?.categoryName}
+                  </option>
+                ))}
+              </select>
+            )}
+
             {/* Feature Upload component */}
             {featureLoader ? (
               <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
