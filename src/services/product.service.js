@@ -5,8 +5,8 @@ class HttpProductService {
     const data = await httpReq.post("/gallery/upload", payload);
     return data;
   }
-  async uploadImage(payload) {
-    const { data } = await httpReq.post("/gallery/bulkUpload", payload);
+  async uploadGalleryImage(payload) {
+    const data = await httpReq.post("/gallery/bulkUpload", payload);
     return data;
   }
 }

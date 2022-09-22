@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import FeatureUplaod from "../../../Components/dashboard/ProductUpload/FeatureUplaod";
+import GalleryUpload from "../../../Components/dashboard/ProductUpload/GalleryUpload";
 import useFileFeatureUploader from "../../../hooks/useFileUploaders/useFileFeatureUploader";
+import useGalleryUploader from "../../../hooks/useFileUploaders/useGalleryUploder";
 import DashboardLayout from "../../../layouts/DashboardLayout";
+import httpCateGoryService from "../../../services/category.service";
 import LoadingButton from "./../../../Components/custom/Buttons/LoadingButton";
 import httpProductService from "./../../../services/product.service";
 
@@ -41,15 +44,75 @@ const inputFields = [
 ];
 
 function ProductUpload() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
+  const [featureLoader, setFeatureLoader] = useState(false);
+  const [galleryLoader, setGalleryLoader] = useState(false);
+
+  // Category states
+  const [cateGories, setCateGories] = useState([]);
+  const [cateGoryLoading, setCateGoryLoading] = useState(false);
+  const [categoryId, setCategoryId] = useState(null);
+
+  // Fetch all Categories
+  useEffect(() => {
+    async function getProducts() {
+      setCateGoryLoading(true);
+      try {
+        const data = await httpCateGoryService.getAllCategory();
+        setCateGories(data);
+      } catch (error) {
+        setCateGoryLoading(false);
+        console.log(error);
+      }
+
+      setCateGoryLoading(false);
+    }
+    getProducts();
+  }, []);
+
+  const handelCategories = (e) => {
+    setCategoryId(e.target.value);
+  };
+
+  // Feature Image All states
   const [uploadedFeature, setUploadedFeature] = useState(null);
-  const [loader, setLoader] = useState(false);
   const { featureFile, repairSingleFile, setFeatureFile } =
     useFileFeatureUploader();
   const [readFeatureImage, setReadFeatureImage] = useState(null);
 
+  // Gallery Image states
+  const { setGalleryFiles, galleryFiles, repairMultipleFiles } =
+    useGalleryUploader();
+  const [renderGalleryImages, setRenderGalleryImages] = useState(null);
+  const [uploadedGalleryImage, setUploadedGalleryImage] = useState(null);
+
+  // Gallery Image function
+  const handelGalleryImages = async () => {
+    if (galleryFiles === uploadedGalleryImage) {
+      toast.success("The gallery images have already been saved.");
+      return;
+    }
+    setGalleryLoader(true);
+    try {
+      const data = await httpProductService.uploadGalleryImage(galleryFiles);
+      setGalleryFiles(data?.url);
+      setUploadedGalleryImage(data?.url);
+      setRenderGalleryImages(data?.url);
+      toast.success("Feature Image Successfully Saved");
+    } catch (error) {
+      setGalleryLoader(false);
+      console.log(error);
+    }
+    setGalleryLoader(false);
+  };
+
+  // feature Image functions
   const handelSaveFeatureImage = async () => {
-    setLoader(true);
+    if (uploadedFeature === featureFile) {
+      toast.success("The Feature image have already been saved.");
+      return;
+    }
+    setFeatureLoader(true);
     try {
       const data = await httpProductService.uploadFeatureImage(featureFile);
       setFeatureFile(data?.url);
@@ -57,20 +120,51 @@ function ProductUpload() {
       setUploadedFeature(data?.url);
       toast.success("Feature Image Successfully Saved");
     } catch (error) {
-      setLoader(false);
-      console.log(error);
+      setFeatureLoader(false);
+      console.log(error.response);
+      if (error.response.status) {
+        toast.error("File is too large or Internal Server Error");
+      }
     }
-    setLoader(false);
+    setFeatureLoader(false);
   };
 
-  console.log(uploadedFeature);
+  console.log(categoryId);
 
-  const onSubmit = (data) => {
-    if (featureFile && uploadedFeature) {
-      console.log({ ...data, featureImg: uploadedFeature });
+  // Main form here
+  const onSubmit = async (data) => {
+    if (uploadedFeature && uploadedGalleryImage && categoryId) {
+      const modifiedData = {
+        ...data,
+        featureImg: uploadedFeature,
+        gallaryImg: uploadedGalleryImage?.join(";"),
+        categoryId,
+      };
+      try {
+        console.log(modifiedData);
+      } catch (error) {
+        console.log(error);
+      }
+
+      // Gallery Image States
+      setGalleryFiles(null);
+      setRenderGalleryImages(null);
+      setUploadedGalleryImage(null);
+      // Feature Image states
+      setFeatureFile(null);
+      setReadFeatureImage(null);
+      setUploadedFeature(null);
+      setCategoryId(null);
+      reset();
     }
-    if (!featureFile || !uploadedFeature) {
+    if (!uploadedFeature) {
       toast.error("Please Select or save your feature Image");
+    }
+    if (!uploadedGalleryImage?.length) {
+      toast.error("Please Select or save your Gallery Images");
+    }
+    if (!categoryId) {
+      toast.error("Please Select a category");
     }
   };
 
@@ -118,8 +212,31 @@ function ProductUpload() {
                   placeholder={input.placeholder}
                 ></textarea>
               ))}
+
+            {/* CateGory dropdown */}
+            {cateGoryLoading ? (
+              <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
+                <LoadingButton
+                  styles="flex justify-center"
+                  svg="w-10 h-10 text-indigo-500"
+                />
+              </div>
+            ) : (
+              <select
+                onChange={handelCategories}
+                className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
+              >
+                <option>Select a Category</option>
+                {cateGories.map((category) => (
+                  <option key={category?.id} value={category?.id}>
+                    {category?.categoryName}
+                  </option>
+                ))}
+              </select>
+            )}
+
             {/* Feature Upload component */}
-            {loader ? (
+            {featureLoader ? (
               <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
                 <LoadingButton
                   styles="flex justify-center"
@@ -135,6 +252,22 @@ function ProductUpload() {
                 readFeatureImage={readFeatureImage}
                 setReadFeatureImage={setReadFeatureImage}
                 setUploadedFeature={setUploadedFeature}
+              />
+            )}
+
+            {galleryLoader ? (
+              <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
+                <LoadingButton svg="w-10 h-10 text-indigo-500" />
+              </div>
+            ) : (
+              <GalleryUpload
+                setGalleryFiles={setGalleryFiles}
+                galleryFiles={galleryFiles}
+                repairMultipleFiles={repairMultipleFiles}
+                renderGalleryImages={renderGalleryImages}
+                setRenderGalleryImages={setRenderGalleryImages}
+                handelGalleryImages={handelGalleryImages}
+                setUploadedGalleryImage={setUploadedGalleryImage}
               />
             )}
 
