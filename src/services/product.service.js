@@ -1,8 +1,21 @@
 import httpReq from "./http.service";
 
 class HttpProductService {
+  async getSingleProductById(id) {
+    const data = await httpReq.get(`/product/get/${id}`);
+    return data;
+  }
+  async getProductByCateGory(id) {
+    const data = await httpReq.get(`/product/categoryId/${id}`);
+    return data;
+  }
+  async getAllProducts() {
+    const data = await httpReq.get("/product/get");
+    return data;
+  }
+
   async addSingleProduct(payload, config) {
-    const data = httpReq.post("/product/add", payload, config);
+    const data = await httpReq.post("/product/add", payload, config);
     return data;
   }
 

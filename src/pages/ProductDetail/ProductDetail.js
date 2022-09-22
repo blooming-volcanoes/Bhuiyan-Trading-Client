@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import httpProductService from "../../services/product.service";
 
-import { getAverageColor } from "../../lib/lib";
+import LoadingButton from "./../../Components/custom/Buttons/LoadingButton";
+import ProtectedPageLayout from "./../../layouts/ProtectedPageLayout";
 import PdDetailMain from "./PdDetailMain/PdDetailMain";
 
 const ProductDetail = () => {
@@ -17,25 +20,37 @@ const ProductDetail = () => {
     ],
   });
 
-  useEffect(() => {
-    image.current.onload = () => {
-      const { R, G, B } = getAverageColor(image.current, 4);
-      setColor({ R, G, B });
-    };
-  }, []);
-  return (
-    <>
-      <PdDetailMain images={images} />
+  const [product, setProduct] = useState({});
+  const [loading, setLoading] = useState(false);
+  let { id } = useParams();
 
-      {/* the image below is not shown on the UI, rather used to find the average color of the banner image */}
-      <img
-        ref={image}
-        src={images.primary}
-        crossOrigin=""
-        alt="hello"
-        className="hidden"
-      />
-    </>
+  useEffect(() => {
+    setLoading(true);
+    httpProductService
+      .getSingleProductById(id)
+      .then((data) => {
+        setProduct(data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [id]);
+
+  console.log(product);
+
+  return (
+    <ProtectedPageLayout>
+      {loading ? (
+        <div className="flex h-screen justify-center space-y-4">
+          <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
+        </div>
+      ) : (
+        <PdDetailMain images={images} product={product} />
+      )}
+    </ProtectedPageLayout>
   );
 };
 

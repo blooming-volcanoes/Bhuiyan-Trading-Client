@@ -1,28 +1,27 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import Footer from "./../Components/common/Footer/Footer";
-import Header from "./../Components/common/Header/Header";
+import Footer from "../Components/common/Footer/Footer";
+import Header from "../Components/common/Header/Header";
 
-function AuthLayout({ children }) {
+function ProtectedPageLayout({ children }) {
   const { user } = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.state || "/";
 
   useEffect(() => {
-    if (user?.email) {
-      navigate(from, { replace: true });
+    if (!user?.email) {
+      navigate("/login", { state: location?.pathname });
       return;
     }
-  }, [user, navigate, location.pathname, from]);
+  }, [user, location?.pathname, navigate]);
   return (
     <>
       <Header />
-      {children}
+      {user?.email ? children : "Loading"}
       <Footer />
     </>
   );
 }
 
-export default AuthLayout;
+export default ProtectedPageLayout;
