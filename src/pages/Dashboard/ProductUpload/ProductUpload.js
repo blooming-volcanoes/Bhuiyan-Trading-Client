@@ -49,6 +49,10 @@ function ProductUpload() {
   const [readFeatureImage, setReadFeatureImage] = useState(null);
 
   const handelSaveFeatureImage = async () => {
+    if (uploadedFeature === featureFile) {
+      toast.success("File Already saved");
+      return;
+    }
     setLoader(true);
     try {
       const data = await httpProductService.uploadFeatureImage(featureFile);
@@ -62,8 +66,6 @@ function ProductUpload() {
     }
     setLoader(false);
   };
-
-  console.log(uploadedFeature);
 
   const onSubmit = (data) => {
     if (featureFile && uploadedFeature) {
