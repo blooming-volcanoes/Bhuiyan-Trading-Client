@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import FeatureUplaod from "../../../Components/dashboard/ProductUpload/FeatureUplaod";
 import GalleryUpload from "../../../Components/dashboard/ProductUpload/GalleryUpload";
 import useFileFeatureUploader from "../../../hooks/useFileUploaders/useFileFeatureUploader";
@@ -44,9 +45,11 @@ const inputFields = [
 ];
 
 function ProductUpload() {
+  const user = useSelector((state) => state.auth.user);
   const { register, handleSubmit, reset } = useForm();
   const [featureLoader, setFeatureLoader] = useState(false);
   const [galleryLoader, setGalleryLoader] = useState(false);
+  const [submitLoader, setSubmitLoader] = useState(false);
 
   // Category states
   const [cateGories, setCateGories] = useState([]);
@@ -98,7 +101,7 @@ function ProductUpload() {
       setGalleryFiles(data?.url);
       setUploadedGalleryImage(data?.url);
       setRenderGalleryImages(data?.url);
-      toast.success("Feature Image Successfully Saved");
+      toast.success("Gallery Image Successfully Saved");
     } catch (error) {
       setGalleryLoader(false);
       console.log(error);
@@ -129,8 +132,6 @@ function ProductUpload() {
     setFeatureLoader(false);
   };
 
-  console.log(categoryId);
-
   // Main form here
   const onSubmit = async (data) => {
     if (uploadedFeature && uploadedGalleryImage && categoryId) {
@@ -140,11 +141,25 @@ function ProductUpload() {
         gallaryImg: uploadedGalleryImage?.join(";"),
         categoryId,
       };
+      setSubmitLoader(true);
+
       try {
-        console.log(modifiedData);
+        const data = await httpProductService.addSingleProduct(modifiedData, {
+          headers: {
+            authorization: `Bearer ${user?.token}`,
+          },
+        });
+        if (data.msg) {
+          toast.success(data.msg);
+        } else {
+          toast.success("Product Uploaded Successfully");
+        }
       } catch (error) {
+        setSubmitLoader(false);
+        toast.error("Internal Server Error");
         console.log(error);
       }
+      setSubmitLoader(false);
 
       // Gallery Image States
       setGalleryFiles(null);
@@ -171,13 +186,16 @@ function ProductUpload() {
   return (
     <DashboardLayout>
       <section>
+        <h1 className="my-10 text-center text-2xl font-semibold capitalize text-indigo-500 drop-shadow">
+          Upload your Product Here
+        </h1>
         <div className="my-5 flex justify-center">
           <form
             className="mx-5 flex w-full flex-col space-y-5 rounded border bg-white p-4 shadow-xl md:w-2/3 lg:w-2/3"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h1 className="text-center text-xl font-semibold capitalize text-gray-500 drop-shadow">
-              Fill the Necessary Details
+            <h1 className="text-center text-lg font-semibold text-gray-500 drop-shadow">
+              Fill all the Necessary Details
             </h1>
             {/* input fields */}
             {inputFields
@@ -252,6 +270,7 @@ function ProductUpload() {
                 readFeatureImage={readFeatureImage}
                 setReadFeatureImage={setReadFeatureImage}
                 setUploadedFeature={setUploadedFeature}
+                featureLoader={featureLoader}
               />
             )}
 
@@ -268,12 +287,19 @@ function ProductUpload() {
                 setRenderGalleryImages={setRenderGalleryImages}
                 handelGalleryImages={handelGalleryImages}
                 setUploadedGalleryImage={setUploadedGalleryImage}
+                galleryLoader={galleryLoader}
               />
             )}
 
-            <button className="dashboard-btn" type="submit">
-              Submit
-            </button>
+            {submitLoader ? (
+              <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
+                <LoadingButton svg="w-10 h-10 text-indigo-500" />
+              </div>
+            ) : (
+              <button className="dashboard-btn" type="submit">
+                Submit
+              </button>
+            )}
           </form>
         </div>
       </section>
