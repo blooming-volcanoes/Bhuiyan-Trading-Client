@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { getAverageColor } from "../../lib/lib";
+import ProtectedPageLayout from "./../../layouts/ProtectedPageLayout";
 import PdDetailMain from "./PdDetailMain/PdDetailMain";
 
 const ProductDetail = () => {
@@ -24,7 +25,7 @@ const ProductDetail = () => {
     };
   }, []);
   return (
-    <>
+    <ProtectedPageLayout>
       <PdDetailMain images={images} />
 
       {/* the image below is not shown on the UI, rather used to find the average color of the banner image */}
@@ -35,7 +36,7 @@ const ProductDetail = () => {
         alt="hello"
         className="hidden"
       />
-    </>
+    </ProtectedPageLayout>
   );
 };
 

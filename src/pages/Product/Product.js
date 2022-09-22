@@ -7,7 +7,6 @@ import MostPopularProducts from "./MostPopularProducts/MostPopularProducts";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import bannerImage from "../../assets/Images/pexels-kindel-media-8352350.jpg";
-import ProtectedPageLayout from "../../layouts/ProtectedPageLayout";
 import httpProductService from "./../../services/product.service";
 
 const Product = () => {
@@ -31,11 +30,11 @@ const Product = () => {
   console.log(products);
 
   return (
-    <ProtectedPageLayout>
+    <>
       <Banner bannerImage={imageUrl} />
       <MostPopularProducts products={products} />
       <AllProducts products={products} />
-    </ProtectedPageLayout>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import "swiper/css/autoplay";
 import "swiper/css/bundle";
 import dummyImage from "../../../assets/Images/pexels-gotta-be-worth-it-5209866.jpg";
 
+import { Link } from "react-router-dom";
 import { Autoplay, Navigation, Pagination } from "swiper";
 
 const Sliders = ({ products }) => {
@@ -59,9 +60,12 @@ const Sliders = ({ products }) => {
                             url(${product?.featureImg})`,
             }}
           >
-            <p className="ml-3 mb-3 text-xl font-bold text-white">
+            <Link
+              to={`/product-detail/${product?.id}`}
+              className="ml-3 mb-3 text-xl font-bold text-white"
+            >
               {product.title}
-            </p>
+            </Link>
           </div>
         </SwiperSlide>
       ))}

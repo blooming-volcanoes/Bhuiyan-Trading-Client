@@ -1,5 +1,6 @@
 import React from "react";
 import { IoIosArrowDroprightCircle, IoIosSearch } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const AllProducts = ({ products }) => {
   return (
@@ -34,9 +35,12 @@ const AllProducts = ({ products }) => {
                           url(${product.featureImg})`,
               }}
             >
-              <p className="ml-3 mb-3 text-xl font-bold text-white">
+              <Link
+                to={`/product-detail/${product?.id}`}
+                className="ml-3 mb-3 text-xl font-bold text-white"
+              >
                 {product.title}
-              </p>
+              </Link>
             </div>
           ))
         ) : (

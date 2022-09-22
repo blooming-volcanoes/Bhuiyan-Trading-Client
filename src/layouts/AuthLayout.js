@@ -15,7 +15,7 @@ function AuthLayout({ children }) {
       navigate(from, { replace: true });
       return;
     }
-  }, [user]);
+  }, [user, navigate, location.pathname, from]);
   return (
     <>
       <Header />
