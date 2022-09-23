@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import httpProductService from "../../services/product.service";
 
 import LoadingButton from "./../../Components/custom/Buttons/LoadingButton";
-import ProtectedPageLayout from "./../../layouts/ProtectedPageLayout";
+import PageLayout from "./../../layouts/PageLayout";
 import PdDetailMain from "./PdDetailMain/PdDetailMain";
 
 const ProductDetail = () => {
@@ -27,7 +27,7 @@ const ProductDetail = () => {
   }, [id]);
 
   return (
-    <ProtectedPageLayout>
+    <PageLayout>
       {loading ? (
         <div className="flex h-screen justify-center space-y-4">
           <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
@@ -35,7 +35,7 @@ const ProductDetail = () => {
       ) : (
         <PdDetailMain product={product} />
       )}
-    </ProtectedPageLayout>
+    </PageLayout>
   );
 };
 

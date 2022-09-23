@@ -55,7 +55,7 @@ const Sliders = ({ products }) => {
         <SwiperSlide>
           <Link
             to={`/product-detail/${product?.id}`}
-            className="flex h-72 items-end rounded-lg bg-cover bg-center bg-no-repeat lg:h-48"
+            className="flex h-screen w-full items-end rounded-lg bg-cover bg-center bg-no-repeat lg:h-48"
             style={{
               backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 70%, rgba(74, 74, 74, 100)), 
                             url(${product?.featureImg})`,
