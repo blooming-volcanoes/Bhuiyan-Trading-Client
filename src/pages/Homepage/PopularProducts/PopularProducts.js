@@ -40,7 +40,7 @@ function PopularProducts() {
 
         {/* All products */}
         {loader ? (
-          <div className="flex h-screen justify-center space-y-4">
+          <div className="flex h-full justify-center space-y-4">
             <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
           </div>
         ) : (
