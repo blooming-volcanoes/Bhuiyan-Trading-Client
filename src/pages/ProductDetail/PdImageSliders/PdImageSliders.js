@@ -12,7 +12,7 @@ import "swiper/css/thumbs";
 import "../styles/ProductDetails.css";
 
 // import required modules
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { FreeMode, Lazy, Navigation, Thumbs } from "swiper";
 
 const PdImageSliders = ({ product }) => {
   const [galleryImages] = useState(product?.gallaryImg?.split(";"));
@@ -27,10 +27,11 @@ const PdImageSliders = ({ product }) => {
         }}
         spaceBetween={10}
         navigation={true}
+        lazy={true}
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
-        modules={[FreeMode, Navigation, Thumbs]}
+        modules={[Lazy, FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
         {galleryImages?.map((img) => (
@@ -44,8 +45,9 @@ const PdImageSliders = ({ product }) => {
         spaceBetween={10}
         slidesPerView={4}
         freeMode={true}
+        lazy={true}
         watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
+        modules={[Lazy, FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
         {galleryImages?.map((img) => (

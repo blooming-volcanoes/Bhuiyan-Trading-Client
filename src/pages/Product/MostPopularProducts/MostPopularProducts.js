@@ -4,15 +4,16 @@ import Sliders from "../Sliders/Sliders";
 
 const MostPopularProducts = ({ products }) => {
   return (
-    <div className="container mx-auto mb-20">
+    <div className="main-container py-20">
       {/* Title */}
       <div className="pl-2 md:pl-0">
-        <h1>
-          <span className="text-3xl font-bold">We are</span>
+        <h1 className="text-3xl font-semibold">
+          <span>We are</span>
           <br />
-          <span className="text-5xl font-bold lg:text-7xl">
-            {products[Math.floor(Math.random() * products.length)]?.title ||
-              "Here"}
+          <span className="text-6xl">
+            {/* {products[Math.floor(Math.random() * products.length)]?.title ||
+              "Here"} */}
+            Red Fish
           </span>
         </h1>
       </div>
