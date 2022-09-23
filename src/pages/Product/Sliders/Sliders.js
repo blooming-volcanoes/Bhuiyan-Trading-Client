@@ -15,7 +15,7 @@ const Sliders = ({ products }) => {
   return (
     <>
       <Swiper
-        slidesPerView={3}
+        slidesPerView={1}
         spaceBetween={30}
         slidesPerGroup={3}
         autoplay={{
@@ -24,6 +24,11 @@ const Sliders = ({ products }) => {
         }}
         loop={true}
         loopFillGroupWithBlank={true}
+        breakpoints={{
+          640: {
+            slidesPerView: 3,
+          },
+        }}
         pagination={{
           clickable: true,
         }}
@@ -40,7 +45,7 @@ const Sliders = ({ products }) => {
                   background:
                     "linear-gradient(rgba(255, 255, 255, 0.01) 70%, rgb(74, 74, 74))",
                 }}
-                className="absolute top-0 bottom-0 left-0 right-0 h-full w-full "
+                className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded "
               ></div>
               <p className="absolute bottom-0 z-10 ml-3 mb-3 text-xl font-bold text-white">
                 {product.title}
