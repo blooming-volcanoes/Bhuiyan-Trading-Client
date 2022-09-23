@@ -6,8 +6,7 @@ import {
 import { Link } from "react-router-dom";
 import PdDescriptionAccordion from "../PdDescriptionAccordion/PdDescriptionAccordion";
 
-const PdDetailsAndDescription = ({ bgImage, product }) => {
-  console.log(bgImage);
+const PdDetailsAndDescription = ({ product }) => {
   return (
     <div
       style={{

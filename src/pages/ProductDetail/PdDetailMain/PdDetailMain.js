@@ -2,14 +2,14 @@
 import PdDetailsAndDescription from "../PdDetailsAndDescription/PdDetailsAndDescription";
 import PdImageSliders from "../PdImageSliders/PdImageSliders";
 
-function PdDetailMain({ images, product }) {
+function PdDetailMain({ product }) {
   return (
     <div
       className="mt-24 flex flex-col lg:flex-row
         "
     >
-      <PdImageSliders bgImages={images} product={product} />
-      <PdDetailsAndDescription bgImage={images.primary} product={product} />
+      <PdImageSliders product={product} />
+      <PdDetailsAndDescription product={product} />
     </div>
   );
   // return (

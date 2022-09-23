@@ -27,7 +27,8 @@ const AllProducts = ({ products }) => {
       <div className="mb-10 grid grid-cols-1 gap-y-3 gap-x-10 md:grid-cols-2 md:gap-y-4 md:gap-x-5 lg:grid-cols-4 lg:gap-y-9 lg:gap-x-9">
         {products.length > 0 ? (
           products.map((product) => (
-            <div
+            <Link
+              to={`/product-detail/${product?.id}`}
               key={product.id}
               className="flex h-56 items-end rounded-lg bg-cover bg-center bg-no-repeat lg:h-52"
               style={{
@@ -35,13 +36,13 @@ const AllProducts = ({ products }) => {
                           url(${product.featureImg})`,
               }}
             >
-              <Link
+              <p
                 to={`/product-detail/${product?.id}`}
                 className="ml-3 mb-3 text-xl font-bold text-white"
               >
                 {product.title}
-              </Link>
-            </div>
+              </p>
+            </Link>
           ))
         ) : (
           <h1 className="col-span-full w-full text-center text-2xl font-semibold text-gray-400">
