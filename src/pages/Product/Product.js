@@ -41,9 +41,11 @@ const Product = () => {
         </div>
       ) : (
         <PageLayout>
-          <Banner bannerImage={imageUrl} />
-          <MostPopularProducts products={products} />
-          <AllProducts products={products} />
+          <div className="bg-gray-100">
+            <Banner bannerImage={imageUrl} />
+            <MostPopularProducts products={products} />
+            <AllProducts products={products} />
+          </div>
         </PageLayout>
       )}
     </>

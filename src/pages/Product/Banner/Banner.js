@@ -10,7 +10,11 @@ const Banner = ({ bannerImage }) => {
       className="h-screen w-full bg-cover bg-no-repeat"
     >
       <img
-        className="absolute right-0 -bottom-20 h-40 w-40 rounded-full md:-bottom-28 md:h-60 md:w-60 lg:-bottom-48 lg:h-96 lg:w-96  "
+        style={{
+          boxShadow:
+            "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
+        }}
+        className="absolute right-0 -bottom-20 hidden rounded-full lg:-bottom-48 lg:inline-block lg:h-[27rem] lg:w-[420px]"
         src={bannerRoundedImg}
         alt="rounded"
       />

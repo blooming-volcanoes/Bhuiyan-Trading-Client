@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const AllProducts = ({ products }) => {
   return (
-    <div className="container mx-auto mb-20">
+    <div className="main-container py-20">
       <div className="flex flex-col items-center justify-between lg:flex-row">
         {/* title and serch box */}
         <div className="mb-4 flex items-center justify-end pl-2 md:pl-0">
