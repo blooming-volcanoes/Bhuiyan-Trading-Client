@@ -14,7 +14,7 @@ const AllProducts = ({ products }) => {
         {/* search box */}
         <div className="relative mb-10 flex pr-2 md:pr-0">
           <input
-            className="w-80 rounded-xl border-slate-300"
+            className="w-full rounded-xl border-slate-300 sm:w-80 md:w-80 lg:w-80"
             type="text"
             name="searchproduct"
             id=""

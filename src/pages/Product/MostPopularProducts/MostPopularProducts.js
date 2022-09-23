@@ -20,7 +20,7 @@ const MostPopularProducts = ({ products }) => {
       <div className="w-full lg:w-4/6">
         <div className="mb-4 flex items-center justify-end pr-2 md:pr-0">
           <IoIosArrowDropleftCircle className="text-xl font-bold" />
-          <p className="ml-2 text-lg font-bold">Most Popular</p>
+          <p className="ml-2 text-lg font-bold">All Sub Categories</p>
         </div>
         <Sliders products={products} />
       </div>

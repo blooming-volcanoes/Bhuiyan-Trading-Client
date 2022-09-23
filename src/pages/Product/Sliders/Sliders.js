@@ -19,7 +19,7 @@ const Sliders = ({ products }) => {
         spaceBetween={30}
         slidesPerGroup={3}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         loop={true}
@@ -41,10 +41,10 @@ const Sliders = ({ products }) => {
             <div className="relative">
               <img className="rounded" src={product?.featureImg} alt="" />
               <div
-                style={{
-                  background:
-                    "linear-gradient(rgba(255, 255, 255, 0.01) 70%, rgb(74, 74, 74))",
-                }}
+                // style={{
+                //   background:
+                //     "linear-gradient(rgba(255, 255, 255, 0.01) 90%, rgb(74, 74, 74))",
+                // }}
                 className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded "
               ></div>
               <p className="absolute bottom-0 z-10 ml-3 mb-3 text-xl font-bold text-white">
