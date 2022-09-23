@@ -6,6 +6,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import "./styles/css/style.css";
 
 import { useSelector } from "react-redux";
+import LoadingButton from "./Components/custom/Buttons/LoadingButton";
 import "./Components/dashboard/charts/ChartjsConfig";
 import useCheckUser from "./hooks/useCheckUser";
 import NotFound from "./pages/NotFound";
@@ -35,7 +36,13 @@ function App() {
   }, [user]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="flex h-screen justify-center space-y-4">
+          <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
+        </div>
+      }
+    >
       <Routes>
         {/* Public Routes are here */}
         <Route path="/*" element={<PublicRoutes />} />
