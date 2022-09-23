@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Navigation, Thumbs } from "swiper";
 
-const PdImageSliders = ({ bgImages, product }) => {
+const PdImageSliders = ({ product }) => {
   const [galleryImages] = useState(product?.gallaryImg?.split(";"));
 
   console.log(galleryImages);

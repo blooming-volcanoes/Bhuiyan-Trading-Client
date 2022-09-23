@@ -53,20 +53,18 @@ const Sliders = ({ products }) => {
     >
       {products.map((product) => (
         <SwiperSlide>
-          <div
+          <Link
+            to={`/product-detail/${product?.id}`}
             className="flex h-72 items-end rounded-lg bg-cover bg-center bg-no-repeat lg:h-48"
             style={{
               backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 70%, rgba(74, 74, 74, 100)), 
                             url(${product?.featureImg})`,
             }}
           >
-            <Link
-              to={`/product-detail/${product?.id}`}
-              className="ml-3 mb-3 text-xl font-bold text-white"
-            >
+            <p className="ml-3 mb-3 text-xl font-bold text-white">
               {product.title}
-            </Link>
-          </div>
+            </p>
+          </Link>
         </SwiperSlide>
       ))}
     </Swiper>
