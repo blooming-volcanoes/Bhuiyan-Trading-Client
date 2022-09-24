@@ -42,7 +42,8 @@ function GalleryUpload({
   return (
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
       <p className="text-center text-xs text-indigo-500">
-        Note : Upload At least 4 Gallery Images here
+        Note : Upload At least 4 Gallery Images here (Only JPEG, JPG, PNG file
+        are allowed)
       </p>
 
       <div className={`${renderGalleryImages && "h-[300px] overflow-y-auto"}`}>
@@ -65,7 +66,7 @@ function GalleryUpload({
           <button
             disabled={galleryLoader}
             type="button"
-            className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500"
+            className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
             onClick={handelGalleryImages}
           >
             Save
@@ -79,7 +80,7 @@ function GalleryUpload({
               setRenderGalleryImages(null);
               setUploadedGalleryImage(null);
             }}
-            className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500"
+            className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
           >
             Change
           </button>

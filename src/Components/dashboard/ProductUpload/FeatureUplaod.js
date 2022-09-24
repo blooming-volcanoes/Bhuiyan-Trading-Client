@@ -27,7 +27,8 @@ function FeatureUplaod({
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
       {/* Show feature Image */}
       <p className="text-center text-xs text-indigo-500">
-        Note : Upload a Product Feature Image here
+        Note : Upload a Product Feature Image here (Only JPEG, JPG, PNG file are
+        allowed)
       </p>
       <div>
         {readFeatureImage && (
@@ -47,7 +48,7 @@ function FeatureUplaod({
             disabled={featureLoader}
             onClick={handelSaveFeatureImage}
             type="button"
-            className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500"
+            className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
           >
             Save
           </button>
@@ -60,7 +61,7 @@ function FeatureUplaod({
               setReadFeatureImage(null);
               setUploadedFeature(null);
             }}
-            className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500"
+            className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
           >
             Change
           </button>
