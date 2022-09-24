@@ -7,7 +7,7 @@ const Banner = ({ bannerImage }) => {
       style={{
         backgroundImage: `url(${bannerImage})`,
       }}
-      className="h-screen w-full bg-cover bg-no-repeat"
+      className="h-full min-h-[550px] bg-cover bg-center bg-no-repeat"
     >
       <img
         style={{

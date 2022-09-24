@@ -1,51 +1,50 @@
 import React, { useRef } from "react";
 
-function FeatureUplaod({
-  file,
+function CateGoryFeature({
+  featureFile,
+  setFeatureFile,
   repairSingleFile,
-  setFile,
+  renderFeatureImage,
+  setRenderFeatureImage,
   handelSaveFeatureImage,
-  readFeatureImage,
-  setReadFeatureImage,
-  setUploadedFeature,
-  featureLoader,
+  featureImageLoader,
+  setUploadedFeatureImage,
 }) {
   const fileRef = useRef();
 
-  function handelFeatureFiles(e) {
+  const handelCateGoryFeature = (e) => {
     repairSingleFile(e.target.files[0]);
     const reader = new FileReader();
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
     }
     reader.onload = (readerEvent) => {
-      setReadFeatureImage(readerEvent.target.result);
+      setRenderFeatureImage(readerEvent.target.result);
     };
-  }
+  };
 
   return (
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
       {/* Show feature Image */}
       <p className="text-center text-xs text-indigo-500">
-        Note : Upload a Product Feature Image here (Only JPEG, JPG, PNG file are
-        allowed)
+        Note : Upload a Category Feature Image here (Only JPEG, JPG, PNG file
+        are allowed)
       </p>
       <div>
-        {readFeatureImage && (
+        {renderFeatureImage && (
           <div>
             <img
               className="h-[200px] w-full object-contain"
-              src={readFeatureImage}
+              src={renderFeatureImage}
               alt=""
             />
           </div>
         )}
       </div>
-
-      {file ? (
+      {featureFile ? (
         <div className="flex w-full justify-center space-x-6">
           <button
-            disabled={featureLoader}
+            disabled={featureImageLoader}
             onClick={handelSaveFeatureImage}
             type="button"
             className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
@@ -53,13 +52,13 @@ function FeatureUplaod({
             Save
           </button>
           <button
+            disabled={featureImageLoader}
             type="button"
-            disabled={featureLoader}
             onClick={(e) => {
               e.stopPropagation();
-              setFile(null);
-              setReadFeatureImage(null);
-              setUploadedFeature(null);
+              setRenderFeatureImage(null);
+              setFeatureFile(null);
+              setUploadedFeatureImage(null);
             }}
             className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
           >
@@ -86,7 +85,7 @@ function FeatureUplaod({
       )}
 
       <input
-        onChange={handelFeatureFiles}
+        onChange={handelCateGoryFeature}
         ref={fileRef}
         type="file"
         className="hidden"
@@ -95,4 +94,4 @@ function FeatureUplaod({
   );
 }
 
-export default FeatureUplaod;
+export default CateGoryFeature;

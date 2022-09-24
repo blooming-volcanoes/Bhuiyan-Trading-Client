@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import Select from "react-select";
 import FeatureUplaod from "../../../Components/dashboard/ProductUpload/FeatureUplaod";
 import GalleryUpload from "../../../Components/dashboard/ProductUpload/GalleryUpload";
 import useFileFeatureUploader from "../../../hooks/useFileUploaders/useFileFeatureUploader";
@@ -54,7 +55,10 @@ function ProductUpload() {
   // Category states
   const [cateGories, setCateGories] = useState([]);
   const [cateGoryLoading, setCateGoryLoading] = useState(false);
+  const [cateGoryName, setCateGoryName] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
+  const [subCategory, setSubCategory] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   // Fetch all Categories
   useEffect(() => {
@@ -73,8 +77,19 @@ function ProductUpload() {
     getProducts();
   }, []);
 
+  // CateGory handel
   const handelCategories = (e) => {
     setCategoryId(e.target.value);
+    const findTheSub = cateGories.find((cate) => cate.id === +e.target.value);
+    setCateGoryName(findTheSub.categoryName);
+    const modifiedSub = findTheSub.subCategoryName.reduce((acc, curr) => {
+      if (curr !== "") {
+        acc.push({ label: curr, value: curr });
+      }
+      return acc;
+    }, []);
+
+    setSubCategory(modifiedSub);
   };
 
   // Feature Image All states
@@ -104,6 +119,9 @@ function ProductUpload() {
       toast.success("Gallery Image Successfully Saved");
     } catch (error) {
       setGalleryLoader(false);
+      if (error.response.status) {
+        toast.error("Image is too large or Internal Server Error");
+      }
       console.log(error);
     }
     setGalleryLoader(false);
@@ -124,9 +142,9 @@ function ProductUpload() {
       toast.success("Feature Image Successfully Saved");
     } catch (error) {
       setFeatureLoader(false);
-      console.log(error.response);
+      console.log(error);
       if (error.response.status) {
-        toast.error("File is too large or Internal Server Error");
+        toast.error("Image is too large or Internal Server Error");
       }
     }
     setFeatureLoader(false);
@@ -134,12 +152,25 @@ function ProductUpload() {
 
   // Main form here
   const onSubmit = async (data) => {
-    if (uploadedFeature && uploadedGalleryImage && categoryId) {
+    if (
+      uploadedFeature &&
+      uploadedGalleryImage &&
+      categoryId &&
+      selectedOption.length
+    ) {
+      const subCateString = selectedOption.reduce((acc, curr) => {
+        acc.push(curr.value);
+
+        return acc;
+      }, []);
+
       const modifiedData = {
         ...data,
         featureImg: uploadedFeature,
         gallaryImg: uploadedGalleryImage?.join(";"),
         categoryId,
+        categoryName: cateGoryName,
+        subCategoryName: subCateString.join(";"),
       };
       setSubmitLoader(true);
 
@@ -169,7 +200,11 @@ function ProductUpload() {
       setFeatureFile(null);
       setReadFeatureImage(null);
       setUploadedFeature(null);
+
+      // Categories
       setCategoryId(null);
+      setSelectedOption(null);
+      setSubCategory(null);
       reset();
     }
     if (!uploadedFeature) {
@@ -251,6 +286,18 @@ function ProductUpload() {
                   </option>
                 ))}
               </select>
+            )}
+            {/* SubCateGory dropdown */}
+
+            {subCategory && (
+              <Select
+                className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
+                options={subCategory}
+                isMulti={true}
+                placeholder="Select a Sub Category"
+              />
             )}
 
             {/* Feature Upload component */}

@@ -11,6 +11,10 @@ function AuthLayout({ children }) {
   const from = location?.state || "/";
 
   useEffect(() => {
+    if (user?.email && user?.role === "admin") {
+      navigate("/admin/dashboard", { replace: true });
+      return;
+    }
     if (user?.email) {
       navigate(from, { replace: true });
       return;
