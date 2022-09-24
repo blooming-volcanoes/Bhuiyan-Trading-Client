@@ -55,6 +55,7 @@ function ProductUpload() {
   // Category states
   const [cateGories, setCateGories] = useState([]);
   const [cateGoryLoading, setCateGoryLoading] = useState(false);
+  const [cateGoryName, setCateGoryName] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
   const [subCategory, setSubCategory] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -80,6 +81,7 @@ function ProductUpload() {
   const handelCategories = (e) => {
     setCategoryId(e.target.value);
     const findTheSub = cateGories.find((cate) => cate.id === +e.target.value);
+    setCateGoryName(findTheSub.categoryName);
     const modifiedSub = findTheSub.subCategoryName.reduce((acc, curr) => {
       if (curr !== "") {
         acc.push({ label: curr, value: curr });
@@ -89,7 +91,6 @@ function ProductUpload() {
 
     setSubCategory(modifiedSub);
   };
-  // console.log(selectedOption);
 
   // Feature Image All states
   const [uploadedFeature, setUploadedFeature] = useState(null);
@@ -168,7 +169,8 @@ function ProductUpload() {
         featureImg: uploadedFeature,
         gallaryImg: uploadedGalleryImage?.join(";"),
         categoryId,
-        subCategory: subCateString.join(";"),
+        categoryName: cateGoryName,
+        subCategoryName: subCateString.join(";"),
       };
       setSubmitLoader(true);
 
