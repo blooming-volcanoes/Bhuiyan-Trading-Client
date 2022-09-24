@@ -13,6 +13,9 @@ import httpProductService from "./../../services/product.service";
 const Product = () => {
   const [imageUrl] = useState(bannerImage);
   const [products, setProducts] = useState([]);
+  const [filteredProductsBySubCate, setFilteredProductsBySubCate] =
+    useState(null);
+  const [modifiedSubCategories, setModifiedSubCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   let { id } = useParams();
 
@@ -31,7 +34,32 @@ const Product = () => {
       });
   }, [id]);
 
-  console.log(products);
+  useEffect(() => {
+    if (products.length) {
+      const tempSub = [];
+      for (let i = 0; i < products.length; i++) {
+        for (let j = 0; j < products[i].subCategoryName.length; j++) {
+          const element = products[i].subCategoryName[j];
+          if (tempSub[j]?.title !== element) {
+            tempSub.push({
+              title: element,
+              featureImg: products[i].featureImg,
+            });
+          }
+        }
+      }
+
+      setModifiedSubCategories(tempSub);
+    }
+  }, [products]);
+
+  const handelFilterProductBySubCategory = (subCategory) => {
+    const filtered = products.filter((pd) =>
+      pd.subCategoryName.includes(subCategory)
+    );
+    setFilteredProductsBySubCate(filtered);
+    window.scrollTo(0, 1000);
+  };
 
   return (
     <>
@@ -43,8 +71,17 @@ const Product = () => {
         <PageLayout>
           <div className="bg-gray-100">
             <Banner bannerImage={imageUrl} />
-            <MostPopularProducts products={products} />
-            <AllProducts products={products} />
+            <MostPopularProducts
+              products={products}
+              modifiedSubCategories={modifiedSubCategories}
+              handelFilterProductBySubCategory={
+                handelFilterProductBySubCategory
+              }
+            />
+            <AllProducts
+              products={products}
+              filteredProductsBySubCate={filteredProductsBySubCate}
+            />
           </div>
         </PageLayout>
       )}

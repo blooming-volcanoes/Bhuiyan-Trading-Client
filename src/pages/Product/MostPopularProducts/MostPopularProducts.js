@@ -2,7 +2,11 @@ import React from "react";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import Sliders from "../Sliders/Sliders";
 
-const MostPopularProducts = ({ products }) => {
+const MostPopularProducts = ({
+  products,
+  modifiedSubCategories,
+  handelFilterProductBySubCategory,
+}) => {
   return (
     <div className="main-container py-20">
       {/* Title */}
@@ -10,11 +14,7 @@ const MostPopularProducts = ({ products }) => {
         <h1 className="text-3xl font-semibold">
           <span>We are</span>
           <br />
-          <span className="text-6xl">
-            {/* {products[Math.floor(Math.random() * products.length)]?.title ||
-              "Here"} */}
-            Red Fish
-          </span>
+          <span className="text-6xl">{products[0]?.categoryName}</span>
         </h1>
       </div>
       <div className="w-full lg:w-4/6">
@@ -22,7 +22,10 @@ const MostPopularProducts = ({ products }) => {
           <IoIosArrowDropleftCircle className="text-xl font-bold" />
           <p className="ml-2 text-lg font-bold">All Sub Categories</p>
         </div>
-        <Sliders products={products} />
+        <Sliders
+          handelFilterProductBySubCategory={handelFilterProductBySubCategory}
+          modifiedSubCategories={modifiedSubCategories}
+        />
       </div>
     </div>
   );

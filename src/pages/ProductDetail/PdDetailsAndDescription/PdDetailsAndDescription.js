@@ -16,9 +16,7 @@ const PdDetailsAndDescription = ({ product }) => {
       className="w-full bg-cover bg-center bg-no-repeat pt-5 pl-5 pr-5 lg:w-1/2"
     >
       <h1 className="mb-2 text-5xl font-bold">{product?.title}</h1>
-      <h3 className="mb-5 text-xl font-bold">
-        {product.title?.toLowerCase().includes("fish") ? "Fish" : ""}
-      </h3>
+      <h3 className="mb-5 text-xl font-bold">{product?.categoryName}</h3>
       <p className="mb-3 font-bold">
         Price: ${" "}
         <span className="text-3xl font-bold text-red-600">
@@ -26,7 +24,7 @@ const PdDetailsAndDescription = ({ product }) => {
         </span>
         /unit
       </p>
-      <p className="mb-10 text-2xl">{product?.productDesc}</p>
+      <p className="mb-10 text-xl">{product?.productDesc}</p>
       <PdDescriptionAccordion />
 
       <div className="flex items-center justify-center">
