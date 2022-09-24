@@ -15,6 +15,7 @@ const Sliders = ({
   modifiedSubCategories,
   handelFilterProductBySubCategory,
 }) => {
+  console.log(modifiedSubCategories);
   return (
     <>
       <Swiper

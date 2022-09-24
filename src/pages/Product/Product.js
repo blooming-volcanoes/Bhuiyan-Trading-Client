@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import bannerImage from "../../assets/Images/pexels-kindel-media-8352350.jpg";
 import LoadingButton from "../../Components/custom/Buttons/LoadingButton";
 import PageLayout from "./../../layouts/PageLayout";
+import httpCateGoryService from "./../../services/category.service";
 import httpProductService from "./../../services/product.service";
 
 const Product = () => {
@@ -17,6 +18,9 @@ const Product = () => {
     useState(null);
   const [modifiedSubCategories, setModifiedSubCategories] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [filterBySubLoader, setFilterBySubLoader] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
+
   let { id } = useParams();
 
   useEffect(() => {
@@ -25,6 +29,7 @@ const Product = () => {
       .getProductByCateGory(id)
       .then((data) => {
         setProducts(data);
+        setSearchResult(data);
       })
       .catch((error) => {
         console.log(error);
@@ -53,12 +58,34 @@ const Product = () => {
     }
   }, [products]);
 
-  const handelFilterProductBySubCategory = (subCategory) => {
-    const filtered = products.filter((pd) =>
-      pd.subCategoryName.includes(subCategory)
-    );
-    setFilteredProductsBySubCate(filtered);
-    window.scrollTo(0, 1000);
+  const handelFilterProductBySubCategory = async (subCategory) => {
+    // const filtered = products.filter((pd) =>
+    //   pd.subCategoryName.includes(subCategory)
+    // );
+    setFilterBySubLoader(true);
+    try {
+      const data = await httpCateGoryService.getProductBySubCategory(
+        subCategory
+      );
+      setFilteredProductsBySubCate(data);
+    } catch (error) {
+      setFilterBySubLoader(false);
+      console.log(error);
+    }
+    setFilterBySubLoader(false);
+  };
+
+  const handelProductBySearch = (productName) => {
+    const userInput = productName.trim().toLowerCase();
+    if (userInput) {
+      setProducts(
+        products.filter((product) =>
+          product.title.trim().toLowerCase().includes(userInput)
+        )
+      );
+    } else {
+      setProducts(searchResult);
+    }
   };
 
   return (
@@ -78,10 +105,17 @@ const Product = () => {
                 handelFilterProductBySubCategory
               }
             />
-            <AllProducts
-              products={products}
-              filteredProductsBySubCate={filteredProductsBySubCate}
-            />
+            {filterBySubLoader ? (
+              <div className="flex h-full justify-center space-y-4 py-4">
+                <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
+              </div>
+            ) : (
+              <AllProducts
+                products={products}
+                filteredProductsBySubCate={filteredProductsBySubCate}
+                handelProductBySearch={handelProductBySearch}
+              />
+            )}
           </div>
         </PageLayout>
       )}

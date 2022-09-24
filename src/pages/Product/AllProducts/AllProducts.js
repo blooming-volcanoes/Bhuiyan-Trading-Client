@@ -2,7 +2,11 @@ import React from "react";
 import { IoIosArrowDroprightCircle, IoIosSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-const AllProducts = ({ products, filteredProductsBySubCate }) => {
+const AllProducts = ({
+  products,
+  filteredProductsBySubCate,
+  handelProductBySearch,
+}) => {
   return (
     <div className="main-container py-20">
       <div className="flex flex-col items-center justify-between lg:flex-row">
@@ -16,6 +20,7 @@ const AllProducts = ({ products, filteredProductsBySubCate }) => {
           <input
             className="w-full rounded-xl border-slate-300 sm:w-80 md:w-80 lg:w-80"
             type="text"
+            onChange={(e) => handelProductBySearch(e.target.value)}
             name="searchproduct"
             id=""
             placeholder="Search products"

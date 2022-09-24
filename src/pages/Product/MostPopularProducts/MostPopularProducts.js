@@ -14,11 +14,13 @@ const MostPopularProducts = ({
         <h1 className="text-3xl font-semibold">
           <span>We are</span>
           <br />
-          <span className="text-6xl">{products[0]?.categoryName}</span>
+          <span className="text-2xl lg:text-6xl">
+            {products[0]?.categoryName}
+          </span>
         </h1>
       </div>
       <div className="w-full lg:w-4/6">
-        <div className="mb-4 flex items-center justify-end pr-2 md:pr-0">
+        <div className="my-4 flex items-center justify-end pr-2 md:pr-0">
           <IoIosArrowDropleftCircle className="text-xl font-bold" />
           <p className="ml-2 text-lg font-bold">All Sub Categories</p>
         </div>
