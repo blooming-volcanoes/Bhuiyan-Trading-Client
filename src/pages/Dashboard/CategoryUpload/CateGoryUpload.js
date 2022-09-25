@@ -122,7 +122,7 @@ function CateGoryUpload() {
 
   return (
     <DashboardLayout>
-      <section>
+      <section className="my-10">
         <h1 className="my-10 text-center text-2xl font-semibold capitalize text-indigo-500 drop-shadow">
           Upload your Categories Here
         </h1>
@@ -145,7 +145,7 @@ function CateGoryUpload() {
               type="text"
               required
               className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
-              placeholder="Sub-categories each nam must be separated by Space like: health care"
+              placeholder="Sub-categories each name must be separated by Space like: Natural Man-made"
               {...register("subCategoryName")}
             />
 
