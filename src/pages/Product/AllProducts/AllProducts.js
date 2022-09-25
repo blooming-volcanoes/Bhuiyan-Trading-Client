@@ -52,21 +52,23 @@ const AllProducts = ({
             ))
           ) : (
             products.map((product) => (
-              <Link
-                to={`/product-detail/${product?.id}`}
-                key={product.id}
-                className="flex h-56 items-end rounded-lg bg-cover bg-center bg-no-repeat lg:h-52"
-                style={{
-                  backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 70%, rgba(74, 74, 74, 100)),
-                          url(${product.featureImg})`,
-                }}
-              >
-                <p
-                  to={`/product-detail/${product?.id}`}
-                  className="ml-3 mb-3 text-xl font-bold text-white"
-                >
-                  {product.title}
-                </p>
+              <Link to={`/product-detail/${product?.id}`} key={product.id}>
+                <div className="relative flex h-[200px] items-end justify-center rounded-lg bg-cover bg-center">
+                  <div>
+                    <img
+                      className="h-[200px] w-full object-cover"
+                      src={product.featureImg}
+                      alt=""
+                    />
+                    <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-20 "></div>
+                    <p
+                      to={`/product-detail/${product?.id}`}
+                      className="absolute bottom-0 z-20 ml-3 mb-3 text-xl font-bold text-white"
+                    >
+                      {product.title}
+                    </p>
+                  </div>
+                </div>
               </Link>
             ))
           )
