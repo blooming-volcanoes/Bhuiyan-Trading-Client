@@ -58,6 +58,22 @@ const Sliders = ({
         ) : (
           <h1>No Product is Available</h1>
         )}
+        <SwiperSlide>
+          <div
+            onClick={() => handelFilterProductBySubCategory(null)}
+            className="relative cursor-pointer"
+          >
+            <img
+              className="rounded"
+              src="https://static.vecteezy.com/system/resources/previews/001/738/717/large_2x/cosmetic-white-background-for-product-presentation-free-photo.jpg"
+              alt=""
+            />
+            <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-25 "></div>
+            <p className="absolute bottom-0 z-10 ml-3 mb-3 text-xl font-bold text-white">
+              All
+            </p>
+          </div>
+        </SwiperSlide>
       </Swiper>
     </>
   );

@@ -48,7 +48,7 @@ const Product = () => {
           if (tempSub[j]?.title !== element) {
             tempSub.push({
               title: element,
-              featureImg: products[i].featureImg,
+              featureImg: products[i].categoryGallay[j],
             });
           }
         }
@@ -63,16 +63,24 @@ const Product = () => {
     //   pd.subCategoryName.includes(subCategory)
     // );
     setFilterBySubLoader(true);
-    try {
-      const data = await httpCateGoryService.getProductBySubCategory(
-        subCategory
-      );
-      setFilteredProductsBySubCate(data);
-    } catch (error) {
+    if (subCategory) {
+      try {
+        const data = await httpCateGoryService.getProductBySubCategory(
+          subCategory
+        );
+        setFilteredProductsBySubCate(data);
+      } catch (error) {
+        setFilterBySubLoader(false);
+        console.log(error);
+      }
       setFilterBySubLoader(false);
-      console.log(error);
+    } else {
+      setFilterBySubLoader(true);
+      setTimeout(() => {
+        setFilterBySubLoader(false);
+        setFilteredProductsBySubCate(null);
+      }, 400);
     }
-    setFilterBySubLoader(false);
   };
 
   const handelProductBySearch = (productName) => {
