@@ -36,7 +36,7 @@ const PdImageSliders = ({ product }) => {
       >
         {galleryImages?.map((img) => (
           <SwiperSlide>
-            <img src={img} alt="" />
+            <img className="!h-[400px] !object-contain" src={img} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -52,7 +52,11 @@ const PdImageSliders = ({ product }) => {
       >
         {galleryImages?.map((img) => (
           <SwiperSlide>
-            <img className="cursor-pointer" src={img} alt="" />
+            <img
+              className="!h-[100px] cursor-pointer !object-contain"
+              src={img}
+              alt=""
+            />
           </SwiperSlide>
         ))}
       </Swiper>
