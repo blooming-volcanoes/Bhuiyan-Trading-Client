@@ -5,6 +5,10 @@ class HttpCategoryService {
     const data = await httpReq.get("/category/get");
     return data;
   }
+  async getSingleCategoryById(id) {
+    const data = await httpReq.get(`/category/get/${id}`);
+    return data;
+  }
   async getProductBySubCategory(categoryName) {
     const data = await httpReq.get(`/product/subCategory/${categoryName}`);
     return data;

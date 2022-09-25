@@ -87,7 +87,7 @@ const Header = ({ color }) => {
             </li>
           )}
           {/* If user logged in or not */}
-          {user?.email ? (
+          {/* {user?.email ? (
             <li className="my-7 text-lg md:my-0 md:ml-8 ">
               <button
                 onClick={handelLogout}
@@ -115,7 +115,7 @@ const Header = ({ color }) => {
                 </Link>
               </li>
             </>
-          )}
+          )} */}
         </ul>
       </nav>
     </header>
