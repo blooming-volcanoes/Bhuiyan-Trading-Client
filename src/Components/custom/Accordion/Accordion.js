@@ -1,6 +1,6 @@
 import React from "react";
 
-const Accordion = () => {
+const Accordion = ({ product }) => {
   return (
     <div className="relative mb-2 w-full overflow-hidden lg:mb-0">
       <input
@@ -32,12 +32,7 @@ const Accordion = () => {
 
       {/* Content */}
       <div className="max-h-0 overflow-hidden pl-5 transition-all duration-500 peer-checked:max-h-40">
-        <p className="pb-3">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat optio
-          laboriosam facere! Maxime maiores vel autem recusandae voluptatum
-          accusamus doloremque, aliquam sit nesciunt, corrupti possimus dolorem
-          repudiandae optio eaque aperiam!
-        </p>
+        <p className="pb-3">{product?.shortDesc}</p>
       </div>
     </div>
   );
