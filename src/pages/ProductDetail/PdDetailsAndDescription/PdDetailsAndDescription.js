@@ -3,10 +3,11 @@ import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PdDescriptionAccordion from "../PdDescriptionAccordion/PdDescriptionAccordion";
 
 const PdDetailsAndDescription = ({ product }) => {
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -25,7 +26,7 @@ const PdDetailsAndDescription = ({ product }) => {
         /unit
       </p>
       <p className="mb-10 text-xl">{product?.productDesc}</p>
-      <PdDescriptionAccordion />
+      <PdDescriptionAccordion product={product} />
 
       <div className="flex items-center justify-center">
         <button className="mb-5 rounded-lg bg-red-900 px-3 py-2 text-lg font-bold text-white">
@@ -34,7 +35,10 @@ const PdDetailsAndDescription = ({ product }) => {
       </div>
 
       <div className="flex w-full gap-1">
-        <button className="flex h-20 w-1/2 items-center justify-center border-slate-500 bg-gray-100 hover:bg-gray-200">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex h-20 w-1/2 items-center justify-center border-slate-500 bg-gray-100 hover:bg-gray-200"
+        >
           <IoIosArrowDropleftCircle className="text-2xl lg:text-3xl" />
           <span className="ml-1 text-lg  lg:text-2xl">Category Page</span>
         </button>
