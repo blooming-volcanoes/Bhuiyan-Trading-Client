@@ -61,10 +61,10 @@ function OurProducts() {
               >
                 <img
                   className="h-20 w-20 rounded-full md:h-10 md:w-10 lg:h-10 lg:w-10"
-                  src={data[0].img}
+                  src={category?.featureImg}
                   alt=""
                 />
-                <p>{category.categoryName}</p>
+                <p>{category?.categoryName}</p>
               </Link>
             ))
           )}

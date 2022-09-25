@@ -14,7 +14,11 @@ class HttpCategoryService {
     return data;
   }
   async uploadFeatureImage(payload) {
-    const data = await httpReq.post("/gallery/upload", payload);
+    const data = await httpReq.post("/gallery/upload/category", payload);
+    return data;
+  }
+  async uploadGalleryImage(payload) {
+    const data = await httpReq.post("/gallery/bulkUpload/category", payload);
     return data;
   }
 }

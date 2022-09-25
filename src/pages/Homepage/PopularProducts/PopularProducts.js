@@ -53,10 +53,10 @@ function PopularProducts() {
               >
                 <img
                   className="h-[100px] w-full overflow-hidden rounded-lg object-cover lg:w-[400px]"
-                  src={data[0].img}
+                  src={category?.featureImg}
                   alt=""
                 />
-                <p className="center absolute bottom-0 left-0 right-0 w-full bg-black bg-opacity-30 p-2 text-2xl font-medium text-white">
+                <p className="center absolute bottom-0 left-0 right-0 w-full bg-black bg-opacity-10 p-2 text-2xl font-medium text-white">
                   {category.categoryName}
                 </p>
               </Link>

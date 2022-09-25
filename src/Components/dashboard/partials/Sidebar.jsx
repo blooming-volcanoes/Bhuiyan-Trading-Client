@@ -323,6 +323,34 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                 "block truncate text-slate-400 transition duration-150 hover:text-slate-200 " +
                                 (isActive ? "!text-indigo-500" : "")
                               }
+                              to="/admin/dashboard/products/all"
+                            >
+                              <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
+                                Products
+                              </span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink
+                              end
+                              className={({ isActive }) =>
+                                "block truncate text-slate-400 transition duration-150 hover:text-slate-200 " +
+                                (isActive ? "!text-indigo-500" : "")
+                              }
+                              to="/admin/dashboard/categories/all"
+                            >
+                              <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
+                                Categories
+                              </span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink
+                              end
+                              className={({ isActive }) =>
+                                "block truncate text-slate-400 transition duration-150 hover:text-slate-200 " +
+                                (isActive ? "!text-indigo-500" : "")
+                              }
                               to="/admin/dashboard/product/upload"
                             >
                               <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
