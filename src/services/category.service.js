@@ -17,6 +17,10 @@ class HttpCategoryService {
     const data = await httpReq.post("/gallery/upload", payload);
     return data;
   }
+  async uploadGalleryImage(payload) {
+    const data = await httpReq.post("/gallery/bulkUpload", payload);
+    return data;
+  }
 }
 
 const httpCateGoryService = new HttpCategoryService();
