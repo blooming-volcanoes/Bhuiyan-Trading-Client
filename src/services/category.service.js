@@ -17,6 +17,10 @@ class HttpCategoryService {
     const data = await httpReq.post("/category/add", payload);
     return data;
   }
+  async updateCategory(id, payload) {
+    const data = await httpReq.put(`/category/update/${id}`, payload);
+    return data;
+  }
   async uploadFeatureImage(payload) {
     const data = await httpReq.post("/gallery/upload/category", payload);
     return data;
