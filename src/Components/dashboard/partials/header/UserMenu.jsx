@@ -2,13 +2,36 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Transition from "../../../../utils/Transition";
 
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import UserAvatar from "../../../../assets/Images/user-avatar-32.png";
+import { removeUser } from "../../../../redux/auth/authAction";
 
 function UserMenu() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
+
+  const handelLogout = () => {
+    Swal.fire({
+      title: "Are you sure you want to Logout?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        dispatch(removeUser());
+        Swal.fire("Logged out!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Ok no Problem", "", "info");
+      }
+    });
+  };
 
   // close on click outside
   useEffect(() => {
@@ -53,7 +76,7 @@ function UserMenu() {
         />
         <div className="flex items-center truncate">
           <span className="ml-2 truncate text-sm font-medium group-hover:text-slate-800">
-            Acme Inc.
+            {user?.name || "Admin"}
           </span>
           <svg
             className="ml-1 h-3 w-3 shrink-0 fill-current text-slate-400"
@@ -80,7 +103,9 @@ function UserMenu() {
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="mb-1 border-b border-slate-200 px-3 pt-0.5 pb-2">
-            <div className="font-medium text-slate-800">Acme Inc.</div>
+            <div className="font-medium text-slate-800">
+              {user?.name || "Admin"}.
+            </div>
             <div className="text-xs italic text-slate-500">Administrator</div>
           </div>
           <ul>
@@ -94,13 +119,18 @@ function UserMenu() {
               </Link>
             </li>
             <li>
-              <Link
-                className="flex items-center py-1 px-3 text-sm font-medium text-indigo-500 hover:text-indigo-600"
-                to="/"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                Sign Out
-              </Link>
+              {user?.email && (
+                <button
+                  type="button"
+                  className="flex items-center py-1 px-3 text-sm font-medium text-indigo-500 hover:text-indigo-600"
+                  onClick={() => {
+                    setDropdownOpen(!dropdownOpen);
+                    handelLogout();
+                  }}
+                >
+                  Sign Out
+                </button>
+              )}
             </li>
           </ul>
         </div>
