@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import UploadFile from "../../../Components/custom/Uploaders/UploadFile";
 import DashboardLayout from "../../../layouts/DashboardLayout";
@@ -7,12 +8,16 @@ import httpCateGoryService from "./../../../services/category.service";
 
 function CategoryEdit() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [prevLoading, setPrevLoading] = useState(false);
   const [prevCategory, setPrevCategory] = useState(null);
   const [details, setDetails] = useState({});
   const [uploadedFeature, setUploadedFeature] = useState(null);
   const [uploadedGalleryImage, setUploadedGalleryImage] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [trackGalleryImageLength, setTrackGalleryImageLength] = useState(null);
+  const [updateLoader, setUpdateLoader] = useState(false);
+  const [isAnyThingEdited, setIsAnyThingEdited] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -20,7 +25,6 @@ function CategoryEdit() {
       httpCateGoryService
         .getSingleCategoryById(id)
         .then((data) => {
-          console.log(data[0]);
           setPrevCategory(data[0]);
         })
         .catch((error) => {
@@ -51,7 +55,7 @@ function CategoryEdit() {
   // Getting all the data
   const handelInputChange = (e) => {
     const { value, name } = e.target;
-
+    setIsAnyThingEdited(true);
     setDetails((prev) => {
       return {
         ...prev,
@@ -64,20 +68,38 @@ function CategoryEdit() {
   const handelSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(trackGalleryImageLength);
-
     const modifiedDetails = {
       ...details,
-      subCategoryName: details?.subCategoryName.split(" ").join(";"),
+      subCategoryName: details?.subCategoryName.trim().split(" ").join(";"),
       featureImg: uploadedFeature || details.featureImg,
-      galleryImg: uploadedGalleryImage || details.galleryImg,
+      galleryImg: uploadedGalleryImage
+        ? uploadedGalleryImage.join(";")
+        : details.galleryImg.join(";"),
     };
+    setUpdateLoader(true);
+    try {
+      const data = await httpCateGoryService.updateCategory(
+        prevCategory.id,
+        modifiedDetails
+      );
+      if (data.msg) {
+        toast.success(data.msg);
+      }
+      navigate(-1);
+    } catch (error) {
+      setUpdateLoader(false);
+      toast.error("Internal Server Error");
+      console.log(error);
+    }
+    setUpdateLoader(false);
 
-    console.log({ modifiedDetails });
-    console.log({ uploadedGalleryImage });
+    setTrackGalleryImageLength(null);
   };
 
-  console.log({ details });
+  // Cancel Editing
+  const handelCancel = () => {
+    navigate(-1);
+  };
 
   return (
     <DashboardLayout>
@@ -157,20 +179,32 @@ function CategoryEdit() {
 
               {/* Save and Cancel */}
               <>
-                <div className="flex flex-col space-y-3">
-                  <button
-                    className="dashboard-btn flex-1 border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
-                    type="submit"
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="dashboard-btn flex-1 border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                </div>
+                {updateLoader ? (
+                  <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
+                    <LoadingButton
+                      styles="flex justify-center"
+                      svg="w-10 h-10 text-indigo-500"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex flex-col space-y-3">
+                    {isAnyThingEdited && (
+                      <button
+                        className="dashboard-btn flex-1 border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
+                        type="submit"
+                      >
+                        Update
+                      </button>
+                    )}
+                    <button
+                      onClick={handelCancel}
+                      className="dashboard-btn flex-1 border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
+                      type="button"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
               </>
             </form>
           )}

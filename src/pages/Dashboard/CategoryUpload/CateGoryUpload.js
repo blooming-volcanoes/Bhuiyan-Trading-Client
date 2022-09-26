@@ -91,6 +91,7 @@ function CateGoryUpload() {
       try {
         const modifiedData = {
           ...userInput,
+          categoryName: userInput.categoryName.trim(),
           subCategoryName: userInput.subCategoryName.split(" ").join(";"),
           featureImg: uploadedFeatureImage,
           galleryImg: uploadedGalleryImage?.join(";"),
@@ -117,6 +118,7 @@ function CateGoryUpload() {
       setGalleryFiles(null);
       setRenderGalleryImages(null);
       setUploadedGalleryImage(null);
+      setTrackGalleryImageLength(null);
 
       // Feature Image States
       setFeatureFile(null);

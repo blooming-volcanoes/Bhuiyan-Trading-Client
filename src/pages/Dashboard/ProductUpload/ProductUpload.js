@@ -204,6 +204,7 @@ function ProductUpload() {
       setGalleryFiles(null);
       setRenderGalleryImages(null);
       setUploadedGalleryImage(null);
+      setTrackGalleryImageLength(null);
       // Feature Image states
       setFeatureFile(null);
       setReadFeatureImage(null);
