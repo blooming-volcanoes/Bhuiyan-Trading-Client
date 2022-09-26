@@ -26,10 +26,7 @@ function FeatureUplaod({
   return (
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
       {/* Show feature Image */}
-      <p className="text-center text-xs text-indigo-500">
-        Note : Upload a Product Feature Image here (Only JPEG, JPG, PNG file are
-        allowed)
-      </p>
+
       <div>
         {readFeatureImage && (
           <div>

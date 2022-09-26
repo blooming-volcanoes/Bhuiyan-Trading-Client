@@ -103,6 +103,7 @@ function ProductUpload() {
     useGalleryUploader();
   const [renderGalleryImages, setRenderGalleryImages] = useState(null);
   const [uploadedGalleryImage, setUploadedGalleryImage] = useState(null);
+  const [trackGalleryImageLength, setTrackGalleryImageLength] = useState(null);
 
   // Gallery Image function
   const handelGalleryImages = async () => {
@@ -119,10 +120,11 @@ function ProductUpload() {
       toast.success("Gallery Image Successfully Saved");
     } catch (error) {
       setGalleryLoader(false);
-      if (error.response.status) {
+      if (error?.response?.status) {
+        toast.error("Image is too large or Internal Server Error");
+      } else {
         toast.error("Image is too large or Internal Server Error");
       }
-      console.log(error);
     }
     setGalleryLoader(false);
   };
@@ -145,6 +147,8 @@ function ProductUpload() {
       console.log(error);
       if (error.response.status) {
         toast.error("Image is too large or Internal Server Error");
+      } else {
+        toast.error("Image is too large or Internal Server Error");
       }
     }
     setFeatureLoader(false);
@@ -152,6 +156,10 @@ function ProductUpload() {
 
   // Main form here
   const onSubmit = async (data) => {
+    if (trackGalleryImageLength !== 4) {
+      toast.error("You need to add at least 4 Image in Gallery");
+      return;
+    }
     if (
       uploadedFeature &&
       uploadedGalleryImage &&
@@ -309,16 +317,22 @@ function ProductUpload() {
                 />
               </div>
             ) : (
-              <FeatureUplaod
-                file={featureFile}
-                repairSingleFile={repairSingleFile}
-                setFile={setFeatureFile}
-                handelSaveFeatureImage={handelSaveFeatureImage}
-                readFeatureImage={readFeatureImage}
-                setReadFeatureImage={setReadFeatureImage}
-                setUploadedFeature={setUploadedFeature}
-                featureLoader={featureLoader}
-              />
+              <>
+                <p className="text-center text-xs text-indigo-500">
+                  Note : Upload a Product Feature Image here (Only JPEG, JPG,
+                  PNG file are allowed)
+                </p>
+                <FeatureUplaod
+                  file={featureFile}
+                  repairSingleFile={repairSingleFile}
+                  setFile={setFeatureFile}
+                  handelSaveFeatureImage={handelSaveFeatureImage}
+                  readFeatureImage={readFeatureImage}
+                  setReadFeatureImage={setReadFeatureImage}
+                  setUploadedFeature={setUploadedFeature}
+                  featureLoader={featureLoader}
+                />
+              </>
             )}
 
             {galleryLoader ? (
@@ -326,16 +340,23 @@ function ProductUpload() {
                 <LoadingButton svg="w-10 h-10 text-indigo-500" />
               </div>
             ) : (
-              <GalleryUpload
-                setGalleryFiles={setGalleryFiles}
-                galleryFiles={galleryFiles}
-                repairMultipleFiles={repairMultipleFiles}
-                renderGalleryImages={renderGalleryImages}
-                setRenderGalleryImages={setRenderGalleryImages}
-                handelGalleryImages={handelGalleryImages}
-                setUploadedGalleryImage={setUploadedGalleryImage}
-                galleryLoader={galleryLoader}
-              />
+              <>
+                <p className="text-center text-xs text-indigo-500">
+                  Note : Upload at least 4 Gallery Images here (Only JPEG, JPG,
+                  PNG file are allowed)
+                </p>
+                <GalleryUpload
+                  setGalleryFiles={setGalleryFiles}
+                  galleryFiles={galleryFiles}
+                  repairMultipleFiles={repairMultipleFiles}
+                  renderGalleryImages={renderGalleryImages}
+                  setRenderGalleryImages={setRenderGalleryImages}
+                  handelGalleryImages={handelGalleryImages}
+                  setUploadedGalleryImage={setUploadedGalleryImage}
+                  galleryLoader={galleryLoader}
+                  setTrackGalleryImageLength={setTrackGalleryImageLength}
+                />
+              </>
             )}
 
             {submitLoader ? (
