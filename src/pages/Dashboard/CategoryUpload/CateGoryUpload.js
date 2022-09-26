@@ -26,6 +26,7 @@ function CateGoryUpload() {
   const [renderGalleryImages, setRenderGalleryImages] = useState(null);
   const [uploadedGalleryImage, setUploadedGalleryImage] = useState(null);
   const [galleryLoader, setGalleryLoader] = useState(false);
+  const [trackGalleryImageLength, setTrackGalleryImageLength] = useState(null);
 
   // Gallery Image function
   const handelGalleryImages = async () => {
@@ -74,6 +75,17 @@ function CateGoryUpload() {
   };
 
   const onSubmit = async (userInput) => {
+    if (
+      trackGalleryImageLength !== userInput.subCategoryName.split(" ")?.length
+    ) {
+      toast.error(
+        `You need to add at least ${
+          userInput.subCategoryName.split(" ")?.length
+        } Images in Gallery`
+      );
+
+      return;
+    }
     if (uploadedFeatureImage && uploadedGalleryImage) {
       setSubmitLoader(true);
       try {
@@ -183,6 +195,7 @@ function CateGoryUpload() {
                 handelGalleryImages={handelGalleryImages}
                 setUploadedGalleryImage={setUploadedGalleryImage}
                 galleryLoader={galleryLoader}
+                setTrackGalleryImageLength={setTrackGalleryImageLength}
               />
             )}
 

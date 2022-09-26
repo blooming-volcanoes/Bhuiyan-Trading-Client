@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import toast from "react-hot-toast";
 
 function CategoryGalleryUpload({
   setGalleryFiles,
@@ -10,14 +9,12 @@ function CategoryGalleryUpload({
   handelGalleryImages,
   setUploadedGalleryImage,
   galleryLoader,
+  setTrackGalleryImageLength,
 }) {
   const fileRef = useRef();
 
   const handelGalleryFiles = async (e) => {
-    if (e.target.files.length > 4) {
-      toast.error("You can't add More than 4 Image in Gallery");
-      return;
-    }
+    setTrackGalleryImageLength(e.target.files.length);
     repairMultipleFiles(e.target.files);
     // Convert the FileList into an array and iterate
     let files = Array.from(e.target.files).map((file) => {
@@ -61,7 +58,7 @@ function CategoryGalleryUpload({
         )}
       </div>
 
-      {galleryFiles && renderGalleryImages?.length === 4 ? (
+      {galleryFiles ? (
         <div className="flex w-full justify-center space-x-6">
           <button
             disabled={galleryLoader}
