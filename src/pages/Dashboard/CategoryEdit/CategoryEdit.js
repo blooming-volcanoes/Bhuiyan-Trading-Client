@@ -8,6 +8,7 @@ function CategoryEdit() {
   const { id } = useParams();
   const [prevLoading, setPrevLoading] = useState(false);
   const [prevCategory, setPrevCategory] = useState({});
+  const [details, setDetails] = useState({});
 
   useEffect(() => {
     if (id) {
@@ -27,6 +28,32 @@ function CategoryEdit() {
         });
     }
   }, [id]);
+
+  useEffect(() => {
+    if (prevCategory?.categoryName) {
+      setDetails((prev) => {
+        return {
+          ...prev,
+          categoryName: prevCategory.categoryName,
+          subCategoryName: prevCategory.subCategoryName.join(" "),
+        };
+      });
+    }
+  }, [prevCategory]);
+
+  // Getting all the data
+  const handelInputChange = (e) => {
+    const { value, name } = e.target;
+
+    setDetails((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  console.log(details);
 
   return (
     <DashboardLayout>
@@ -50,6 +77,8 @@ function CategoryEdit() {
                   Category name
                 </span>
                 <input
+                  onChange={handelInputChange}
+                  name="categoryName"
                   type="text"
                   className="rounded-lg border-gray-300 text-sm"
                   defaultValue={prevCategory?.categoryName}
@@ -64,20 +93,16 @@ function CategoryEdit() {
                   >
                     Subcategory names
                   </span>
-                  <button className="rounded bg-green-100 p-1 text-xs font-semibold text-green-500">
-                    Add Sub Category
-                  </button>
                 </div>
-                {prevCategory?.subCategoryName?.map(
-                  (sub) =>
-                    sub !== "" && (
-                      <input
-                        type="text"
-                        className="rounded-lg border-gray-300 text-sm"
-                        defaultValue={sub}
-                      />
-                    )
-                )}
+
+                <input
+                  onChange={handelInputChange}
+                  name={`subCategoryName`}
+                  type="text"
+                  defaultValue={details?.subCategoryName}
+                  className="rounded-lg border-gray-300 text-sm"
+                  placeholder="Each Sub category will be separated by Space"
+                />
               </label>
 
               {/* Save and Cancel */}
