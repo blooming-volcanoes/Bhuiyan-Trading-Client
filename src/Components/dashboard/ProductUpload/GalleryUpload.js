@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import toast from "react-hot-toast";
 
 function GalleryUpload({
   setGalleryFiles,
@@ -10,14 +9,16 @@ function GalleryUpload({
   handelGalleryImages,
   setUploadedGalleryImage,
   galleryLoader,
+  setTrackGalleryImageLength,
 }) {
   const fileRef = useRef();
 
   const handelGalleryFiles = async (e) => {
-    if (e.target.files.length > 4) {
-      toast.error("You can't add More than 4 Image in Gallery");
-      return;
-    }
+    // if (e.target.files.length > 4) {
+    //   toast.error("You can't add More than 4 Image in Gallery");
+    //   return;
+    // }
+    setTrackGalleryImageLength(e.target.files.length);
     repairMultipleFiles(e.target.files);
     // Convert the FileList into an array and iterate
     let files = Array.from(e.target.files).map((file) => {
@@ -41,11 +42,6 @@ function GalleryUpload({
 
   return (
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
-      <p className="text-center text-xs text-indigo-500">
-        Note : Upload At least 4 Gallery Images here (Only JPEG, JPG, PNG file
-        are allowed)
-      </p>
-
       <div className={`${renderGalleryImages && "h-[300px] overflow-y-auto"}`}>
         {renderGalleryImages && (
           <div className="flex flex-col items-center justify-center space-y-5">
@@ -61,7 +57,7 @@ function GalleryUpload({
         )}
       </div>
 
-      {galleryFiles && renderGalleryImages?.length === 4 ? (
+      {galleryFiles ? (
         <div className="flex w-full justify-center space-x-6">
           <button
             disabled={galleryLoader}

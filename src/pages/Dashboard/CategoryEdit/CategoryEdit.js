@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
+import UploadFile from "../../../Components/custom/Uploaders/UploadFile";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import httpCateGoryService from "./../../../services/category.service";
 
 function CategoryEdit() {
   const { id } = useParams();
   const [prevLoading, setPrevLoading] = useState(false);
-  const [prevCategory, setPrevCategory] = useState({});
+  const [prevCategory, setPrevCategory] = useState(null);
   const [details, setDetails] = useState({});
+  const [uploadedFeature, setUploadedFeature] = useState(null);
+  const [uploadedGalleryImage, setUploadedGalleryImage] = useState(null);
+  const [trackGalleryImageLength, setTrackGalleryImageLength] = useState(null);
 
   useEffect(() => {
     if (id) {
@@ -16,8 +20,8 @@ function CategoryEdit() {
       httpCateGoryService
         .getSingleCategoryById(id)
         .then((data) => {
-          setPrevCategory(data[0]);
           console.log(data[0]);
+          setPrevCategory(data[0]);
         })
         .catch((error) => {
           console.log(error);
@@ -29,13 +33,16 @@ function CategoryEdit() {
     }
   }, [id]);
 
+  // Set the previous value
   useEffect(() => {
-    if (prevCategory?.categoryName) {
+    if (prevCategory) {
       setDetails((prev) => {
         return {
           ...prev,
           categoryName: prevCategory.categoryName,
           subCategoryName: prevCategory.subCategoryName.join(" "),
+          featureImg: prevCategory?.featureImg,
+          galleryImg: prevCategory?.galleryImg,
         };
       });
     }
@@ -53,11 +60,28 @@ function CategoryEdit() {
     });
   };
 
-  console.log(details);
+  // Submit the form
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(trackGalleryImageLength);
+
+    const modifiedDetails = {
+      ...details,
+      subCategoryName: details?.subCategoryName.split(" ").join(";"),
+      featureImg: uploadedFeature || details.featureImg,
+      galleryImg: uploadedGalleryImage || details.galleryImg,
+    };
+
+    console.log({ modifiedDetails });
+    console.log({ uploadedGalleryImage });
+  };
+
+  console.log({ details });
 
   return (
     <DashboardLayout>
-      <section>
+      <section className="my-5">
         <h1 className="my-4 text-center text-2xl font-semibold text-indigo-500 drop-shadow">
           Edit Category
         </h1>
@@ -67,7 +91,10 @@ function CategoryEdit() {
               <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
             </div>
           ) : (
-            <form className="relative mx-5 w-full space-y-2 rounded border-2 bg-white p-4 shadow-lg md:w-[600px] lg:w-[600px]">
+            <form
+              onSubmit={handelSubmit}
+              className="relative mx-5 w-full space-y-4 rounded border-2 bg-white p-4 shadow-lg md:w-[600px] lg:w-[600px]"
+            >
               {/* Input fields */}
               <label htmlFor="cateName" className="flex flex-col space-y-2">
                 <span
@@ -105,18 +132,40 @@ function CategoryEdit() {
                 />
               </label>
 
-              {/* Save and Cancel */}
+              {/* Feature Image upload */}
+              <p className="text-center text-xs text-indigo-500">
+                Note : Update your Category feature Image here here (Only JPEG,
+                JPG, PNG file are allowed)
+              </p>
+              <UploadFile
+                isMultiple={false}
+                setUploadedFeature={setUploadedFeature}
+                uploadedFeature={uploadedFeature}
+              />
 
+              {/* Gallery Image upload */}
+              <p className="text-center text-xs text-indigo-500">
+                Note : Update your Category Gallery Image here here (Only JPEG,
+                JPG, PNG file are allowed)
+              </p>
+              <UploadFile
+                isMultiple={true}
+                setUploadedGalleryImage={setUploadedGalleryImage}
+                uploadedGalleryImage={uploadedGalleryImage}
+                setTrackGalleryImageLength={setTrackGalleryImageLength}
+              />
+
+              {/* Save and Cancel */}
               <>
-                <div className="flex justify-between">
+                <div className="flex flex-col space-y-3">
                   <button
-                    className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
+                    className="dashboard-btn flex-1 border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
                     type="submit"
                   >
-                    Save
+                    Update
                   </button>
                   <button
-                    className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
+                    className="dashboard-btn flex-1 border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
                     type="button"
                   >
                     Cancel

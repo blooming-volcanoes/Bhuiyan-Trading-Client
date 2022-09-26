@@ -4,7 +4,7 @@ import CategoryTable from "../../../Components/dashboard/Table/CategoryTable";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import httpCateGoryService from "../../../services/category.service";
 
-const theadData = ["categoryName", "subCategoryName", "Action"];
+const theadData = ["Category name", "Sub-category Name", "Action"];
 
 function Categories() {
   const [loader, setLoader] = useState(false);
