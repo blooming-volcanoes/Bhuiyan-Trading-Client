@@ -1,12 +1,16 @@
 import React from "react";
 import { IoIosArrowDroprightCircle, IoIosSearch } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const AllProducts = ({
   products,
   filteredProductsBySubCate,
   handelProductBySearch,
+  isDataLimitDone,
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   return (
     <div className="main-container py-20">
       <div className="flex flex-col items-center justify-between lg:flex-row">
@@ -83,9 +87,56 @@ const AllProducts = ({
 
       {/* load more button */}
       <div className="mb-10 flex items-center justify-center">
-        <button className="rounded-xl bg-red-800 px-4 py-2 text-lg font-bold text-white">
-          Load More
-        </button>
+        {isDataLimitDone ? (
+          <button
+            onClick={() => {
+              setSearchParams({
+                page: searchParams.get("page")
+                  ? +searchParams.get("page") - 1
+                  : 1,
+              });
+            }}
+            className="flex items-center rounded border-2 border-red-800 bg-red-800 px-6 py-3 text-lg font-semibold text-white transition-all hover:scale-110 hover:border-red-800 hover:bg-transparent hover:text-red-800"
+          >
+            <span className="mr-2 text-2xl">
+              <BsArrowLeft />
+            </span>
+            Back
+          </button>
+        ) : (
+          <div className="flex space-x-4">
+            <button
+              onClick={() => {
+                setSearchParams({
+                  page: searchParams.get("page")
+                    ? +searchParams.get("page") - 1
+                    : 1,
+                });
+              }}
+              className="flex items-center rounded border-2 border-red-800 bg-red-800 px-6 py-3 text-lg font-semibold text-white transition-all hover:scale-110 hover:border-red-800 hover:bg-transparent hover:text-red-800"
+            >
+              <span className="mr-2 text-2xl">
+                <BsArrowLeft />
+              </span>
+              Back
+            </button>
+            <button
+              onClick={() => {
+                setSearchParams({
+                  page: searchParams.get("page")
+                    ? +searchParams.get("page") + 1
+                    : 1,
+                });
+              }}
+              className="flex items-center  rounded border-2 border-red-800 bg-red-800 px-6 py-3 text-lg font-semibold text-white transition-all hover:scale-110 hover:border-red-800 hover:bg-transparent hover:text-red-800"
+            >
+              Load More
+              <span className="ml-2 text-2xl">
+                <BsArrowRight />
+              </span>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

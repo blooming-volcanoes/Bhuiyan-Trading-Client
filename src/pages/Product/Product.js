@@ -4,7 +4,7 @@ import AllProducts from "./AllProducts/AllProducts";
 import Banner from "./Banner/Banner";
 import MostPopularProducts from "./MostPopularProducts/MostPopularProducts";
 
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import bannerImage from "../../assets/Images/pexels-kindel-media-8352350.jpg";
 import LoadingButton from "../../Components/custom/Buttons/LoadingButton";
 import PageLayout from "./../../layouts/PageLayout";
@@ -20,15 +20,24 @@ const Product = () => {
   const [loading, setLoading] = useState(false);
   const [filterBySubLoader, setFilterBySubLoader] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
+  const [searchParams] = useSearchParams();
+  const [isDataLimitDone, setIsDataLimitDone] = useState(false);
 
   let { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
     httpProductService
-      .getProductByCateGory(id)
+      .getProductByCateGory(id, searchParams.get("page"))
       .then((data) => {
         setProducts(data);
+        setSearchResult(data);
+        if (!data.length || data.length < 10) {
+          setIsDataLimitDone(true);
+        } else {
+          setIsDataLimitDone(false);
+        }
+        console.log(data);
         setSearchResult(data);
       })
       .catch((error) => {
@@ -37,7 +46,7 @@ const Product = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [id]);
+  }, [id, searchParams]);
 
   useEffect(() => {
     if (products.length) {
@@ -122,6 +131,7 @@ const Product = () => {
                 products={products}
                 filteredProductsBySubCate={filteredProductsBySubCate}
                 handelProductBySearch={handelProductBySearch}
+                isDataLimitDone={isDataLimitDone}
               />
             )}
           </div>

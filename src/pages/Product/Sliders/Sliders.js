@@ -15,7 +15,6 @@ const Sliders = ({
   modifiedSubCategories,
   handelFilterProductBySubCategory,
 }) => {
-  console.log(modifiedSubCategories);
   return (
     <>
       <Swiper
@@ -47,8 +46,12 @@ const Sliders = ({
                 onClick={() => handelFilterProductBySubCategory(sub?.title)}
                 className="relative cursor-pointer"
               >
-                <img className="rounded" src={sub?.featureImg} alt="" />
-                <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded "></div>
+                <img
+                  className="!h-[200px] rounded !object-cover"
+                  src={sub?.featureImg}
+                  alt=""
+                />
+                <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-30 "></div>
                 <p className="absolute bottom-0 z-10 ml-3 mb-3 text-xl font-bold text-white">
                   {sub?.title}
                 </p>

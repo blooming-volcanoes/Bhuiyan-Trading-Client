@@ -55,7 +55,7 @@ function OurProducts() {
           ) : (
             cateGories.map((category, i) => (
               <Link
-                to={`/product/${category.id}`}
+                to={`/product/${category.id}?page=1`}
                 className="flex flex-col items-center justify-center space-x-0 space-y-3 text-lg font-semibold capitalize text-gray-600 md:flex-row md:justify-start md:space-x-6 lg:flex-row lg:justify-start lg:space-y-0 lg:space-x-6"
                 key={i}
               >
