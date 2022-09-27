@@ -4,7 +4,7 @@ import AllProducts from "./AllProducts/AllProducts";
 import Banner from "./Banner/Banner";
 import MostPopularProducts from "./MostPopularProducts/MostPopularProducts";
 
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import bannerImage from "../../assets/Images/pexels-kindel-media-8352350.jpg";
 import LoadingButton from "../../Components/custom/Buttons/LoadingButton";
 import PageLayout from "./../../layouts/PageLayout";
@@ -13,22 +13,32 @@ import httpProductService from "./../../services/product.service";
 
 const Product = () => {
   const [imageUrl] = useState(bannerImage);
-  const [products, setProducts] = useState([]);
+  const [data, setProducts] = useState([]);
+
   const [filteredProductsBySubCate, setFilteredProductsBySubCate] =
     useState(null);
   const [modifiedSubCategories, setModifiedSubCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filterBySubLoader, setFilterBySubLoader] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
+  const [searchParams] = useSearchParams();
+  const [isDataLimitDone, setIsDataLimitDone] = useState(false);
 
   let { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
     httpProductService
-      .getProductByCateGory(id)
+      .getProductByCateGory(id, searchParams.get("page"))
       .then((data) => {
         setProducts(data);
+        setSearchResult(data);
+        if (!data.length || data.length < 10) {
+          setIsDataLimitDone(true);
+        } else {
+          setIsDataLimitDone(false);
+        }
+        console.log(data);
         setSearchResult(data);
       })
       .catch((error) => {
@@ -37,26 +47,33 @@ const Product = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [id]);
+  }, [id, searchParams]);
 
   useEffect(() => {
-    if (products.length) {
-      const tempSub = [];
-      for (let i = 0; i < products.length; i++) {
-        for (let j = 0; j < products[i].subCategoryName.length; j++) {
-          const element = products[i].subCategoryName[j];
-          if (tempSub[j]?.title !== element) {
-            tempSub.push({
-              title: element,
-              featureImg: products[i].categoryGallay[j],
-            });
+    httpProductService
+      .getAllProductByCateGory(id)
+      .then((data) => {
+        if (data.length) {
+          const tempSub = [];
+          for (let i = 0; i < data.length; i++) {
+            for (let j = 0; j < data[i].subCategoryName.length; j++) {
+              const element = data[i].subCategoryName[j];
+              if (tempSub[j]?.title !== element) {
+                tempSub.push({
+                  title: element,
+                  featureImg: data[i].categoryGallay[j],
+                });
+              }
+            }
           }
-        }
-      }
 
-      setModifiedSubCategories(tempSub);
-    }
-  }, [products]);
+          setModifiedSubCategories(tempSub);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
 
   const handelFilterProductBySubCategory = async (subCategory) => {
     // const filtered = products.filter((pd) =>
@@ -87,7 +104,7 @@ const Product = () => {
     const userInput = productName.trim().toLowerCase();
     if (userInput) {
       setProducts(
-        products.filter((product) =>
+        data.filter((product) =>
           product.title.trim().toLowerCase().includes(userInput)
         )
       );
@@ -107,7 +124,7 @@ const Product = () => {
           <div className="bg-gray-100">
             <Banner bannerImage={imageUrl} />
             <MostPopularProducts
-              products={products}
+              products={data}
               modifiedSubCategories={modifiedSubCategories}
               handelFilterProductBySubCategory={
                 handelFilterProductBySubCategory
@@ -119,9 +136,10 @@ const Product = () => {
               </div>
             ) : (
               <AllProducts
-                products={products}
+                products={data}
                 filteredProductsBySubCate={filteredProductsBySubCate}
                 handelProductBySearch={handelProductBySearch}
+                isDataLimitDone={isDataLimitDone}
               />
             )}
           </div>

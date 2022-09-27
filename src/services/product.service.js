@@ -5,7 +5,11 @@ class HttpProductService {
     const data = await httpReq.get(`/product/get/${id}`);
     return data;
   }
-  async getProductByCateGory(id) {
+  async getProductByCateGory(id, pageNo) {
+    const data = await httpReq.get(`/product/categoryId/${id}?page=${pageNo}`);
+    return data;
+  }
+  async getAllProductByCateGory(id) {
     const data = await httpReq.get(`/product/categoryId/${id}`);
     return data;
   }

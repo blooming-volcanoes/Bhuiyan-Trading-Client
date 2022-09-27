@@ -47,7 +47,7 @@ function OurProducts() {
 
         {/* categories */}
 
-        <div className="my-20 grid grid-cols-2 gap-y-20  md:grid-cols-2 lg:grid-cols-4 lg:gap-3">
+        <div className="my-20 grid grid-cols-2 gap-y-20  md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           {loader ? (
             <div className="flex h-full justify-center space-y-4">
               <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
@@ -55,12 +55,12 @@ function OurProducts() {
           ) : (
             cateGories.map((category, i) => (
               <Link
-                to={`/product/${category.id}`}
+                to={`/product/${category.id}?page=1`}
                 className="flex flex-col items-center justify-center space-x-0 space-y-3 text-lg font-semibold capitalize text-gray-600 md:flex-row md:justify-start md:space-x-6 lg:flex-row lg:justify-start lg:space-y-0 lg:space-x-6"
                 key={i}
               >
                 <img
-                  className="h-20 w-20 rounded-full md:h-10 md:w-10 lg:h-10 lg:w-10"
+                  className="h-20 w-20 rounded-full  object-cover  md:h-10 md:w-10 lg:h-[60px] lg:w-[60px]"
                   src={category?.featureImg}
                   alt=""
                 />

@@ -34,3 +34,7 @@
 .swiper-button-prev {
   display: none;
 }
+
+.swiper-pagination-bullet {
+  display: none;
+}
