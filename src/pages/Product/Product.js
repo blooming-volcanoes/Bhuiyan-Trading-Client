@@ -23,7 +23,6 @@ const Product = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [searchParams] = useSearchParams();
   const [isDataLimitDone, setIsDataLimitDone] = useState(false);
-  const [loadAllProducts, setloadAllProduts] = useState([]);
 
   let { id } = useParams();
 

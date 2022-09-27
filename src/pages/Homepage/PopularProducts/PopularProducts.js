@@ -47,7 +47,7 @@ function PopularProducts() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {cateGories.map((category) => (
               <Link
-                to={`/product/${category.id}`}
+                to={`/product/${category.id}?page=1`}
                 className="relative"
                 key={category.id}
               >
