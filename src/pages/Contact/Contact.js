@@ -16,7 +16,7 @@ function Contact() {
         ></iframe>
       </div>
 
-      <ContactForm></ContactForm>
+      <ContactForm />
     </PageLayout>
   );
 }
