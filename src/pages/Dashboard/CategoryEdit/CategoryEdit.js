@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { ImCross } from "react-icons/im";
+import { MdAddToPhotos } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import UploadFile from "../../../Components/custom/Uploaders/UploadFile";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import httpCateGoryService from "./../../../services/category.service";
+import httpProductService from "./../../../services/product.service";
 
 function CategoryEdit() {
   const { id } = useParams();
@@ -18,6 +21,11 @@ function CategoryEdit() {
   const [trackGalleryImageLength, setTrackGalleryImageLength] = useState(null);
   const [updateLoader, setUpdateLoader] = useState(false);
   const [isAnyThingEdited, setIsAnyThingEdited] = useState(false);
+
+  const [addSubCategory, setAddSubCategory] = useState(false);
+
+  // all product by this category states
+  const [allProducts, setGetAllProducts] = useState([]);
 
   useEffect(() => {
     if (id) {
@@ -37,6 +45,21 @@ function CategoryEdit() {
     }
   }, [id]);
 
+  // get All products by this category
+  useEffect(() => {
+    if (prevCategory) {
+      async function loadAllProductByCategory() {
+        try {
+          const data = await httpProductService.getAllProductByCateGory(id);
+          setGetAllProducts(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      loadAllProductByCategory();
+    }
+  }, [id, prevCategory]);
+
   // Set the previous value
   useEffect(() => {
     if (prevCategory) {
@@ -44,7 +67,6 @@ function CategoryEdit() {
         return {
           ...prev,
           categoryName: prevCategory.categoryName,
-          subCategoryName: prevCategory.subCategoryName.join(" "),
           featureImg: prevCategory?.featureImg,
           galleryImg: prevCategory?.galleryImg,
         };
@@ -64,19 +86,37 @@ function CategoryEdit() {
     });
   };
 
+  async function updateAllTheProducts(category) {
+    for (let i = 0; i < allProducts.length; i++) {
+      allProducts[i].categoryName = category.categoryName;
+    }
+  }
+
   // Submit the form
   const handelSubmit = async (e) => {
     e.preventDefault();
 
+    let currentSub;
+    if (details?.subCategoryName) {
+      currentSub =
+        prevCategory.subCategoryName.join(";") +
+        ";" +
+        details?.subCategoryName.trim().split(" ").join(";");
+    } else {
+      currentSub = prevCategory.subCategoryName.join(";");
+    }
+
     const modifiedDetails = {
       ...details,
-      subCategoryName: details?.subCategoryName.trim().split(" ").join(";"),
+      subCategoryName: currentSub,
       featureImg: uploadedFeature || details.featureImg,
       galleryImg: uploadedGalleryImage
-        ? uploadedGalleryImage.join(";")
+        ? details.galleryImg.join(";") + ";" + uploadedGalleryImage.join(";")
         : details.galleryImg.join(";"),
     };
+
     setUpdateLoader(true);
+    updateAllTheProducts(modifiedDetails);
     try {
       const data = await httpCateGoryService.updateCategory(
         prevCategory.id,
@@ -85,6 +125,13 @@ function CategoryEdit() {
       if (data.msg) {
         toast.success(data.msg);
       }
+
+      allProducts.map(async (product) => {
+        await httpProductService.updateSingleProduct(product.id, {
+          categoryName: product.categoryName,
+        });
+      });
+
       navigate(-1);
     } catch (error) {
       setUpdateLoader(false);
@@ -136,22 +183,35 @@ function CategoryEdit() {
               {/* Sub Categories */}
               <label htmlFor="cateName" className="flex flex-col space-y-2">
                 <div className="flex justify-between">
-                  <span
-                    id="cateName"
-                    className="text-xs font-semibold text-gray-400"
+                  <button
+                    onClick={() => setAddSubCategory(true)}
+                    type="button"
+                    className="flex items-center  rounded bg-indigo-200 p-1 text-xs font-semibold text-indigo-500"
                   >
-                    Subcategory names
-                  </span>
+                    Add more Subcategories
+                    <MdAddToPhotos className="ml-2 text-xl" />
+                  </button>
+                  {addSubCategory && (
+                    <button
+                      onClick={() => setAddSubCategory(false)}
+                      type="button"
+                      className="flex items-center  rounded bg-red-200 p-1 text-xs font-semibold text-red-500"
+                    >
+                      Cancel
+                      <ImCross className="ml-2 text-sm" />
+                    </button>
+                  )}
                 </div>
 
-                <input
-                  onChange={handelInputChange}
-                  name={`subCategoryName`}
-                  type="text"
-                  defaultValue={details?.subCategoryName}
-                  className="rounded-lg border-gray-300 text-sm"
-                  placeholder="Each Sub category will be separated by Space"
-                />
+                {addSubCategory && (
+                  <input
+                    onChange={handelInputChange}
+                    name={`subCategoryName`}
+                    type="text"
+                    className="rounded-lg border-gray-300 text-sm"
+                    placeholder="Each Sub category will be separated by Space"
+                  />
+                )}
               </label>
 
               {/* Feature Image upload */}
