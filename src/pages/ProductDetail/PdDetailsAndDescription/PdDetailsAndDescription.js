@@ -29,9 +29,12 @@ const PdDetailsAndDescription = ({ product }) => {
       <PdDescriptionAccordion product={product} />
 
       <div className="flex items-center justify-center">
-        <button className="mb-5 rounded-lg bg-red-900 px-3 py-2 text-lg font-bold text-white">
+        <Link
+          to="/contact"
+          className="mb-5 rounded-lg bg-red-900 px-3 py-2 text-lg font-bold text-white"
+        >
           Contact us to purchase
-        </button>
+        </Link>
       </div>
 
       <div className="flex w-full gap-1">
