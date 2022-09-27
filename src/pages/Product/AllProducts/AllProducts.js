@@ -88,21 +88,23 @@ const AllProducts = ({
       {/* load more button */}
       <div className="mb-10 flex items-center justify-center">
         {isDataLimitDone ? (
-          <button
-            onClick={() => {
-              setSearchParams({
-                page: searchParams.get("page")
-                  ? +searchParams.get("page") - 1
-                  : 1,
-              });
-            }}
-            className="flex items-center rounded border-2 border-red-800 bg-red-800 px-6 py-3 text-lg font-semibold text-white transition-all hover:scale-110 hover:border-red-800 hover:bg-transparent hover:text-red-800"
-          >
-            <span className="mr-2 text-2xl">
-              <BsArrowLeft />
-            </span>
-            Back
-          </button>
+          +searchParams.get("page") !== 1 && (
+            <button
+              onClick={() => {
+                setSearchParams({
+                  page: searchParams.get("page")
+                    ? +searchParams.get("page") - 1
+                    : 1,
+                });
+              }}
+              className="flex items-center rounded border-2 border-red-800 bg-red-800 px-6 py-3 text-lg font-semibold text-white transition-all hover:scale-110 hover:border-red-800 hover:bg-transparent hover:text-red-800"
+            >
+              <span className="mr-2 text-2xl">
+                <BsArrowLeft />
+              </span>
+              Back
+            </button>
+          )
         ) : (
           <div className="flex space-x-4">
             {+searchParams.get("page") !== 1 && (

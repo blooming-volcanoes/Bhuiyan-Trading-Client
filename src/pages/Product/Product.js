@@ -49,6 +49,8 @@ const Product = () => {
       });
   }, [id, searchParams]);
 
+  console.log(isDataLimitDone);
+
   useEffect(() => {
     if (data.length) {
       httpCateGoryService
