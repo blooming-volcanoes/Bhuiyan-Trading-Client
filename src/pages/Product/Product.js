@@ -66,34 +66,9 @@ const Product = () => {
           setModifiedSubCategories(sub);
         });
     }
-
-    // httpProductService
-    //   .getAllProductByCateGory(id)
-    //   .then((data) => {
-    //     if (data.length) {
-    //       const tempSub = [];
-    //       for (let i = 0; i < data.length; i++) {
-    //         for (let j = 0; j < data[i].subCategoryName.length; j++) {
-    //           const element = data[i].subCategoryName[j];
-    //           if (tempSub[j]?.title !== element) {
-    //             tempSub.push({
-    //               title: element,
-    //               featureImg: data[i].categoryGallay[j],
-    //             });
-    //           }
-    //         }
-    //       }
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   }, [id, data]);
 
   const handelFilterProductBySubCategory = async (subCategory) => {
-    // const filtered = products.filter((pd) =>
-    //   pd.subCategoryName.includes(subCategory)
-    // );
     setFilterBySubLoader(true);
     if (subCategory) {
       try {
