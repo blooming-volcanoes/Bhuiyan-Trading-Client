@@ -38,7 +38,7 @@ const Product = () => {
         } else {
           setIsDataLimitDone(false);
         }
-        console.log(data);
+
         setSearchResult(data);
       })
       .catch((error) => {
@@ -50,30 +50,45 @@ const Product = () => {
   }, [id, searchParams]);
 
   useEffect(() => {
-    httpProductService
-      .getAllProductByCateGory(id)
-      .then((data) => {
-        if (data.length) {
-          const tempSub = [];
-          for (let i = 0; i < data.length; i++) {
-            for (let j = 0; j < data[i].subCategoryName.length; j++) {
-              const element = data[i].subCategoryName[j];
-              if (tempSub[j]?.title !== element) {
-                tempSub.push({
-                  title: element,
-                  featureImg: data[i].categoryGallay[j],
-                });
-              }
+    if (data.length) {
+      httpCateGoryService
+        .getSingleCategoryById(data[0].categoryId)
+        .then((data) => {
+          const sub = [];
+          for (let i = 0; i < data[0]?.subCategoryName.length; i++) {
+            if (sub[i]?.title !== data[0].subCategoryName[i]) {
+              sub.push({
+                title: data[0].subCategoryName[i],
+                featureImg: data[0].galleryImg[i],
+              });
             }
           }
+          setModifiedSubCategories(sub);
+        });
+    }
 
-          setModifiedSubCategories(tempSub);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id]);
+    // httpProductService
+    //   .getAllProductByCateGory(id)
+    //   .then((data) => {
+    //     if (data.length) {
+    //       const tempSub = [];
+    //       for (let i = 0; i < data.length; i++) {
+    //         for (let j = 0; j < data[i].subCategoryName.length; j++) {
+    //           const element = data[i].subCategoryName[j];
+    //           if (tempSub[j]?.title !== element) {
+    //             tempSub.push({
+    //               title: element,
+    //               featureImg: data[i].categoryGallay[j],
+    //             });
+    //           }
+    //         }
+    //       }
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  }, [id, data]);
 
   const handelFilterProductBySubCategory = async (subCategory) => {
     // const filtered = products.filter((pd) =>
