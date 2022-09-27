@@ -79,7 +79,7 @@ function CateGoryUpload() {
       trackGalleryImageLength !== userInput.subCategoryName.split(" ")?.length
     ) {
       toast.error(
-        `You need to add at least ${
+        `You need to add only ${
           userInput.subCategoryName.split(" ")?.length
         } Images in Gallery`
       );
