@@ -6,7 +6,7 @@ class HttpProductService {
     return data;
   }
   // Get with Pagination
-  async getProductByCateGory(id, pageNo) {
+  async getProductByCateGoryWithPagination(id, pageNo) {
     const data = await httpReq.get(`/product/categoryId/${id}?page=${pageNo}`);
     return data;
   }
