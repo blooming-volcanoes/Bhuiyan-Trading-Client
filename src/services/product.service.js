@@ -19,6 +19,10 @@ class HttpProductService {
     const data = await httpReq.get("/product/get");
     return data;
   }
+  async getAllProductsByPagination(pageNo) {
+    const data = await httpReq.get(`/product/get?page=${pageNo}`);
+    return data;
+  }
 
   async addSingleProduct(payload, config) {
     const data = await httpReq.post("/product/add", payload, config);

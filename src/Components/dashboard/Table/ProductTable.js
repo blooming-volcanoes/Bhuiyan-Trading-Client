@@ -9,8 +9,14 @@ function ProductTable({ theadData, tableData }) {
             <table className="min-w-full leading-normal">
               <thead>
                 <tr>
-                  {theadData.map((data) => (
-                    <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                  <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    No
+                  </th>
+                  {theadData.map((data, i) => (
+                    <th
+                      key={i}
+                      className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700"
+                    >
                       {data}
                     </th>
                   ))}
@@ -22,8 +28,13 @@ function ProductTable({ theadData, tableData }) {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((data) => (
-                  <tr>
+                {tableData.map((data, i) => (
+                  <tr key={i}>
+                    <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
+                      <p className="whitespace-no-wrap h-[40px] overflow-y-auto  font-semibold text-gray-500  scrollbar-hide">
+                        {data.id}
+                      </p>
+                    </td>
                     <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
                       <p className="whitespace-no-wrap h-[40px] overflow-y-auto  font-semibold text-indigo-500  scrollbar-hide">
                         {data?.title}

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
+import Pagination from "../../../Components/custom/Pagination/Pagination";
 import ProductTable from "./../../../Components/dashboard/Table/ProductTable";
 import DashboardLayout from "./../../../layouts/DashboardLayout";
 import httpProductService from "./../../../services/product.service";
@@ -8,13 +10,22 @@ function Products() {
   const [allProducts, setAllProducts] = useState([]);
   const [tableHeadData, setTableHeadData] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isDataLimitDone, setIsDataLimitDone] = useState(false);
 
   // load all Products
   useEffect(() => {
     async function loadAllProducts() {
       setLoader(true);
       try {
-        const data = await httpProductService.getAllProducts();
+        const data = await httpProductService.getAllProductsByPagination(
+          searchParams.get("page")
+        );
+        if (!data.length || data.length < 10) {
+          setIsDataLimitDone(true);
+        } else {
+          setIsDataLimitDone(false);
+        }
         setAllProducts(data);
       } catch (error) {
         setLoader(false);
@@ -23,7 +34,7 @@ function Products() {
       setLoader(false);
     }
     loadAllProducts();
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     if (allProducts.length) {
@@ -42,8 +53,6 @@ function Products() {
     }
   }, [allProducts]);
 
-  console.log(tableHeadData);
-
   return (
     <DashboardLayout>
       <section>
@@ -58,6 +67,12 @@ function Products() {
         ) : (
           <ProductTable theadData={tableHeadData} tableData={allProducts} />
         )}
+
+        <Pagination
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          isDataLimitDone={isDataLimitDone}
+        />
       </section>
     </DashboardLayout>
   );
