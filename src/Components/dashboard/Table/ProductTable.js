@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ProductTable({ theadData, tableData }) {
   return (
@@ -9,8 +10,14 @@ function ProductTable({ theadData, tableData }) {
             <table className="min-w-full leading-normal">
               <thead>
                 <tr>
-                  {theadData.map((data) => (
-                    <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                  <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    No
+                  </th>
+                  {theadData.map((data, i) => (
+                    <th
+                      key={i}
+                      className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700"
+                    >
                       {data}
                     </th>
                   ))}
@@ -22,8 +29,13 @@ function ProductTable({ theadData, tableData }) {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((data) => (
-                  <tr>
+                {tableData.map((data, i) => (
+                  <tr key={i}>
+                    <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
+                      <p className="whitespace-no-wrap h-[40px] overflow-y-auto  font-semibold text-gray-500  scrollbar-hide">
+                        {data.id}
+                      </p>
+                    </td>
                     <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
                       <p className="whitespace-no-wrap h-[40px] overflow-y-auto  font-semibold text-indigo-500  scrollbar-hide">
                         {data?.title}
@@ -59,9 +71,9 @@ function ProductTable({ theadData, tableData }) {
                         {data?.categoryName}
                       </p>
                     </td>
-                    <td className="flex h-[90px] flex-col overflow-y-auto border-b border-gray-200 bg-white py-1 px-5 text-sm scrollbar-hide">
+                    <td className="border-b border-gray-200 bg-white py-2 px-5  text-sm scrollbar-hide">
                       {data?.subCategoryName?.map((sub) => (
-                        <p className="whitespace-no-wrap text-xs font-semibold text-green-600">
+                        <p className="whitespace-no-wrap flex h-[50px] flex-col  overflow-y-auto text-xs font-semibold text-green-600">
                           <span>{sub}</span>
                         </p>
                       ))}
@@ -69,8 +81,8 @@ function ProductTable({ theadData, tableData }) {
 
                     <td className="space-x-4 border-b border-gray-200 bg-white px-5 py-1 text-sm">
                       <div className="flex  space-x-2">
-                        <span
-                          to={`/admin/dashboard/categories/edit/${data?.id}`}
+                        <Link
+                          to={`/admin/dashboard/product/edit/${data?.id}`}
                           className="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900"
                         >
                           <span
@@ -78,7 +90,7 @@ function ProductTable({ theadData, tableData }) {
                             className="absolute inset-0 rounded-full bg-green-200 opacity-50"
                           ></span>
                           <span className="relative cursor-pointer">Edit</span>
-                        </span>
+                        </Link>
                         <button className="relative inline-block px-3 py-1 font-semibold leading-tight text-white">
                           <span
                             aria-hidden
