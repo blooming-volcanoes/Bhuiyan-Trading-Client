@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
@@ -68,6 +69,11 @@ function Contact() {
           .deleteContactInfo(id)
           .then(() => {
             Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          })
+          .catch((error) => {
+            setIsContactInfoDeleted(false);
+            toast.error("Internal Server Error");
+            console.log(error);
           })
           .finally(() => {
             setIsContactInfoDeleted(false);
