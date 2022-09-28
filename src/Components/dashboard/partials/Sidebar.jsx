@@ -445,7 +445,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                 "block truncate text-slate-400 transition duration-150 hover:text-slate-200 " +
                                 (isActive ? "!text-indigo-500" : "")
                               }
-                              to="/admin/dashboard/contact-us"
+                              to="/admin/dashboard/contact-us?page=1"
                             >
                               <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
                                 Contact us

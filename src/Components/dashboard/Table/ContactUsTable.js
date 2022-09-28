@@ -1,6 +1,6 @@
 import React from "react";
 
-function ContactUsTable({ theadData, tableData }) {
+function ContactUsTable({ theadData, tableData, handelDelete }) {
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
@@ -14,6 +14,9 @@ function ContactUsTable({ theadData, tableData }) {
                       {data}
                     </th>
                   ))}
+                  <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
+                    Actions
+                  </th>
 
                   <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3"></th>
                 </tr>
@@ -32,12 +35,12 @@ function ContactUsTable({ theadData, tableData }) {
                       </p>
                     </td>
                     <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
-                      <p className="whitespace-no-wrap text-xs font-semibold text-green-600">
+                      <p className="whitespace-no-wrap h-[50px] overflow-y-auto text-xs font-semibold text-green-600 scrollbar-hide">
                         <span>{data?.emailTitle}</span>
                       </p>
                     </td>
-                    <td className="h-[90px] overflow-y-auto border-b border-gray-200 bg-white px-5 py-2 text-sm">
-                      <p className="whitespace-no-wrap text-xs font-semibold text-gray-600">
+                    <td className=" border-b border-gray-200 bg-white px-5 py-2 text-sm">
+                      <p className="whitespace-no-wrap h-[50px] overflow-y-auto text-xs font-semibold text-gray-600 scrollbar-hide">
                         <span>{data?.comments}</span>
                       </p>
                     </td>
@@ -72,6 +75,18 @@ function ContactUsTable({ theadData, tableData }) {
                           {new Date(data?.created_at).toLocaleDateString()}
                         </span>
                       </p>
+                    </td>
+                    <td className=" border-b  border-gray-200 bg-white px-5 py-2 text-sm">
+                      <button
+                        onClick={() => handelDelete(data.id)}
+                        className="relative inline-block px-3 py-1 font-semibold leading-tight text-white"
+                      >
+                        <span
+                          aria-hidden
+                          className="absolute inset-0 rounded-full bg-red-500 opacity-75"
+                        ></span>
+                        <span className="relative cursor-pointer">Delete</span>
+                      </button>
                     </td>
                   </tr>
                 ))}
