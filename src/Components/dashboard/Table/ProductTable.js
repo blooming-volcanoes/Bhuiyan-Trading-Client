@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ProductTable({ theadData, tableData }) {
   return (
@@ -70,9 +71,9 @@ function ProductTable({ theadData, tableData }) {
                         {data?.categoryName}
                       </p>
                     </td>
-                    <td className="flex h-[90px] flex-col overflow-y-auto border-b border-gray-200 bg-white py-1 px-5 text-sm scrollbar-hide">
+                    <td className="border-b border-gray-200 bg-white py-2 px-5  text-sm scrollbar-hide">
                       {data?.subCategoryName?.map((sub) => (
-                        <p className="whitespace-no-wrap text-xs font-semibold text-green-600">
+                        <p className="whitespace-no-wrap flex h-[50px] flex-col  overflow-y-auto text-xs font-semibold text-green-600">
                           <span>{sub}</span>
                         </p>
                       ))}
@@ -80,8 +81,8 @@ function ProductTable({ theadData, tableData }) {
 
                     <td className="space-x-4 border-b border-gray-200 bg-white px-5 py-1 text-sm">
                       <div className="flex  space-x-2">
-                        <span
-                          to={`/admin/dashboard/categories/edit/${data?.id}`}
+                        <Link
+                          to={`/admin/dashboard/product/edit/${data?.id}`}
                           className="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900"
                         >
                           <span
@@ -89,7 +90,7 @@ function ProductTable({ theadData, tableData }) {
                             className="absolute inset-0 rounded-full bg-green-200 opacity-50"
                           ></span>
                           <span className="relative cursor-pointer">Edit</span>
-                        </span>
+                        </Link>
                         <button className="relative inline-block px-3 py-1 font-semibold leading-tight text-white">
                           <span
                             aria-hidden
