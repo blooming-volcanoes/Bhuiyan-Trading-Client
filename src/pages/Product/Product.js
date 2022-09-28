@@ -29,7 +29,7 @@ const Product = () => {
   useEffect(() => {
     setLoading(true);
     httpProductService
-      .getProductByCateGory(id, searchParams.get("page"))
+      .getProductByCateGoryWithPagination(id, searchParams.get("page"))
       .then((data) => {
         setProducts(data);
         setSearchResult(data);
