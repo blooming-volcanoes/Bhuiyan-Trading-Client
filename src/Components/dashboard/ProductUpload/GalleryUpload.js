@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function GalleryUpload({
   setGalleryFiles,
@@ -12,37 +12,58 @@ function GalleryUpload({
   setTrackGalleryImageLength,
 }) {
   const fileRef = useRef();
-
+  const [selectMulti, setSelectMulti] = useState([]);
+  // console.log(selectMulti);
   const handelGalleryFiles = async (e) => {
-    // if (e.target.files.length > 4) {
-    //   toast.error("You can't add More than 4 Image in Gallery");
-    //   return;
-    // }
-    setTrackGalleryImageLength(e.target.files.length);
-    repairMultipleFiles(e.target.files);
-    // Convert the FileList into an array and iterate
-    let files = Array.from(e.target.files).map((file) => {
-      // Define a new file reader
-      let reader = new FileReader();
+    const files = [...e.target.files];
+    const newFiles = [];
 
-      // Create a new promise
-      return new Promise((resolve) => {
-        // Resolve the promise after reading file
-        reader.onload = () => resolve(reader.result);
-
-        // Read the file as a text
-        reader.readAsDataURL(file);
-      });
+    files.forEach((file) => {
+      newFiles.push(file);
     });
 
-    // At this point you'll have an array of results
-    let res = await Promise.all(files);
-    setRenderGalleryImages(res);
+    setSelectMulti((prev) => [...prev, ...newFiles]);
+
+    setTrackGalleryImageLength(files.length);
   };
+
+  // Render the images
+  useEffect(() => {
+    if (selectMulti?.length) {
+      repairMultipleFiles(selectMulti);
+      async function loadRenderImage() {
+        // Convert the FileList into an array and iterate
+        let files = Array.from(selectMulti).map((file) => {
+          // Define a new file reader
+          let reader = new FileReader();
+
+          // Create a new promise
+          return new Promise((resolve) => {
+            // Resolve the promise after reading file
+            reader.onload = () => resolve(reader.result);
+
+            // Read the file as a text
+            reader.readAsDataURL(file);
+          });
+        });
+
+        // At this point you'll have an array of results
+        let res = await Promise.all(files);
+        setRenderGalleryImages(res);
+      }
+      loadRenderImage();
+    }
+  }, [selectMulti?.length]);
+
+  console.log(renderGalleryImages);
 
   return (
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
-      <div className={`${renderGalleryImages && "h-[300px] overflow-y-auto"}`}>
+      <div
+        className={`${
+          renderGalleryImages?.length > 0 && "h-[300px] overflow-y-auto"
+        }`}
+      >
         {renderGalleryImages && (
           <div className="flex flex-col items-center justify-center space-y-5">
             {renderGalleryImages.map((img, i) => (
@@ -59,27 +80,51 @@ function GalleryUpload({
 
       {galleryFiles ? (
         <div className="flex w-full justify-center space-x-6">
-          <button
-            disabled={galleryLoader}
-            type="button"
-            className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
-            onClick={handelGalleryImages}
-          >
-            Save
-          </button>
+          {renderGalleryImages && renderGalleryImages[0]?.includes("data") && (
+            <button
+              disabled={galleryLoader}
+              type="button"
+              className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
+              onClick={handelGalleryImages}
+            >
+              Save
+            </button>
+          )}
+
+          {renderGalleryImages && renderGalleryImages[0]?.includes("data") && (
+            <button
+              disabled={galleryLoader}
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                fileRef.current.click();
+              }}
+              className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
+            >
+              Add More
+            </button>
+          )}
           <button
             disabled={galleryLoader}
             type="button"
             onClick={(e) => {
               e.stopPropagation();
+              setSelectMulti([]);
               setGalleryFiles(null);
               setRenderGalleryImages(null);
               setUploadedGalleryImage(null);
             }}
             className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
           >
-            Change
+            Clear All
           </button>
+          <input
+            onChange={handelGalleryFiles}
+            ref={fileRef}
+            type="file"
+            multiple
+            className="hidden"
+          />
         </div>
       ) : (
         <div

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import Pagination from "../../../Components/custom/Pagination/Pagination";
 import ProductTable from "./../../../Components/dashboard/Table/ProductTable";
@@ -12,6 +14,8 @@ function Products() {
   const [loader, setLoader] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isDataLimitDone, setIsDataLimitDone] = useState(false);
+  const [isProductDeleted, setIsProductDeleted] = useState(false);
+  const user = useSelector((state) => state.auth.user);
 
   // load all Products
   useEffect(() => {
@@ -34,7 +38,7 @@ function Products() {
       setLoader(false);
     }
     loadAllProducts();
-  }, [searchParams]);
+  }, [searchParams, isProductDeleted]);
 
   useEffect(() => {
     if (allProducts.length) {
@@ -53,6 +57,40 @@ function Products() {
     }
   }, [allProducts]);
 
+  // handel Delete Product
+  const handelDeleteProduct = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        setIsProductDeleted(true);
+        httpProductService
+          .deleteProduct(id, {
+            headers: {
+              authorization: `Bearer ${user?.token}`,
+            },
+          })
+          .then((data) => {
+            console.log(data);
+            Swal.fire("Saved!", "", "success");
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            setIsProductDeleted(false);
+          });
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
+
   return (
     <DashboardLayout>
       <section>
@@ -65,7 +103,11 @@ function Products() {
             <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
           </div>
         ) : (
-          <ProductTable theadData={tableHeadData} tableData={allProducts} />
+          <ProductTable
+            handelDeleteProduct={handelDeleteProduct}
+            theadData={tableHeadData}
+            tableData={allProducts}
+          />
         )}
 
         <Pagination

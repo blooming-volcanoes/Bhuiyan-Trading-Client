@@ -156,8 +156,8 @@ function ProductUpload() {
 
   // Main form here
   const onSubmit = async (data) => {
-    if (trackGalleryImageLength !== 4) {
-      toast.error("You need to add at least 4 Image in Gallery");
+    if (trackGalleryImageLength < 1) {
+      toast.error("You need to add at least 1 Image in Gallery");
       return;
     }
     if (
@@ -181,7 +181,7 @@ function ProductUpload() {
         subCategoryName: subCateString.join(";"),
       };
       setSubmitLoader(true);
-
+      console.log(modifiedData);
       try {
         const data = await httpProductService.addSingleProduct(modifiedData, {
           headers: {

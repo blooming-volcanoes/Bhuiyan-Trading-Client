@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function ProductTable({ theadData, tableData }) {
+function ProductTable({ handelDeleteProduct, theadData, tableData }) {
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
@@ -91,7 +91,10 @@ function ProductTable({ theadData, tableData }) {
                           ></span>
                           <span className="relative cursor-pointer">Edit</span>
                         </Link>
-                        <button className="relative inline-block px-3 py-1 font-semibold leading-tight text-white">
+                        <button
+                          onClick={() => handelDeleteProduct(data.id)}
+                          className="relative inline-block px-3 py-1 font-semibold leading-tight text-white"
+                        >
                           <span
                             aria-hidden
                             className="absolute inset-0 rounded-full bg-red-500 opacity-75"

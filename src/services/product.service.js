@@ -41,6 +41,10 @@ class HttpProductService {
     const data = await httpReq.post("/gallery/bulkUpload", payload);
     return data;
   }
+  async deleteProduct(id, config) {
+    const data = await httpReq.delete(`/product/delete/${id}`, config);
+    return data;
+  }
 }
 
 const httpProductService = new HttpProductService();
