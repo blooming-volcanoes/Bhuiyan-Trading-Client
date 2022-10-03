@@ -70,7 +70,7 @@ function ProductEdit() {
               <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
             </div>
           ) : (
-            <form className="relative mx-5 w-full space-y-4 rounded border-2 bg-white p-4 shadow-lg md:w-[600px] lg:w-[600px]">
+            <form className="relative mx-5 w-full space-y-4 rounded border-2 bg-white p-4 shadow-lg md:w-[600px] lg:w-[800px]">
               {Object.keys(currentProduct).map(
                 (input) =>
                   input !== "gallaryImg" &&
@@ -100,6 +100,7 @@ function ProductEdit() {
                     </label>
                   )
               )}
+              {/* text area */}
               <label className="flex flex-col space-y-2">
                 <span
                   id="cateName"
@@ -131,6 +132,8 @@ function ProductEdit() {
                   defaultValue={prevProduct && prevProduct["productDesc"]}
                 ></textarea>
               </label>
+
+              {/* Update buttons */}
               <>
                 {updateLoader ? (
                   <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
