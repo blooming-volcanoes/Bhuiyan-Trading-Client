@@ -12,6 +12,8 @@ function ProductEdit() {
   const [loader, setLoader] = useState(false);
   const [updateLoader, setUpdateLoader] = useState(false);
   const [uploadedFeature, setUploadedFeature] = useState(null);
+  const [uploadedGalleryImage, setUploadedGalleryImage] = useState(null);
+  const [trackGalleryImageLength, setTrackGalleryImageLength] = useState(null);
   const { id } = useParams();
 
   // get a Single Product
@@ -57,8 +59,19 @@ function ProductEdit() {
     });
   };
 
+  // Change feature Image
   const handelChangeFeatureImg = (key) => {
     setUploadedFeature(null);
+    setCurrentProduct((prev) => {
+      return {
+        ...prev,
+        [key]: null,
+      };
+    });
+  };
+
+  // Change feature Image
+  const handelChangeGalleryImg = (key) => {
     setCurrentProduct((prev) => {
       return {
         ...prev,
@@ -130,10 +143,10 @@ function ProductEdit() {
                   )
               )}
 
-              {/* render prev images */}
+              {/* render prev images and Update*/}
 
               {/* Feature Img */}
-              <div className="relative mx-auto w-[400px]">
+              <div className="relative mx-auto w-[400px] rounded border border-gray-300 p-2 shadow">
                 <span className="text-xs font-semibold text-gray-400">
                   Feature Image
                 </span>
@@ -147,7 +160,7 @@ function ProductEdit() {
                     <button
                       onClick={() => handelChangeFeatureImg("featureImg")}
                       style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
-                      className="absolute top-[4px] -right-[19px] rounded-full bg-gray-100 text-2xl font-semibold text-red-500 transition-all hover:scale-110"
+                      className="absolute -top-[4px] -right-[19px] rounded-full bg-gray-100 text-2xl font-semibold text-red-500 transition-all hover:scale-110"
                       type="button"
                     >
                       <svg
@@ -174,6 +187,52 @@ function ProductEdit() {
                   />
                 )}
               </div>
+
+              {/* Gallery Image */}
+              <span className="text-xs font-semibold text-gray-400">
+                Gallery Image
+              </span>
+              {currentProduct["gallaryImg"] ? (
+                <div className="mx-auto h-[300px]  overflow-y-scroll rounded border border-gray-300 p-2 shadow scrollbar-hide">
+                  {currentProduct["gallaryImg"].split(" ").map((img) => (
+                    <div className="relative mx-auto w-[600px]">
+                      <img
+                        className=" rounded object-contain "
+                        src={img}
+                        alt=""
+                      />
+                      <button
+                        onClick={() => handelChangeGalleryImg("gallaryImg")}
+                        style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+                        className="absolute -top-[4px] -right-[19px] rounded-full bg-gray-100 text-2xl font-semibold text-red-500 transition-all hover:scale-110"
+                        type="button"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="h-10 w-10"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <UploadFile
+                  isMultiple={true}
+                  setUploadedGalleryImage={setUploadedGalleryImage}
+                  uploadedGalleryImage={uploadedGalleryImage}
+                  setTrackGalleryImageLength={setTrackGalleryImageLength}
+                />
+              )}
 
               {/* text area */}
               <label className="flex flex-col space-y-2">

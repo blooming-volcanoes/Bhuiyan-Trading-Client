@@ -25,12 +25,12 @@ function GalleryUpload({
     setSelectMulti((prev) => [...prev, ...newFiles]);
 
     setTrackGalleryImageLength(files.length);
-    repairMultipleFiles(files);
   };
 
   // Render the images
   useEffect(() => {
     if (selectMulti?.length) {
+      repairMultipleFiles(selectMulti);
       async function loadRenderImage() {
         // Convert the FileList into an array and iterate
         let files = Array.from(selectMulti).map((file) => {
@@ -88,17 +88,19 @@ function GalleryUpload({
           >
             Save
           </button>
-          <button
-            disabled={galleryLoader}
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              fileRef.current.click();
-            }}
-            className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
-          >
-            Add More
-          </button>
+          {renderGalleryImages && renderGalleryImages[0]?.includes("data") && (
+            <button
+              disabled={galleryLoader}
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                fileRef.current.click();
+              }}
+              className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
+            >
+              Add More
+            </button>
+          )}
           <button
             disabled={galleryLoader}
             type="button"

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
 import Select from "react-select";
 import FeatureUplaod from "../../../Components/dashboard/ProductUpload/FeatureUplaod";
 import GalleryUpload from "../../../Components/dashboard/ProductUpload/GalleryUpload";
@@ -46,7 +45,6 @@ const inputFields = [
 ];
 
 function ProductUpload() {
-  const user = useSelector((state) => state.auth.user);
   const { register, handleSubmit, reset } = useForm();
   const [featureLoader, setFeatureLoader] = useState(false);
   const [galleryLoader, setGalleryLoader] = useState(false);
@@ -183,11 +181,11 @@ function ProductUpload() {
       setSubmitLoader(true);
       console.log(modifiedData);
       try {
-        const data = await httpProductService.addSingleProduct(modifiedData, {
-          headers: {
-            authorization: `Bearer ${user?.token}`,
-          },
-        });
+        // const data = await httpProductService.addSingleProduct(modifiedData, {
+        //   headers: {
+        //     authorization: `Bearer ${user?.token}`,
+        //   },
+        // });
         if (data.msg) {
           toast.success(data.msg);
         } else {
