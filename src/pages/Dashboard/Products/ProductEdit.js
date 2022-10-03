@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
+import UploadFile from "../../../Components/custom/Uploaders/UploadFile";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import httpProductService from "./../../../services/product.service";
 
@@ -9,6 +11,7 @@ function ProductEdit() {
   const [currentProduct, setCurrentProduct] = useState({});
   const [loader, setLoader] = useState(false);
   const [updateLoader, setUpdateLoader] = useState(false);
+  const [uploadedFeature, setUploadedFeature] = useState(null);
   const { id } = useParams();
 
   // get a Single Product
@@ -54,7 +57,28 @@ function ProductEdit() {
     });
   };
 
-  console.log(currentProduct);
+  const handelChangeFeatureImg = (key) => {
+    setUploadedFeature(null);
+    setCurrentProduct((prev) => {
+      return {
+        ...prev,
+        [key]: null,
+      };
+    });
+  };
+
+  const handelUpdateForm = (e) => {
+    e.preventDefault();
+    if (!currentProduct.featureImg && !uploadedFeature) {
+      toast.error("Please select a feature Image");
+      return;
+    }
+    const updatedForm = {
+      ...currentProduct,
+      featureImg: uploadedFeature || prevProduct?.featureImg,
+    };
+    console.log(updatedForm);
+  };
 
   return (
     <DashboardLayout>
@@ -70,7 +94,10 @@ function ProductEdit() {
               <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
             </div>
           ) : (
-            <form className="relative mx-5 w-full space-y-4 rounded border-2 bg-white p-4 shadow-lg md:w-[600px] lg:w-[800px]">
+            <form
+              onSubmit={handelUpdateForm}
+              className="relative mx-5 w-full space-y-4 rounded border-2 bg-white p-4 shadow-lg md:w-[600px] lg:w-[800px]"
+            >
               {Object.keys(currentProduct).map(
                 (input) =>
                   input !== "gallaryImg" &&
@@ -78,7 +105,8 @@ function ProductEdit() {
                   input !== "productDesc" &&
                   input !== "shortDesc" && (
                     <label
-                      htmlFor="cateName"
+                      key={input}
+                      htmlFor={input}
                       className="flex flex-col space-y-2"
                     >
                       <span
@@ -92,6 +120,7 @@ function ProductEdit() {
                       </span>
                       <input
                         type="text"
+                        id={input}
                         name={input}
                         className="rounded-lg border-gray-300 text-sm"
                         onChange={handelChangeDetails}
@@ -100,6 +129,52 @@ function ProductEdit() {
                     </label>
                   )
               )}
+
+              {/* render prev images */}
+
+              {/* Feature Img */}
+              <div className="relative mx-auto w-[400px]">
+                <span className="text-xs font-semibold text-gray-400">
+                  Feature Image
+                </span>
+                {currentProduct["featureImg"] !== null ? (
+                  <>
+                    <img
+                      className="rounded object-contain "
+                      src={prevProduct && prevProduct["featureImg"]}
+                      alt=""
+                    />
+                    <button
+                      onClick={() => handelChangeFeatureImg("featureImg")}
+                      style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+                      className="absolute top-[4px] -right-[19px] rounded-full bg-gray-100 text-2xl font-semibold text-red-500 transition-all hover:scale-110"
+                      type="button"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="h-10 w-10"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </>
+                ) : (
+                  <UploadFile
+                    isMultiple={false}
+                    setUploadedFeature={setUploadedFeature}
+                    uploadedFeature={uploadedFeature}
+                  />
+                )}
+              </div>
+
               {/* text area */}
               <label className="flex flex-col space-y-2">
                 <span
