@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import UploadFile from "../../../Components/custom/Uploaders/UploadFile";
 import DashboardLayout from "../../../layouts/DashboardLayout";
@@ -14,6 +14,7 @@ function ProductEdit() {
   const [uploadedFeature, setUploadedFeature] = useState(null);
   const [uploadedGalleryImage, setUploadedGalleryImage] = useState(null);
   const [trackGalleryImageLength, setTrackGalleryImageLength] = useState(null);
+  const navigate = useNavigate();
   const { id } = useParams();
 
   // get a Single Product
@@ -75,22 +76,40 @@ function ProductEdit() {
     setCurrentProduct((prev) => {
       return {
         ...prev,
-        [key]: null,
+        gallaryImg: currentProduct.gallaryImg
+          .split(";")
+          .filter((img) => img !== key)
+          .join(";"),
       };
     });
   };
 
-  const handelUpdateForm = (e) => {
+  // Send the updated data to the backend
+  const handelUpdateForm = async (e) => {
     e.preventDefault();
     if (!currentProduct.featureImg && !uploadedFeature) {
       toast.error("Please select a feature Image");
       return;
     }
+
     const updatedForm = {
       ...currentProduct,
       featureImg: uploadedFeature || prevProduct?.featureImg,
+      gallaryImg:
+        (uploadedGalleryImage && uploadedGalleryImage.join(";")) ||
+        prevProduct.gallaryImg,
     };
-    console.log(updatedForm);
+    setUpdateLoader(true);
+    try {
+      await httpProductService.updateSingleProduct(id, updatedForm);
+      toast.success("Product Updated Successfully");
+      navigate(-1);
+    } catch (error) {
+      setUpdateLoader(false);
+      toast.error("Internal Server Error");
+      console.log(error);
+    }
+    setUpdateLoader(false);
   };
 
   return (
@@ -194,15 +213,15 @@ function ProductEdit() {
               </span>
               {currentProduct["gallaryImg"] ? (
                 <div className="mx-auto h-[300px]  overflow-y-scroll rounded border border-gray-300 p-2 shadow scrollbar-hide">
-                  {currentProduct["gallaryImg"].split(" ").map((img) => (
-                    <div className="relative mx-auto w-[600px]">
+                  {currentProduct["gallaryImg"].split(";").map((img) => (
+                    <div key={img} className="relative mx-auto w-[600px]">
                       <img
-                        className=" rounded object-contain "
+                        className="mx-auto my-2 rounded object-contain "
                         src={img}
                         alt=""
                       />
                       <button
-                        onClick={() => handelChangeGalleryImg("gallaryImg")}
+                        onClick={() => handelChangeGalleryImg(img)}
                         style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
                         className="absolute -top-[4px] -right-[19px] rounded-full bg-gray-100 text-2xl font-semibold text-red-500 transition-all hover:scale-110"
                         type="button"

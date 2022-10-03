@@ -80,14 +80,17 @@ function GalleryUpload({
 
       {galleryFiles ? (
         <div className="flex w-full justify-center space-x-6">
-          <button
-            disabled={galleryLoader}
-            type="button"
-            className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
-            onClick={handelGalleryImages}
-          >
-            Save
-          </button>
+          {renderGalleryImages && renderGalleryImages[0]?.includes("data") && (
+            <button
+              disabled={galleryLoader}
+              type="button"
+              className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
+              onClick={handelGalleryImages}
+            >
+              Save
+            </button>
+          )}
+
           {renderGalleryImages && renderGalleryImages[0]?.includes("data") && (
             <button
               disabled={galleryLoader}
