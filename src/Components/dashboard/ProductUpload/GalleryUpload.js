@@ -80,7 +80,7 @@ function GalleryUpload({
 
       {galleryFiles ? (
         <div className="flex w-full justify-center space-x-6">
-          {renderGalleryImages && renderGalleryImages[0]?.includes("data") && (
+          {renderGalleryImages && renderGalleryImages[0]?.startsWith("data") && (
             <button
               disabled={galleryLoader}
               type="button"
@@ -91,7 +91,7 @@ function GalleryUpload({
             </button>
           )}
 
-          {renderGalleryImages && renderGalleryImages[0]?.includes("data") && (
+          {renderGalleryImages && renderGalleryImages[0]?.startsWith("data") && (
             <button
               disabled={galleryLoader}
               type="button"

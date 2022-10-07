@@ -452,6 +452,20 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               </span>
                             </NavLink>
                           </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink
+                              end
+                              className={({ isActive }) =>
+                                "block truncate text-slate-400 transition duration-150 hover:text-slate-200 " +
+                                (isActive ? "!text-indigo-500" : "")
+                              }
+                              to="/admin/dashboard/blog/new"
+                            >
+                              <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
+                                Post Blog
+                              </span>
+                            </NavLink>
+                          </li>
                         </ul>
                       </div>
                     </React.Fragment>
