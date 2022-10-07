@@ -9,6 +9,7 @@ import ProductEdit from "../pages/Dashboard/Products/ProductEdit";
 import Products from "../pages/Dashboard/Products/Products";
 import ProductUpload from "../pages/Dashboard/ProductUpload/ProductUpload";
 import NotFound from "../pages/NotFound";
+import PostBlog from "./../pages/Dashboard/Blog/PostBlog";
 import Categories from "./../pages/Dashboard/Categories/Categories";
 
 function AdminRoutes() {
@@ -23,6 +24,7 @@ function AdminRoutes() {
       <Route path="/image-upload" element={<ImageUpload />} />
       <Route path="/product/upload" element={<ProductUpload />} />
       <Route path="/category/upload" element={<CateGoryUpload />} />
+      <Route path="/blog/new" element={<PostBlog />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

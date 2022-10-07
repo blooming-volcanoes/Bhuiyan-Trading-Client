@@ -41,14 +41,16 @@ function FeatureUplaod({
 
       {file ? (
         <div className="flex w-full justify-center space-x-6">
-          <button
-            disabled={featureLoader}
-            onClick={handelSaveFeatureImage}
-            type="button"
-            className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
-          >
-            Save
-          </button>
+          {readFeatureImage && readFeatureImage?.startsWith("data") && (
+            <button
+              disabled={featureLoader}
+              onClick={handelSaveFeatureImage}
+              type="button"
+              className="dashboard-btn border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
+            >
+              Save
+            </button>
+          )}
           <button
             type="button"
             disabled={featureLoader}
