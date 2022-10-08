@@ -98,7 +98,7 @@ function PostBlog() {
     });
   }
 
-  const handelSubmitForm = (e) => {
+  async function handelSubmitForm(e) {
     e.preventDefault();
     const content = convertToRaw(editorState.getCurrentContent());
     if (inputData.featureImg === "") {
@@ -113,8 +113,12 @@ function PostBlog() {
       toast.error("Please write a Blog!!");
       return;
     }
-    console.log(inputData);
-  };
+    try {
+      console.log(inputData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <DashboardLayout>
@@ -212,34 +216,13 @@ function PostBlog() {
                     dropdownClassName: undefined,
                   },
                 }}
-                mention={{
-                  separator: " ",
-                  trigger: "@",
-                  suggestions: [
-                    {
-                      text: "PROGRAMMER",
-                      value: "Programmer",
-                      url: "/programmer",
-                    },
-                    {
-                      text: "JAVASCRIPT",
-                      value: "javascript",
-                      url: "/javascript",
-                    },
-                    {
-                      text: "REACT",
-                      value: "React",
-                      url: "/react",
-                    },
-                  ],
-                }}
                 hashtag={{
                   separator: " ",
                   trigger: "#",
                 }}
                 wrapperClassName="border-2 p-1 rounded shadow"
                 toolbarClassName="!py-3 !border-none !bg-[#f9f9f9]"
-                editorClassName="!h-full !min-h-[200px] scrollbar-hide"
+                editorClassName="!h-full px-3 !min-h-[200px] scrollbar-hide"
                 placeholder="Start writing..."
               />
             </div>
