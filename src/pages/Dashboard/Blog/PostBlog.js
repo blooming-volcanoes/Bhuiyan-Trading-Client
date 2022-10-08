@@ -1,14 +1,27 @@
 import { convertToRaw, EditorState } from "draft-js";
 import React, { useEffect, useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
+import toast from "react-hot-toast";
 import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
+import UploadFile from "../../../Components/custom/Uploaders/UploadFile";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import httpCateGoryService from "../../../services/category.service";
 
 function PostBlog() {
   const [cateGories, setCateGories] = useState([]);
   const [cateGoryLoading, setCateGoryLoading] = useState(false);
+  const [uploadedFeature, setUploadedFeature] = useState(null);
+
+  const [inputData, setInputData] = useState({
+    metaDesc: "",
+    categoryId: "",
+    title: "",
+    postDesc: "",
+    featureImg: "",
+    imgCaption: "",
+    focusKey: "",
+  });
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -32,7 +45,42 @@ function PostBlog() {
 
   //   Set categoryId
   const handelCategories = (e) => {
-    console.log(+e.target.value);
+    if (isNaN(+e.target.value) !== true) {
+      setInputData((prev) => {
+        return {
+          ...prev,
+          categoryId: +e.target.value,
+        };
+      });
+      return;
+    }
+    setInputData((prev) => {
+      return {
+        ...prev,
+        categoryId: "",
+      };
+    });
+  };
+
+  // Set feature Image
+  useEffect(() => {
+    setInputData((prev) => {
+      return {
+        ...prev,
+        featureImg: uploadedFeature || "",
+      };
+    });
+  }, [uploadedFeature]);
+
+  // Handel form Data change
+  const handelFormDataChange = (e) => {
+    const { name, value } = e.target;
+    setInputData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
   };
 
   //   Editor State
@@ -42,7 +90,31 @@ function PostBlog() {
     if (content.blocks[0].text === "") {
       setEditorState(() => EditorState.createEmpty());
     }
+    setInputData((prev) => {
+      return {
+        ...prev,
+        postDesc: JSON.stringify(content),
+      };
+    });
   }
+
+  const handelSubmitForm = (e) => {
+    e.preventDefault();
+    const content = convertToRaw(editorState.getCurrentContent());
+    if (inputData.featureImg === "") {
+      toast.error("Please select or save the feature Image");
+      return;
+    }
+    if (inputData.categoryId === "") {
+      toast.error("Please select a category");
+      return;
+    }
+    if (content.blocks[0].text === "") {
+      toast.error("Please write a Blog!!");
+      return;
+    }
+    console.log(inputData);
+  };
 
   return (
     <DashboardLayout>
@@ -53,15 +125,32 @@ function PostBlog() {
 
         {/* Blog contents */}
         <div className="my-5 flex justify-center">
-          <form className="mx-5 flex w-full flex-col space-y-5 rounded border bg-white p-4 shadow-xl md:w-2/3 lg:w-2/3">
+          <form
+            onSubmit={handelSubmitForm}
+            className="mx-5 flex w-full flex-col space-y-5 rounded border bg-white p-4 shadow-xl md:w-2/3 lg:w-2/3"
+          >
             <input
               className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
+              name="title"
               type="text"
               placeholder="Title"
+              onChange={handelFormDataChange}
+              required
+            />
+            <input
+              className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
+              name="focusKey"
+              type="text"
+              placeholder="Focus keys"
+              onChange={handelFormDataChange}
+              required
             />
             <textarea
               className="h-28 rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
+              name="metaDesc"
               placeholder="Meta description"
+              required
+              onChange={handelFormDataChange}
             ></textarea>
             {/* CateGory dropdown */}
             {cateGoryLoading ? (
@@ -76,7 +165,7 @@ function PostBlog() {
                 onChange={handelCategories}
                 className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
               >
-                <option>Select a Category</option>
+                <option value={null}>Select a Category</option>
                 {cateGories.map((category) => (
                   <option key={category?.id} value={category?.id}>
                     {category?.categoryName}
@@ -84,6 +173,20 @@ function PostBlog() {
                 ))}
               </select>
             )}
+            <input
+              className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
+              name="imgCaption"
+              type="text"
+              placeholder="Image Caption"
+              onChange={handelFormDataChange}
+              required
+            />
+            {/* Feature Image */}
+            <UploadFile
+              isMultiple={false}
+              setUploadedFeature={setUploadedFeature}
+              uploadedFeature={uploadedFeature}
+            />
             {/* Editor */}
             <div>
               <Editor
