@@ -5,6 +5,7 @@ import CateGoryUpload from "../pages/Dashboard/CategoryUpload/CateGoryUpload";
 import Contact from "../pages/Dashboard/Contact/Contact";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ImageUpload from "../pages/Dashboard/ImageUpload/ImageUpload";
+import HomePage from "../pages/Dashboard/pages/HomePage";
 import ProductEdit from "../pages/Dashboard/Products/ProductEdit";
 import Products from "../pages/Dashboard/Products/Products";
 import ProductUpload from "../pages/Dashboard/ProductUpload/ProductUpload";
@@ -25,6 +26,7 @@ function AdminRoutes() {
       <Route path="/product/upload" element={<ProductUpload />} />
       <Route path="/category/upload" element={<CateGoryUpload />} />
       <Route path="/blog/new" element={<PostBlog />} />
+      <Route path="/pages/home" element={<HomePage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

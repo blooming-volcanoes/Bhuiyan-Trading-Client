@@ -8,8 +8,7 @@ import httpContactService from "./../../../services/contact.service";
 
 export default function ContactForm() {
   const [loader, setLoader] = useState(false);
-  const [queryParams, setQueryParams] = useSearchParams();
-  console.log(queryParams.get("id"));
+  const [queryParams] = useSearchParams();
   const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (userData) => {

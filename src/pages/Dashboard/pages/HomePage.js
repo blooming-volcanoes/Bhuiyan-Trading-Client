@@ -1,0 +1,120 @@
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
+import UploadFile from "../../../Components/custom/Uploaders/UploadFile";
+import DashboardLayout from "./../../../layouts/DashboardLayout";
+import httpDashboardService from "./../../../services/dashboard.service";
+
+function HomePage() {
+  const [uploadedFeature, setUploadedFeature] = useState(null);
+  const { register, handleSubmit, reset } = useForm();
+  const [loading, setLoading] = useState(false);
+
+  // Submit the form
+  const onSubmit = async (userData) => {
+    setLoading(true);
+    try {
+      const modified = {
+        ...userData,
+        backgroundImg: uploadedFeature || "",
+      };
+      await httpDashboardService.postNewHeaderData(modified);
+      toast.success("Header Data has been updated");
+    } catch (error) {
+      setLoading(false);
+      toast.success("Internal Server Error");
+      console.log(error);
+    }
+    setLoading(false);
+    reset();
+    setUploadedFeature(null);
+  };
+
+  return (
+    <DashboardLayout>
+      <section>
+        <h1 className="my-4 text-center text-2xl font-semibold text-indigo-500 drop-shadow">
+          Home Page
+        </h1>
+      </section>
+
+      {/* Contents */}
+      <div className="my-10 flex justify-center">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="relative mx-5 w-full space-y-4 rounded border-2 bg-white p-4 shadow-lg md:w-[600px] lg:w-[600px]"
+        >
+          <label htmlFor="cateName" className="flex flex-col space-y-2">
+            <span id="cateName" className="text-xs font-semibold text-gray-400">
+              Main Title
+            </span>
+            <input
+              type="text"
+              required
+              id="cateName"
+              name="mainTitle"
+              className="rounded-lg border-gray-300 text-sm"
+              {...register("mainTitle")}
+            />
+          </label>
+          <label htmlFor="secondTitle" className="flex flex-col space-y-2">
+            <span id="cateName" className="text-xs font-semibold text-gray-400">
+              Second Title
+            </span>
+            <input
+              type="text"
+              required
+              className="rounded-lg border-gray-300 text-sm"
+              id="secondTitle"
+              name="secondTitle"
+              {...register("secondTitle")}
+            />
+          </label>
+          <label htmlFor="thirdTitle" className="flex flex-col space-y-2">
+            <span id="cateName" className="text-xs font-semibold text-gray-400">
+              Third Title
+            </span>
+            <input
+              required
+              type="text"
+              className="rounded-lg border-gray-300 text-sm"
+              id="thirdTitle"
+              name="thirdTitle"
+              {...register("thirdTitle")}
+            />
+          </label>
+          <label htmlFor="thirdTitle" className="flex flex-col space-y-2">
+            <span id="cateName" className="text-xs font-semibold text-gray-400">
+              Background Image
+            </span>
+            <UploadFile
+              isMultiple={false}
+              setUploadedFeature={setUploadedFeature}
+              uploadedFeature={uploadedFeature}
+            />
+          </label>
+
+          {loading ? (
+            <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
+              <LoadingButton
+                styles="flex justify-center"
+                svg="w-10 h-10 text-indigo-500"
+              />
+            </div>
+          ) : (
+            <button
+              disabled={loading}
+              className="dashboard-btn w-full flex-1 border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
+              type="submit"
+            >
+              Submit
+            </button>
+          )}
+        </form>
+      </div>
+    </DashboardLayout>
+  );
+}
+
+export default HomePage;
