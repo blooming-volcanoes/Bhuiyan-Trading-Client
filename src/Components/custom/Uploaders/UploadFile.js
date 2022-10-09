@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useFileFeatureUploader from "../../../hooks/useFileUploaders/useFileFeatureUploader";
 import useGalleryUploader from "../../../hooks/useFileUploaders/useGalleryUploder";
@@ -14,6 +14,8 @@ function UploadFile({
   setUploadedFeature,
   uploadedFeature,
   setTrackGalleryImageLength,
+  isFeatureSubmitted,
+  isGallerySubmitted,
 }) {
   // Feature Image All states
   // const [uploadedFeature, setUploadedFeature] = useState(null);
@@ -51,6 +53,22 @@ function UploadFile({
     }
     setGalleryLoader(false);
   };
+
+  useEffect(() => {
+    if (!isMultiple) {
+      setFeatureFile(null);
+      setReadFeatureImage(null);
+      setUploadedFeature(null);
+    }
+  }, [isFeatureSubmitted]);
+
+  useEffect(() => {
+    if (isMultiple) {
+      setGalleryFiles(null);
+      setRenderGalleryImages(null);
+      setUploadedGalleryImage(null);
+    }
+  }, [isGallerySubmitted]);
 
   // feature Image functions
   const handelSaveFeatureImage = async () => {

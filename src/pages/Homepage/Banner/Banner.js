@@ -1,4 +1,20 @@
+import { useEffect, useState } from "react";
+import httpDashboardService from "./../../../services/dashboard.service";
+
 function Banner() {
+  const [headerData, setHeaderData] = useState(null);
+  useEffect(() => {
+    async function getHeaderData() {
+      try {
+        const data = await httpDashboardService.getHeaderData();
+        setHeaderData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getHeaderData();
+  }, []);
+
   return (
     <section className="banner-bg h-screen">
       <div className="main-container flex h-full items-center justify-center md:justify-start">
