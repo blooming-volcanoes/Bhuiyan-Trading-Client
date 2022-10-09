@@ -7,10 +7,12 @@ import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import UploadFile from "../../../Components/custom/Uploaders/UploadFile";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import httpCateGoryService from "../../../services/category.service";
+import httpBlogService from "./../../../services/blog.service";
 
 function PostBlog() {
   const [cateGories, setCateGories] = useState([]);
   const [cateGoryLoading, setCateGoryLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [uploadedFeature, setUploadedFeature] = useState(null);
 
   const [inputData, setInputData] = useState({
@@ -113,11 +115,16 @@ function PostBlog() {
       toast.error("Please write a Blog!!");
       return;
     }
+    setLoading(true);
     try {
       console.log(inputData);
+      const data = await httpBlogService.createBlog(inputData);
+      console.log(data);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
+    setLoading(false);
   }
 
   return (
@@ -227,9 +234,22 @@ function PostBlog() {
               />
             </div>
 
-            <button className="dashboard-btn" type="submit">
-              Submit
-            </button>
+            {loading ? (
+              <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
+                <LoadingButton
+                  styles="flex justify-center"
+                  svg="w-10 h-10 text-indigo-500"
+                />
+              </div>
+            ) : (
+              <button
+                disabled={loading}
+                className="dashboard-btn"
+                type="submit"
+              >
+                Submit
+              </button>
+            )}
           </form>
         </div>
       </section>

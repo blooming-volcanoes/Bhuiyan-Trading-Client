@@ -30,7 +30,7 @@ const PdDetailsAndDescription = ({ product }) => {
 
       <div className="flex items-center justify-center">
         <Link
-          to="/contact"
+          to={`/contact?name=${product?.title}&&id=${product?.id}`}
           className="mb-5 rounded-lg bg-red-900 px-3 py-2 text-lg font-bold text-white"
         >
           Contact us to purchase

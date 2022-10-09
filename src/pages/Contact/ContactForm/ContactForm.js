@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import httpContactService from "./../../../services/contact.service";
 
 export default function ContactForm() {
   const [loader, setLoader] = useState(false);
+  const [queryParams, setQueryParams] = useSearchParams();
+  console.log(queryParams.get("id"));
   const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (userData) => {
     setLoader(true);
+    const modifiedData = {
+      ...userData,
+      productId: queryParams.get("id") || "",
+    };
     try {
-      await httpContactService.createContactInfo(userData);
+      await httpContactService.createContactInfo(modifiedData);
       Swal.fire({
         position: "top-bottom",
         icon: "success",
@@ -74,6 +80,7 @@ export default function ContactForm() {
             <input
               className="rounded-lg"
               {...register("productName")}
+              defaultValue={queryParams.get("name") && queryParams.get("name")}
               type="text"
               placeholder="Product Name"
               required
