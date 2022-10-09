@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
@@ -10,6 +10,26 @@ function HomePage() {
   const [uploadedFeature, setUploadedFeature] = useState(null);
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
+  const [isFeatureSubmitted, setIsFeatureSubmitted] = useState(false);
+  const [isAlreadyHeadExists, setIsAlreadyHeadExists] = useState(false);
+  const [headerData, setHeaderData] = useState(null);
+
+  useEffect(() => {
+    async function getHeaderData() {
+      try {
+        const data = await httpDashboardService.getHeaderData();
+        if (!data) {
+          setIsAlreadyHeadExists(false);
+        } else {
+          setHeaderData(data);
+          setIsAlreadyHeadExists(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getHeaderData();
+  }, [loading]);
 
   // Submit the form
   const onSubmit = async (userData) => {
@@ -17,9 +37,16 @@ function HomePage() {
     try {
       const modified = {
         ...userData,
+        thirdTitle: userData.thirdTitle || headerData?.thirdTitle,
+        secondTitle: userData.secondTitle || headerData?.secondTitle,
+        mainTitle: userData.mainTitle || headerData?.mainTitle,
         backgroundImg: uploadedFeature || "",
       };
-      await httpDashboardService.postNewHeaderData(modified);
+      if (isAlreadyHeadExists) {
+        await httpDashboardService.updateNewHeaderData(headerData.id, modified);
+      } else {
+        await httpDashboardService.postNewHeaderData(modified);
+      }
       toast.success("Header Data has been updated");
     } catch (error) {
       setLoading(false);
@@ -28,8 +55,10 @@ function HomePage() {
     }
     setLoading(false);
     reset();
-    setUploadedFeature(null);
+    setIsFeatureSubmitted(true);
   };
+
+  console.log(isAlreadyHeadExists);
 
   return (
     <DashboardLayout>
@@ -54,6 +83,7 @@ function HomePage() {
               required
               id="cateName"
               name="mainTitle"
+              defaultValue={headerData && headerData?.mainTitle}
               className="rounded-lg border-gray-300 text-sm"
               {...register("mainTitle")}
             />
@@ -68,6 +98,7 @@ function HomePage() {
               className="rounded-lg border-gray-300 text-sm"
               id="secondTitle"
               name="secondTitle"
+              defaultValue={headerData && headerData?.secondTitle}
               {...register("secondTitle")}
             />
           </label>
@@ -81,6 +112,7 @@ function HomePage() {
               className="rounded-lg border-gray-300 text-sm"
               id="thirdTitle"
               name="thirdTitle"
+              defaultValue={headerData && headerData?.thirdTitle}
               {...register("thirdTitle")}
             />
           </label>
@@ -92,6 +124,7 @@ function HomePage() {
               isMultiple={false}
               setUploadedFeature={setUploadedFeature}
               uploadedFeature={uploadedFeature}
+              isFeatureSubmitted={isFeatureSubmitted}
             />
           </label>
 
