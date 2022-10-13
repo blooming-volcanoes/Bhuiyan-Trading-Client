@@ -17,12 +17,14 @@ function PostBlog() {
 
   const [inputData, setInputData] = useState({
     metaDesc: "",
+    alt: "",
     categoryId: "",
     title: "",
     postDesc: "",
     featureImg: "",
     imgCaption: "",
     focusKey: "",
+    status: "now",
   });
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -89,9 +91,6 @@ function PostBlog() {
   function onEditorStateChange(editorState) {
     setEditorState(editorState);
     const content = convertToRaw(editorState.getCurrentContent());
-    if (content.blocks[0].text === "") {
-      setEditorState(() => EditorState.createEmpty());
-    }
     setInputData((prev) => {
       return {
         ...prev,
@@ -153,6 +152,14 @@ function PostBlog() {
               name="focusKey"
               type="text"
               placeholder="Focus keys"
+              onChange={handelFormDataChange}
+              required
+            />
+            <input
+              className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
+              name="alt"
+              type="text"
+              placeholder="Alt"
               onChange={handelFormDataChange}
               required
             />
