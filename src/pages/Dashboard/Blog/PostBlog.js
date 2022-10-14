@@ -14,6 +14,7 @@ function PostBlog() {
   const [cateGoryLoading, setCateGoryLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [uploadedFeature, setUploadedFeature] = useState(null);
+  const [isFeatureSubmitted, setIsFeatureSubmitted] = useState(false);
 
   const [inputData, setInputData] = useState({
     metaDesc: "",
@@ -116,10 +117,27 @@ function PostBlog() {
     }
     setLoading(true);
     try {
-      console.log(inputData);
-      const data = await httpBlogService.createBlog(inputData);
-      console.log(data);
+      await httpBlogService.createBlog(inputData);
+      toast.success("Blog Posted Successfully", {
+        duration: 4000,
+      });
+      setEditorState(() => EditorState.createEmpty());
+      setIsFeatureSubmitted(true);
+      setInputData({
+        metaDesc: "",
+        alt: "",
+        categoryId: "",
+        title: "",
+        postDesc: "",
+        featureImg: "",
+        imgCaption: "",
+        focusKey: "",
+        status: "",
+      });
     } catch (error) {
+      toast.error("Internal Server Error", {
+        duration: 4000,
+      });
       setLoading(false);
       console.log(error);
     }
@@ -142,6 +160,7 @@ function PostBlog() {
             <input
               className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
               name="title"
+              value={inputData.title}
               type="text"
               placeholder="Title"
               onChange={handelFormDataChange}
@@ -151,6 +170,7 @@ function PostBlog() {
               className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
               name="focusKey"
               type="text"
+              value={inputData.focusKey}
               placeholder="Focus keys"
               onChange={handelFormDataChange}
               required
@@ -158,6 +178,7 @@ function PostBlog() {
             <input
               className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
               name="alt"
+              value={inputData.alt}
               type="text"
               placeholder="Alt"
               onChange={handelFormDataChange}
@@ -166,6 +187,7 @@ function PostBlog() {
             <textarea
               className="h-28 rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
               name="metaDesc"
+              value={inputData.metaDesc}
               placeholder="Meta description"
               required
               onChange={handelFormDataChange}
@@ -194,6 +216,7 @@ function PostBlog() {
             <input
               className="rounded border-2 border-gray-400 text-sm focus:outline-none focus:ring-0"
               name="imgCaption"
+              value={inputData.imgCaption}
               type="text"
               placeholder="Image Caption"
               onChange={handelFormDataChange}
@@ -204,6 +227,7 @@ function PostBlog() {
               isMultiple={false}
               setUploadedFeature={setUploadedFeature}
               uploadedFeature={uploadedFeature}
+              isFeatureSubmitted={isFeatureSubmitted}
             />
             {/* Editor */}
             <div>
