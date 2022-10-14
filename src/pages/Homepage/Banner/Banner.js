@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import BannerImg from "../../../assets/Images/bg.jpg";
+// import BannerImg from "../../../assets/Images/bg.jpg";
+// import whiteBg from "../../../assets/Images/white-bg.jpg";
 import httpDashboardService from "./../../../services/dashboard.service";
 
 function Banner() {
   const [headerData, setHeaderData] = useState(null);
+
   useEffect(() => {
     async function getHeaderData() {
       try {
@@ -20,7 +22,7 @@ function Banner() {
     <section
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-       url(${headerData?.backgroundImg || BannerImg})`,
+       url(${headerData ? headerData?.backgroundImg : ""})`,
       }}
       className="h-screen bg-cover bg-center bg-no-repeat"
     >
