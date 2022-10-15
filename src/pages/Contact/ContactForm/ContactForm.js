@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { MdCall, MdLocationOn, MdMarkEmailRead } from "react-icons/md";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
@@ -41,21 +42,30 @@ export default function ContactForm() {
       <Toaster />
       <div className="main-container py-10">
         {/* titles */}
-        <div className="flex flex-col justify-between space-y-6 text-white  md:flex-row lg:flex-row lg:space-y-0">
-          <h1 className="w-2/4 text-3xl font-medium">
-            Connect with us-
-            <br />
-            <span className="text-lg">Address Here</span>
-            <br />
-            <span className="text-lg">Address Here</span>
-            <br />
-            <span className="text-lg">Address Here</span>
-            <br />
-          </h1>
-          <p className="w-full text-lg font-medium lg:w-2/6">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum eaque
-            fugit ad nostrum quos qui
-          </p>
+        <div>
+          <ul className="space-y-4 text-white">
+            <li className="flex w-2/4 space-x-2">
+              <span>
+                <MdLocationOn className="inline text-xl" />
+              </span>
+              <span>
+                Mohiddin Market (2nd floor), Abdul Barek Road, North Pahartali,
+                Chittagong, Bangladesh.
+              </span>
+            </li>
+            <li className="flex w-2/4 space-x-2">
+              <span>
+                <MdMarkEmailRead className="inline text-xl" />
+              </span>
+              <a href="mailto:info@bhuiyantrad.com">info@bhuiyantrad.com</a>
+            </li>
+            <li className="flex w-2/4 space-x-2">
+              <span>
+                <MdCall className="inline text-xl" />
+              </span>
+              <a href="tel:01818929292">+88-01818929292</a>
+            </li>
+          </ul>
         </div>
 
         {/* inputs */}
