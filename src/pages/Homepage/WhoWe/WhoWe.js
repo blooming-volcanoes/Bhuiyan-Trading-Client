@@ -9,14 +9,15 @@ export default function WhoWe() {
           <div className="mb-4 md:mb-0" data-aos="zoom-in-right">
             <h3 className="mb-3 text-4xl font-bold text-white">Who we are?</h3>
             <p className="text-justify text-xl text-white">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum
-              excepturi esse ipsum hic aspernatur doloribus vel ad eligendi est,
-              provident aut neque unde nam molestias in possimus dolorum sint!
-              Aperiam voluptatibus itaque vitae debitis ex, praesentium
-              laudantium magni quas, maiores velit voluptate quidem. Facere cum
-              maxime fugit, quasi neque dolore suscipit quidem voluptate vero
-              voluptatem eaque, sint necessitatibus ullam eos! Quo nemo et quod
-              maiores harum. Numquam enim nisi id.
+              Welcome to Bhuiyan Trading Corp. We have the pleasure to introduce
+              with our company name Bhuiyan Trading Corporation for your kind
+              reference and future necessary action. We are biggest stockiest
+              for all kind marine Automation, Navigation, Hydraulic Pump and
+              motor, Com pressure, Fire detection system etc . We are one point
+              marine supplier solutions for all your vessels requirements. Our
+              company provides the highest quality services. We are a trusted
+              service provider over a decade with our efforts and our client’s
+              satisfaction.
             </p>
           </div>
           <div className="p-4" data-aos="zoom-in-left">

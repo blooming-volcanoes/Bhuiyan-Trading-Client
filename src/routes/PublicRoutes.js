@@ -5,9 +5,7 @@ import NotFound from "../pages/NotFound";
 import Register from "./../pages/Register/Register";
 const LatestNews = React.lazy(() => import("../pages/LatestNews/LatestNews"));
 const Contact = React.lazy(() => import("../pages/Contact/Contact"));
-const ClientsPage = React.lazy(() =>
-  import("../pages/ClientsPage/ClientsPage")
-);
+const AboutUs = React.lazy(() => import("../pages/AboutUs/AboutUs"));
 const Home = React.lazy(() => import("../pages/Homepage/Home"));
 const Product = React.lazy(() => import("../pages/Product/Product"));
 const ProductDetail = React.lazy(() =>
@@ -21,7 +19,7 @@ function PublicRoutes() {
       <Route path="/latestNews" element={<LatestNews />} />
       <Route path="/product/:id" element={<Product />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/ClientsPage" element={<ClientsPage />} />
+      <Route path="/about-us" element={<AboutUs />} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Register />} />
