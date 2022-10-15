@@ -11,12 +11,10 @@ export default function Future() {
           </div>
           <div className="">
             <p className="text-justify text-xl font-bold text-black">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-              repellendus impedit placeat adipisci quibusdam iure vel sequi
-              reprehenderit nobis. Facilis tempora nam sapiente sequi, officiis
-              dolorem quos inventore aspernatur facere. Autem sint accusamus
-              minus corrupti animi, veritatis neque aut distinctio doloremque
-              veniam molestiae delectus magni totam eum libero error a?
+              We listen carefully and understand the needs of our clients. We
+              have been committed to setting the highest standards for quality
+              and client service within the given period of time whatever your
+              vessel’s needs, we can help.
             </p>
           </div>
         </div>

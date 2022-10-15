@@ -15,14 +15,15 @@ export default function ShipEquipment() {
           <div className="py-3 ">
             <h3 className="text-4xl font-bold text-white">Our Research</h3>
             <p className="text-justify text-xl text-white">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum
-              excepturi esse ipsum hic aspernatur doloribus vel ad eligendi est,
-              provident aut neque unde nam molestias in possimus dolorum sint!
-              Aperiam voluptatibus itaque vitae debitis ex, praesentium
-              laudantium magni quas, maiores velit voluptate quidem. Facere cum
-              maxime fugit, quasi neque dolore suscipit quidem voluptate vero
-              voluptatem eaque, sint necessitatibus ullam eos! Quo nemo et quod
-              maiores harum. Numquam enim nisi id.
+              Marine and Offshore units often operate in difficult environments,
+              where they are subject to constant wave action. Given these
+              circumstances, unit owners require their assets to be built,
+              maintained and upgraded to the highest possible standards of
+              safety, cost-efficiency and sustainability. To improve safety,
+              Bureau Veritas invests in research and development, helping our
+              experts gain a deeper knowledge of maritime conditions, and
+              improve our suite of software programs. This technology enables us
+              to carry out complex cutting-edge studies.
             </p>
           </div>
         </div>

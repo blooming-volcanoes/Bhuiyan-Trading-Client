@@ -7,10 +7,10 @@ import logo from "../../../assets/Images/logo.png";
 import { removeUser } from "./../../../redux/auth/authAction";
 let Links = [
   { name: "Home", link: "/" },
-  { name: "Contact Us", link: "/contact" },
+  { name: "About Us", link: "/about-us" },
   { name: "Latest News", link: "/latestNews" },
+  { name: "Contact Us", link: "/contact" },
   // { name: "Blog", link: "/blogPage" },
-  { name: "Our Clients", link: "/ClientsPage" },
 ];
 
 const Header = ({ color }) => {

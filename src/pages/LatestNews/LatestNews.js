@@ -5,16 +5,6 @@ import PageLayout from "../../layouts/PageLayout";
 import LoadingButton from "./../../Components/custom/Buttons/LoadingButton";
 import httpBlogService from "./../../services/blog.service";
 
-const blogs = [
-  {
-    title: "This is the title This is the title",
-    img: dummy,
-    timeStamps: new Date().toLocaleDateString(),
-    content:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated ",
-  },
-];
-
 function LatestNews() {
   const [blogs, setBlogs] = useState([]);
   const [loader, setLoader] = useState(false);

@@ -1,6 +1,6 @@
 import React from "react";
+import PageLayout from "../../layouts/PageLayout";
 import ContactForm from "../Contact/ContactForm/ContactForm";
-import PageLayout from "./../../layouts/PageLayout";
 import Banner from "./Banner/Banner";
 import BlogOne from "./BlogOne/BlogOne";
 import BlogThree from "./BlogThree/BlogThree";
