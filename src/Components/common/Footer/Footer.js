@@ -26,8 +26,6 @@ function Footer() {
     setLoader(false);
   }, [cateGories.length]);
 
-  console.log(cateGories);
-
   return (
     <section className="bg-[#282828] pb-5 text-white ">
       <div className="mx-auto mb-20 grid w-2/3 grid-cols-1 pt-5 lg:w-full lg:max-w-6xl lg:grid-cols-4">
@@ -52,8 +50,8 @@ function Footer() {
 
         <ul className="mb-4 mt-6 space-y-3 text-center lg:mb-0 lg:text-start">
           <li className="text-xl font-medium">Our Products</li>
-          {cateGories.slice(0, 6).map((category) => (
-            <li className="capitalize">
+          {cateGories.slice(0, 6).map((category, i) => (
+            <li key={i} className="capitalize">
               <Link to={`/product/${category?.id}?page=1`}>
                 {category?.categoryName}
               </Link>

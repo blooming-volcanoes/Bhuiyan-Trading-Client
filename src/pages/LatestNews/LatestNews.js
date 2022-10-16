@@ -1,12 +1,14 @@
+import draftToHtml from "draftjs-to-html";
 import React, { useEffect, useState } from "react";
+import ReactHtmlParser from "react-html-parser";
 import bgTop from "../../assets/Images/bg-top.png";
-import dummy from "../../assets/Images/dummy.jpg";
 import PageLayout from "../../layouts/PageLayout";
 import LoadingButton from "./../../Components/custom/Buttons/LoadingButton";
 import httpBlogService from "./../../services/blog.service";
 
 function LatestNews() {
   const [blogs, setBlogs] = useState([]);
+  const [smallBlogs, setSmallBlogs] = useState([]);
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -22,6 +24,7 @@ function LatestNews() {
             return lastTime - firstTime;
           })
         );
+        console.log(JSON.parse(data[0].postDesc));
       } catch (error) {
         setLoader(false);
         console.log(error);
@@ -31,7 +34,23 @@ function LatestNews() {
     getAllBlogs();
   }, []);
 
-  console.log(blogs);
+  useEffect(() => {
+    let modifiedSmallBlogs = [];
+    if (blogs.length) {
+      for (let i = 0; i < blogs.length; i++) {
+        const parsedData = JSON.parse(blogs[i].postDesc);
+        console.log(parsedData.blocks[0].text.slice(0, 100));
+        modifiedSmallBlogs.push({
+          ...blogs[i],
+          postDesc: { ...parsedData, blocks: [parsedData.blocks[0]] },
+        });
+      }
+    }
+
+    setSmallBlogs(modifiedSmallBlogs);
+  }, [blogs]);
+
+  console.log(smallBlogs);
 
   return (
     <PageLayout>
@@ -53,52 +72,67 @@ function LatestNews() {
             <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
           </div>
         ) : (
-          <div className="main-container grid grid-cols-1 gap-x-10 gap-y-10 py-10 md:grid-cols-2 lg:grid-cols-2 lg:gap-y-0">
+          <div className="main-container grid grid-cols-1 py-10 md:grid-cols-2 lg:grid-cols-2 lg:gap-y-0">
             {/* blog Image */}
-            <img className="rounded" src={blogs[0]?.featureImg} alt="" />
+            <img
+              className="mx-auto w-full rounded object-contain md:w-[500px] lg:w-[500px]"
+              src={smallBlogs[0]?.featureImg}
+              alt=""
+            />
 
             {/* blog contents */}
-            <div className="space-y-4">
+            <div>
               <p className="text-sm font-semibold">
-                Date : {new Date(blogs[0]?.updated_at).toLocaleDateString()}{" "}
-                Time : {new Date(blogs[0]?.updated_at).toLocaleTimeString()}
+                Date :{" "}
+                {new Date(smallBlogs[0]?.updated_at).toLocaleDateString()} Time
+                : {new Date(smallBlogs[0]?.updated_at).toLocaleTimeString()}
               </p>
 
-              <h1 className="text-3xl font-semibold">{blogs[0]?.title}</h1>
-              <p className="mt-5 pt-3 text-justify font-semibold text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Deleniti, magni exercitationem aliquid et recusandae
-                praesentium. Molestiae, velit cupiditate dolore similique soluta
-                ea provident eius dolor voluptatem tenetur sapiente maiores,
-                officiis fugiat nesciunt nostrum laboriosam? Sit itaque nam
-                illum, repellendus impedit doloribus enim, ad repudiandae sunt,
-                aliquam aperiam repellat veritatis obcaecati. Autem ipsam eos
-                perferendis labore porro voluptates tempore eum nesciunt non
-                illum minima laudantium facere qui possimus, excepturizz
-              </p>
+              <h1 className="text-3xl font-semibold">{smallBlogs[0]?.title}</h1>
+              {/* blog content */}
+              <article className="prose prose-sm">
+                {ReactHtmlParser(draftToHtml(smallBlogs[0]?.postDesc))}
+              </article>
+
+              <button className="dashboard-btn mt-10">Read more</button>
             </div>
           </div>
         )}
 
         {/* All blogs */}
-        <div className=" main-container grid grid-cols-1 gap-6 py-10 md:grid-cols-2 lg:grid-cols-4">
-          {Array(8)
-            .fill(blogs[0])
-            .map((blog, i) => (
+
+        {loader ? (
+          <div className="my-6 flex h-full justify-center space-y-4">
+            <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
+          </div>
+        ) : (
+          <div className=" main-container grid grid-cols-1 gap-6 py-10 md:grid-cols-2 lg:grid-cols-4">
+            {smallBlogs?.map((blog, i) => (
               <div
-                className="space-y-2 rounded-lg bg-white py-4 px-2 shadow-lg"
+                className="space-y-2 rounded-lg border bg-white py-4 px-2 shadow-lg"
                 key={i}
               >
-                <img className="rounded" src={dummy} alt="" />
+                <img className="rounded" src={blog?.featureImg} alt="" />
                 <p className="text-lg font-semibold">{blog?.title}</p>
                 <p className="text-xs font-semibold">
-                  Date : {new Date().toLocaleDateString()} Time :{" "}
-                  {new Date().toLocaleTimeString()}
+                  Date : {new Date(blog?.updated_at).toLocaleDateString()} Time
+                  : {new Date(blog?.updated_at).toLocaleTimeString()}
                 </p>
-                <p className="font-semibold">{blog?.content}</p>
+                {/* blog content */}
+                <article className="prose prose-sm  prose-p:truncate">
+                  {ReactHtmlParser(draftToHtml(blog?.postDesc))}
+                </article>
+
+                <button
+                  type="button"
+                  className="text-xs font-semibold text-gray-600 underline"
+                >
+                  Read More
+                </button>
               </div>
             ))}
-        </div>
+          </div>
+        )}
       </section>
     </PageLayout>
   );
