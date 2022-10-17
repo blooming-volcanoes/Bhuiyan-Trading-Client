@@ -46,6 +46,11 @@ function BlogsTable({ handelDeleteProduct, theadData, tableData }) {
                     </td>
                     <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
                       <p className="whitespace-no-wrap font-semibold  text-green-500">
+                        {data?.imgCaption}
+                      </p>
+                    </td>
+                    <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
+                      <p className="whitespace-no-wrap font-semibold  text-green-500">
                         {data?.focusKey}
                       </p>
                     </td>

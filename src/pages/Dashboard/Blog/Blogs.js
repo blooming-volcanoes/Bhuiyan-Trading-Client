@@ -47,7 +47,6 @@ function Blogs() {
       let keys = [];
       for (let key in blogs[0]) {
         if (
-          key !== "id" &&
           key !== "featureImg" &&
           key !== "postDesc" &&
           key !== "categoryId" &&
@@ -59,6 +58,8 @@ function Blogs() {
       setTableHeadData(keys);
     }
   }, [blogs]);
+
+  console.log(tableHeadData);
 
   return (
     <DashboardLayout>
