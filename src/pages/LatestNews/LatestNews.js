@@ -95,7 +95,7 @@ function LatestNews() {
                   {smallBlogs[0]?.title}
                 </h1>
                 {/* blog content */}
-                <article className="prose prose-sm">
+                <article className="prose prose-sm prose-img:hidden">
                   {ReactHtmlParser(draftToHtml(smallBlogs[0]?.postDesc))}
                 </article>
 

@@ -45,6 +45,10 @@ class HttpProductService {
     const data = await httpReq.delete(`/product/delete/${id}`, config);
     return data;
   }
+  async deleteGalleryImages(name) {
+    const data = await httpReq.delete(`/gallery/file/${name}`);
+    return data;
+  }
 }
 
 const httpProductService = new HttpProductService();
