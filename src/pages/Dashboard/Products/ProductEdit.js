@@ -122,7 +122,7 @@ function ProductEdit() {
         await httpProductService.deleteGalleryImages(img.split("/")[4]);
       });
 
-      // navigate(-1);
+      navigate(-1);
     } catch (error) {
       setUpdateLoader(false);
       toast.error("Internal Server Error");
