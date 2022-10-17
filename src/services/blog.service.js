@@ -10,6 +10,9 @@ class HttpBlogService {
   async getAllBlogs() {
     return await httpReq.get(`/post/blog`);
   }
+  async getAllBlogsWithPagination(pageNo) {
+    return await httpReq.get(`/post/blog?page=${pageNo}`);
+  }
 }
 
 const httpBlogService = new HttpBlogService();

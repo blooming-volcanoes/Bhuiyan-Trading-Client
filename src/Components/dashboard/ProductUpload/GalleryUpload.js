@@ -55,8 +55,6 @@ function GalleryUpload({
     }
   }, [selectMulti?.length]);
 
-  console.log(renderGalleryImages);
-
   return (
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
       <div

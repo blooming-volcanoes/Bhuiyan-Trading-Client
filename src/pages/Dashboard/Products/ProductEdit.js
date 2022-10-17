@@ -13,6 +13,7 @@ function ProductEdit() {
   const [updateLoader, setUpdateLoader] = useState(false);
   const [uploadedFeature, setUploadedFeature] = useState(null);
   const [uploadedGalleryImage, setUploadedGalleryImage] = useState(null);
+  const [deletedImage, setDeletedImage] = useState([]);
   const [trackGalleryImageLength, setTrackGalleryImageLength] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -62,6 +63,9 @@ function ProductEdit() {
 
   // Change feature Image
   const handelChangeFeatureImg = (key) => {
+    setDeletedImage((prev) => {
+      return [...prev, currentProduct.featureImg];
+    });
     setUploadedFeature(null);
     setCurrentProduct((prev) => {
       return {
@@ -73,6 +77,14 @@ function ProductEdit() {
 
   // Change feature Image
   const handelChangeGalleryImg = (key) => {
+    // Track the deleted Images
+    setDeletedImage((prev) => {
+      return [
+        ...prev,
+        ...currentProduct.gallaryImg.split(";").filter((img) => img === key),
+      ];
+    });
+    // Set after Deleted Images
     setCurrentProduct((prev) => {
       return {
         ...prev,
@@ -83,6 +95,8 @@ function ProductEdit() {
       };
     });
   };
+
+  console.log(deletedImage);
 
   // Send the updated data to the backend
   const handelUpdateForm = async (e) => {
@@ -97,12 +111,17 @@ function ProductEdit() {
       featureImg: uploadedFeature || prevProduct?.featureImg,
       gallaryImg:
         (uploadedGalleryImage && uploadedGalleryImage.join(";")) ||
-        prevProduct.gallaryImg,
+        currentProduct.gallaryImg,
     };
     setUpdateLoader(true);
     try {
       await httpProductService.updateSingleProduct(id, updatedForm);
       toast.success("Product Updated Successfully");
+
+      deletedImage.forEach(async (img) => {
+        await httpProductService.deleteGalleryImages(img.split("/")[4]);
+      });
+
       navigate(-1);
     } catch (error) {
       setUpdateLoader(false);
@@ -110,6 +129,7 @@ function ProductEdit() {
       console.log(error);
     }
     setUpdateLoader(false);
+    setDeletedImage([]);
   };
 
   return (
