@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Blogs from "../pages/Dashboard/Blog/Blogs";
 import CategoryEdit from "../pages/Dashboard/CategoryEdit/CategoryEdit";
 import CateGoryUpload from "../pages/Dashboard/CategoryUpload/CateGoryUpload";
 import Contact from "../pages/Dashboard/Contact/Contact";
@@ -26,6 +27,7 @@ function AdminRoutes() {
       <Route path="/product/upload" element={<ProductUpload />} />
       <Route path="/category/upload" element={<CateGoryUpload />} />
       <Route path="/blog/new" element={<PostBlog />} />
+      <Route path="/blogs" element={<Blogs />} />
       <Route path="/pages/home" element={<HomePage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
