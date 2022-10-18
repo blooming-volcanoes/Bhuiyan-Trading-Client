@@ -46,13 +46,13 @@ function CategoryTable({ theadData, tableData }) {
                         ></span>
                         <span className="relative cursor-pointer">Edit</span>
                       </Link>
-                      <button className="relative inline-block px-3 py-1 font-semibold leading-tight text-white">
+                      {/* <button className="relative inline-block px-3 py-1 font-semibold leading-tight text-white">
                         <span
                           aria-hidden
                           className="absolute inset-0 rounded-full bg-red-500 opacity-75"
                         ></span>
                         <span className="relative cursor-pointer">Delete</span>
-                      </button>
+                      </button> */}
                     </td>
                   </tr>
                 ))}
