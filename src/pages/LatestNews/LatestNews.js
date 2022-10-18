@@ -50,7 +50,6 @@ function LatestNews() {
     if (blogs.length) {
       for (let i = 0; i < blogs.length; i++) {
         const parsedData = JSON.parse(blogs[i].postDesc);
-        console.log(parsedData.blocks[0].text.slice(0, 900));
         modifiedSmallBlogs.push({
           ...blogs[i],
           postDesc: {
@@ -58,7 +57,6 @@ function LatestNews() {
             blocks: [
               parsedData.blocks[0],
               parsedData.blocks[1] && parsedData.blocks[1],
-              parsedData.blocks[2] && parsedData.blocks[2],
             ],
           },
         });
@@ -67,8 +65,6 @@ function LatestNews() {
 
     setSmallBlogs(modifiedSmallBlogs);
   }, [blogs]);
-
-  console.log(smallBlogs);
 
   return (
     <PageLayout>
@@ -116,8 +112,9 @@ function LatestNews() {
                   {smallBlogs[0]?.title}
                 </h1>
                 {/* blog content */}
-                <article className="prose prose-sm rounded bg-white p-4 shadow prose-img:hidden">
+                <article className="prose prose-sm h-[200px] overflow-y-auto rounded bg-white p-4 shadow scrollbar-hide prose-img:hidden">
                   {ReactHtmlParser(draftToHtml(smallBlogs[0]?.postDesc))}
+                  ...
                 </article>
 
                 <Link to={`/blog/${smallBlogs[0]?.slug}`}>
@@ -137,9 +134,13 @@ function LatestNews() {
                   className="space-y-2 rounded-lg border bg-white py-4 px-2 shadow-lg"
                   key={i}
                 >
-                  <img className="rounded" src={blog?.featureImg} alt="" />
+                  <img
+                    className="w-full rounded object-contain md:h-[300px] lg:h-[180px]"
+                    src={blog?.featureImg}
+                    alt=""
+                  />
                   <Link
-                    to={`/blog/${blog?.id}`}
+                    to={`/blog/${blog?.slug}`}
                     className="block text-sm font-light hover:text-blue-600 hover:underline"
                   >
                     {blog?.title}
