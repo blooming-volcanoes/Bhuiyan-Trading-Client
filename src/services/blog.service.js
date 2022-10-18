@@ -5,7 +5,7 @@ class HttpBlogService {
     return await httpReq.post(`/post/blog`, payload);
   }
   async getSingleBlogById(slug) {
-    return await httpReq.get(`/post/blog/:${slug}`);
+    return await httpReq.get(`/post/blog/${slug}`);
   }
   async getAllBlogs() {
     return await httpReq.get(`/post/blog`);

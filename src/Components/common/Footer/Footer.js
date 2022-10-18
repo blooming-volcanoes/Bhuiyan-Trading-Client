@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { MdCall, MdLocationOn, MdMarkEmailRead } from "react-icons/md";
 import { Link } from "react-router-dom";
-import facebook from "../../../assets/Images/facebook.png";
-import instagram from "../../../assets/Images/instagram.png";
-import linkedin from "../../../assets/Images/linkedin.png";
 import logo from "../../../assets/Images/logo.png";
 import httpCateGoryService from "../../../services/category.service";
+import SocialMedia from "./../SocialMedia/SocialMedia";
 
 function Footer() {
   const [cateGories, setCateGories] = useState([]);
@@ -35,17 +33,7 @@ function Footer() {
             <img src={logo} alt="" />
           </li>
 
-          <li className="flex space-x-3">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer">
-              <img className="h-10 w-10" src={facebook} alt="" />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-              <img className="h-10 w-10" src={linkedin} alt="" />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">
-              <img className="h-10 w-10" src={instagram} alt="" />
-            </a>
-          </li>
+          <SocialMedia styles="flex items-center space-x-4" />
         </ul>
 
         <ul className="mb-4 mt-6 space-y-3 text-center lg:mb-0 lg:text-start">
