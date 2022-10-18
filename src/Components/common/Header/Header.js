@@ -8,7 +8,7 @@ import { removeUser } from "./../../../redux/auth/authAction";
 let Links = [
   { name: "Home", link: "/" },
   { name: "About Us", link: "/about-us" },
-  { name: "Latest News", link: "/latestNews" },
+  { name: "Latest News", link: "/latestNews?page=1" },
   { name: "Contact Us", link: "/contact" },
   // { name: "Blog", link: "/blogPage" },
 ];
