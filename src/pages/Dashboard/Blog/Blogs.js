@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import Pagination from "../../../Components/custom/Pagination/Pagination";
 import DashboardLayout from "../../../layouts/DashboardLayout";
@@ -12,6 +13,7 @@ function Blogs() {
   const [tableHeadData, setTableHeadData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isDataLimitDone, setIsDataLimitDone] = useState(false);
+  const [isBlogDeleted, setIsBlogDeleted] = useState(false);
 
   useEffect(() => {
     async function getAllBlogs() {
@@ -40,7 +42,7 @@ function Blogs() {
       setLoader(false);
     }
     getAllBlogs();
-  }, [searchParams]);
+  }, [searchParams, isBlogDeleted]);
 
   useEffect(() => {
     if (blogs.length) {
@@ -50,7 +52,8 @@ function Blogs() {
           key !== "featureImg" &&
           key !== "postDesc" &&
           key !== "categoryId" &&
-          key !== "status"
+          key !== "status" &&
+          key !== "slug"
         ) {
           keys.push(key);
         }
@@ -59,7 +62,33 @@ function Blogs() {
     }
   }, [blogs]);
 
-  console.log(tableHeadData);
+  const handelDeleteBlog = (slug) => {
+    Swal.fire({
+      title: "Are you sure?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        setIsBlogDeleted(true);
+        httpBlogService
+          .deleteBlogBySlug(slug)
+          .then((data) => {
+            Swal.fire("Saved!", "", "success");
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            setIsBlogDeleted(false);
+          });
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
 
   return (
     <DashboardLayout>
@@ -73,7 +102,11 @@ function Blogs() {
             <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
           </div>
         ) : (
-          <BlogsTable theadData={tableHeadData} tableData={blogs} />
+          <BlogsTable
+            handelDeleteBlog={handelDeleteBlog}
+            theadData={tableHeadData}
+            tableData={blogs}
+          />
         )}
 
         <Pagination

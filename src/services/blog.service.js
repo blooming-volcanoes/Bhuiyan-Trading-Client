@@ -13,6 +13,9 @@ class HttpBlogService {
   async getAllBlogsWithPagination(pageNo) {
     return await httpReq.get(`/post/blog?page=${pageNo}`);
   }
+  async deleteBlogBySlug(slug) {
+    return await httpReq.delete(`/post/blog/${slug}`);
+  }
 }
 
 const httpBlogService = new HttpBlogService();
