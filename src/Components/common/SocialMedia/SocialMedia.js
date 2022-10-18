@@ -5,7 +5,7 @@ import linkedin from "../../../assets/Images/linkedin.png";
 
 function SocialMedia({ styles }) {
   return (
-    <ul className={`${styles} mx-auto mb-4 space-y-4 lg:mx-0`}>
+    <ul className={`${styles} mx-auto mb-4  lg:mx-0`}>
       <li>
         <a href="https://facebook.com" target="_blank" rel="noreferrer">
           <img className="h-10 w-10" src={facebook} alt="" />

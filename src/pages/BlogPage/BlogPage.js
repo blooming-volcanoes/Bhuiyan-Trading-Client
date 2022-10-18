@@ -73,7 +73,7 @@ function BlogPage() {
               />
             </div>
             <div className="mx-auto ml-4 md:my-auto">
-              <SocialMedia styles="flex flex-col" />
+              <SocialMedia styles="flex flex-col space-y-4" />
             </div>
             {/* blog contents */}
           </div>
