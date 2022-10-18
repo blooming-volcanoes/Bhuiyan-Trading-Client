@@ -58,7 +58,9 @@ function Products() {
   }, [allProducts]);
 
   // handel Delete Product
-  const handelDeleteProduct = (id) => {
+  const handelDeleteProduct = (product) => {
+    const deletedImages = [product.featureImg, ...product.gallaryImg];
+
     Swal.fire({
       title: "Are you sure?",
       showDenyButton: true,
@@ -70,12 +72,15 @@ function Products() {
       if (result.isConfirmed) {
         setIsProductDeleted(true);
         httpProductService
-          .deleteProduct(id, {
+          .deleteProduct(product?.id, {
             headers: {
               authorization: `Bearer ${user?.token}`,
             },
           })
           .then((data) => {
+            deletedImages.forEach(async (img) => {
+              await httpProductService.deleteGalleryImages(img.split("/")[4]);
+            });
             console.log(data);
             Swal.fire("Saved!", "", "success");
           })

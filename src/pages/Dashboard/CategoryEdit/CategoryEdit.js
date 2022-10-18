@@ -23,6 +23,7 @@ function CategoryEdit() {
   const [isAnyThingEdited, setIsAnyThingEdited] = useState(false);
 
   const [addSubCategory, setAddSubCategory] = useState(false);
+  const [deletedFeatureImg, setDeletedFeatureImg] = useState(null);
 
   // all product by this category states
   const [allProducts, setGetAllProducts] = useState([]);
@@ -92,9 +93,31 @@ function CategoryEdit() {
     }
   }
 
+  useEffect(() => {
+    setDetails((prev) => {
+      return {
+        ...prev,
+        featureImg: uploadedFeature,
+      };
+    });
+  }, [uploadedFeature]);
+
   // Submit the form
   const handelSubmit = async (e) => {
     e.preventDefault();
+
+    if (details?.subCategoryName) {
+      const lengthOfNewSub = details.subCategoryName.split(" ").length;
+      toast.error(
+        `Now you need to add ${lengthOfNewSub} Images in Gallery Images`
+      );
+      return;
+    }
+
+    if (details?.featureImg === "") {
+      toast.error(`Please Upload a feature Image`);
+      return;
+    }
 
     let currentSub;
     if (details?.subCategoryName) {
@@ -109,7 +132,7 @@ function CategoryEdit() {
     const modifiedDetails = {
       ...details,
       subCategoryName: currentSub,
-      featureImg: uploadedFeature || details.featureImg,
+      featureImg: details.featureImg,
       galleryImg: uploadedGalleryImage
         ? details.galleryImg.join(";") + ";" + uploadedGalleryImage.join(";")
         : details.galleryImg.join(";"),
@@ -146,6 +169,17 @@ function CategoryEdit() {
   // Cancel Editing
   const handelCancel = () => {
     navigate(-1);
+  };
+
+  // handel Change feature Image
+  const handelChangeFeatureImg = (img) => {
+    setDetails((prev) => {
+      return {
+        ...prev,
+        featureImg: "",
+      };
+    });
+    setDeletedFeatureImg(img);
   };
 
   return (
@@ -193,7 +227,15 @@ function CategoryEdit() {
                   </button>
                   {addSubCategory && (
                     <button
-                      onClick={() => setAddSubCategory(false)}
+                      onClick={() => {
+                        setAddSubCategory(false);
+                        setDetails((prev) => {
+                          return {
+                            ...prev,
+                            subCategoryName: null,
+                          };
+                        });
+                      }}
                       type="button"
                       className="flex items-center  rounded bg-red-200 p-1 text-xs font-semibold text-red-500"
                     >
@@ -215,20 +257,53 @@ function CategoryEdit() {
               </label>
 
               {/* Feature Image upload */}
-              <p className="text-center text-xs text-indigo-500">
-                Note : Update your Category feature Image here here (Only JPEG,
-                JPG, PNG file are allowed)
-              </p>
-              <UploadFile
-                isMultiple={false}
-                setUploadedFeature={setUploadedFeature}
-                uploadedFeature={uploadedFeature}
-              />
+              <div className="relative rounded  p-2 shadow">
+                <p className="text-center text-xs text-indigo-500">
+                  Note : This for your main Category Image
+                </p>
+                {details?.featureImg ? (
+                  <>
+                    <img
+                      className="mx-auto h-[200px]  w-[600px] rounded border object-cover  p-2 "
+                      src={details && details["featureImg"]}
+                      alt=""
+                    />
+                    <button
+                      onClick={() =>
+                        handelChangeFeatureImg(details["featureImg"])
+                      }
+                      style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+                      className="absolute top-[22px] -right-[3px] rounded-full bg-gray-100 text-2xl font-semibold text-red-500 transition-all hover:scale-110"
+                      type="button"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="h-10 w-10"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </>
+                ) : (
+                  <UploadFile
+                    isMultiple={false}
+                    setUploadedFeature={setUploadedFeature}
+                    uploadedFeature={uploadedFeature}
+                  />
+                )}
+              </div>
 
               {/* Gallery Image upload */}
               <p className="text-center text-xs text-indigo-500">
-                Note : Update your Category Gallery Image here here (Only JPEG,
-                JPG, PNG file are allowed)
+                Note : This is for your Sub-Category Image
               </p>
               <UploadFile
                 isMultiple={true}
