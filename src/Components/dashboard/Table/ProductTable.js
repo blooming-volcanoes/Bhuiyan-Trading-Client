@@ -92,7 +92,7 @@ function ProductTable({ handelDeleteProduct, theadData, tableData }) {
                           <span className="relative cursor-pointer">Edit</span>
                         </Link>
                         <button
-                          onClick={() => handelDeleteProduct(data.id)}
+                          onClick={() => handelDeleteProduct(data)}
                           className="relative inline-block px-3 py-1 font-semibold leading-tight text-white"
                         >
                           <span
