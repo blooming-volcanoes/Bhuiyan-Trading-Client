@@ -132,7 +132,7 @@ function EditBlog() {
     delete inputData?.created_at;
     try {
       await httpBlogService.updateBlog(inputData.id, inputData);
-      toast.success("Blog Posted Successfully", {
+      toast.success("Blog Updated Successfully", {
         duration: 4000,
       });
 
