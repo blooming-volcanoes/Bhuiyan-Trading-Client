@@ -96,6 +96,12 @@ function CategoryEdit() {
   const handelSubmit = async (e) => {
     e.preventDefault();
 
+    if (details?.subCategoryName) {
+      const lengthOfNewSub = details.subCategoryName.split(" ").length;
+      toast.error(`Now you need to add ${lengthOfNewSub} Images in Gallery`);
+      return;
+    }
+
     let currentSub;
     if (details?.subCategoryName) {
       currentSub =
@@ -193,7 +199,15 @@ function CategoryEdit() {
                   </button>
                   {addSubCategory && (
                     <button
-                      onClick={() => setAddSubCategory(false)}
+                      onClick={() => {
+                        setAddSubCategory(false);
+                        setDetails((prev) => {
+                          return {
+                            ...prev,
+                            subCategoryName: null,
+                          };
+                        });
+                      }}
                       type="button"
                       className="flex items-center  rounded bg-red-200 p-1 text-xs font-semibold text-red-500"
                     >
