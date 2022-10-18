@@ -74,7 +74,7 @@ function BlogsTable({ handelDeleteBlog, theadData, tableData }) {
                     <td className="space-x-4 border-b border-gray-200 bg-white px-5 py-1 text-sm">
                       <div className="flex  space-x-2">
                         <Link
-                          to="/latestNews"
+                          to={`/admin/dashboard/blog/edit/${data?.slug}`}
                           className="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900"
                         >
                           <span

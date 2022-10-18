@@ -4,7 +4,10 @@ class HttpBlogService {
   async createBlog(payload) {
     return await httpReq.post(`/post/blog`, payload);
   }
-  async getSingleBlogById(slug) {
+  async updateBlog(id, payload) {
+    return await httpReq.put(`/post/blog/${id}`, payload);
+  }
+  async getSingleBlogBySlug(slug) {
     return await httpReq.get(`/post/blog/${slug}`);
   }
   async getAllBlogs() {
