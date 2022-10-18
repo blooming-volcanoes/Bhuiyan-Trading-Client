@@ -100,7 +100,7 @@ function LatestNews() {
                 </article>
 
                 <button type="button" className="dashboard-btn mt-10">
-                  <Link to={`/blog/${smallBlogs[0]?.id}`}>Read more</Link>
+                  <Link to={`/blog/${smallBlogs[0]?.slug}`}>Read more</Link>
                 </button>
               </div>
             </div>
@@ -131,7 +131,7 @@ function LatestNews() {
                     type="button"
                     className="text-xs font-semibold text-gray-600 underline"
                   >
-                    <Link to={`/blog/${blog?.id}`}>Read More</Link>
+                    <Link to={`/blog/${blog?.slug}`}>Read More</Link>
                   </button>
                 </div>
               ))}
