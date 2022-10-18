@@ -21,7 +21,7 @@ function BlogPage() {
     async function getBlog() {
       setLoader(true);
       try {
-        const data = await httpBlogService.getSingleBlogById(slug);
+        const data = await httpBlogService.getSingleBlogBySlug(slug);
         isMounted && setBlog(data);
         console.log(data);
       } catch (error) {

@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function BlogsTable({ handelDeleteProduct, theadData, tableData }) {
-  console.log(tableData);
+function BlogsTable({ handelDeleteBlog, theadData, tableData }) {
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
@@ -39,11 +38,7 @@ function BlogsTable({ handelDeleteProduct, theadData, tableData }) {
                         {data?.title}
                       </p>
                     </td>
-                    <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
-                      <p className="whitespace-no-wrap font-semibold  text-green-500">
-                        {data?.slug}
-                      </p>
-                    </td>
+
                     <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
                       <p className="whitespace-no-wrap font-semibold  text-green-500">
                         {data?.imgCaption}
@@ -79,7 +74,7 @@ function BlogsTable({ handelDeleteProduct, theadData, tableData }) {
                     <td className="space-x-4 border-b border-gray-200 bg-white px-5 py-1 text-sm">
                       <div className="flex  space-x-2">
                         <Link
-                          to="/latestNews"
+                          to={`/admin/dashboard/blog/edit/${data?.slug}`}
                           className="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900"
                         >
                           <span
@@ -88,7 +83,10 @@ function BlogsTable({ handelDeleteProduct, theadData, tableData }) {
                           ></span>
                           <span className="relative cursor-pointer">Edit</span>
                         </Link>
-                        <button className="relative inline-block px-3 py-1 font-semibold leading-tight text-white">
+                        <button
+                          onClick={() => handelDeleteBlog(data?.slug)}
+                          className="relative inline-block px-3 py-1 font-semibold leading-tight text-white"
+                        >
                           <span
                             aria-hidden
                             className="absolute inset-0 rounded-full bg-red-500 opacity-75"

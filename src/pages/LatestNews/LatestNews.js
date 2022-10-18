@@ -99,9 +99,11 @@ function LatestNews() {
                   {ReactHtmlParser(draftToHtml(smallBlogs[0]?.postDesc))}
                 </article>
 
-                <button type="button" className="dashboard-btn mt-10">
-                  <Link to={`/blog/${smallBlogs[0]?.slug}`}>Read more</Link>
-                </button>
+                <Link to={`/blog/${smallBlogs[0]?.slug}`}>
+                  <button type="button" className="dashboard-btn mt-10">
+                    Read more
+                  </button>
+                </Link>
               </div>
             </div>
             {/* All blogs */}
