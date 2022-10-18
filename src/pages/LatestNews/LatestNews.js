@@ -1,8 +1,10 @@
 import draftToHtml from "draftjs-to-html";
 import React, { useEffect, useState } from "react";
 import ReactHtmlParser from "react-html-parser";
-import { Link } from "react-router-dom";
+import Moment from "react-moment";
+import { Link, useSearchParams } from "react-router-dom";
 import bgTop from "../../assets/Images/bg-top.png";
+import Pagination from "../../Components/custom/Pagination/Pagination";
 import PageLayout from "../../layouts/PageLayout";
 import LoadingButton from "./../../Components/custom/Buttons/LoadingButton";
 import httpBlogService from "./../../services/blog.service";
@@ -11,12 +13,16 @@ function LatestNews() {
   const [blogs, setBlogs] = useState([]);
   const [smallBlogs, setSmallBlogs] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isDataLimitDone, setIsDataLimitDone] = useState(false);
 
   useEffect(() => {
     async function getAllBlogs() {
       setLoader(true);
       try {
-        const data = await httpBlogService.getAllBlogs();
+        const data = await httpBlogService.getAllBlogsWithPagination(
+          searchParams.get("page")
+        );
         setBlogs(
           data.sort((a, b) => {
             let firstTime = new Date(a.updated_at);
@@ -25,7 +31,11 @@ function LatestNews() {
             return lastTime - firstTime;
           })
         );
-        console.log(JSON.parse(data[0].postDesc));
+        if (!data.length || data.length < 10) {
+          setIsDataLimitDone(true);
+        } else {
+          setIsDataLimitDone(false);
+        }
       } catch (error) {
         setLoader(false);
         console.log(error);
@@ -33,17 +43,24 @@ function LatestNews() {
       setLoader(false);
     }
     getAllBlogs();
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     let modifiedSmallBlogs = [];
     if (blogs.length) {
       for (let i = 0; i < blogs.length; i++) {
         const parsedData = JSON.parse(blogs[i].postDesc);
-        console.log(parsedData.blocks[0].text.slice(0, 100));
+        console.log(parsedData.blocks[0].text.slice(0, 900));
         modifiedSmallBlogs.push({
           ...blogs[i],
-          postDesc: { ...parsedData, blocks: [parsedData.blocks[0]] },
+          postDesc: {
+            ...parsedData,
+            blocks: [
+              parsedData.blocks[0],
+              parsedData.blocks[1] && parsedData.blocks[1],
+              parsedData.blocks[2] && parsedData.blocks[2],
+            ],
+          },
         });
       }
     }
@@ -55,7 +72,7 @@ function LatestNews() {
 
   return (
     <PageLayout>
-      <section>
+      <section className="bg-gray-100">
         {/* latest News Banner */}
 
         <div
@@ -84,30 +101,37 @@ function LatestNews() {
 
               {/* blog contents */}
               <div>
-                <p className="text-sm font-semibold">
-                  Date :{" "}
-                  {new Date(smallBlogs[0]?.updated_at).toLocaleDateString()}{" "}
-                  Time :{" "}
-                  {new Date(smallBlogs[0]?.updated_at).toLocaleTimeString()}
+                <p className="mt-2 flex space-x-2 text-xs font-semibold">
+                  <span>
+                    <Moment parse="YYYY-MM-DD HH:mm">
+                      {smallBlogs[0]?.created_at}
+                    </Moment>
+                  </span>
+                  <span className="text-green-500">
+                    <Moment date={smallBlogs[0]?.updated_at} fromNow />
+                  </span>
                 </p>
 
                 <h1 className="text-3xl font-semibold">
                   {smallBlogs[0]?.title}
                 </h1>
                 {/* blog content */}
-                <article className="prose prose-sm prose-img:hidden">
+                <article className="prose prose-sm rounded bg-white p-4 shadow prose-img:hidden">
                   {ReactHtmlParser(draftToHtml(smallBlogs[0]?.postDesc))}
                 </article>
 
                 <Link to={`/blog/${smallBlogs[0]?.slug}`}>
-                  <button type="button" className="dashboard-btn mt-10">
+                  <button type="button" className="dashboard-btn mt-4">
                     Read more
                   </button>
                 </Link>
               </div>
             </div>
+            <h1 className="mt-10 text-center text-4xl font-bold text-gray-700 underline">
+              More blogs
+            </h1>
             {/* All blogs */}
-            <div className=" main-container grid grid-cols-1 gap-6 py-10 md:grid-cols-2 lg:grid-cols-4">
+            <div className="main-container grid grid-cols-1 gap-6 py-4 md:grid-cols-2 lg:grid-cols-4">
               {smallBlogs?.map((blog, i) => (
                 <div
                   className="space-y-2 rounded-lg border bg-white py-4 px-2 shadow-lg"
@@ -116,18 +140,15 @@ function LatestNews() {
                   <img className="rounded" src={blog?.featureImg} alt="" />
                   <Link
                     to={`/blog/${blog?.id}`}
-                    className="text-lg font-semibold"
+                    className="block text-sm font-light hover:text-blue-600 hover:underline"
                   >
                     {blog?.title}
                   </Link>
-                  <p className="text-xs font-semibold">
-                    Date : {new Date(blog?.updated_at).toLocaleDateString()}{" "}
-                    Time : {new Date(blog?.updated_at).toLocaleTimeString()}
+                  <p className="mt-2 flex space-x-2 text-xs font-semibold">
+                    <span className="text-green-500">
+                      <Moment date={blog?.updated_at} fromNow />
+                    </span>
                   </p>
-                  {/* blog content */}
-                  <article className="prose prose-sm  prose-p:truncate">
-                    {ReactHtmlParser(draftToHtml(blog?.postDesc))}
-                  </article>
 
                   <button
                     type="button"
@@ -140,6 +161,12 @@ function LatestNews() {
             </div>
           </>
         )}
+
+        <Pagination
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          isDataLimitDone={isDataLimitDone}
+        />
       </section>
     </PageLayout>
   );

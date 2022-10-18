@@ -3,7 +3,7 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 function Pagination({ isDataLimitDone, searchParams, setSearchParams }) {
   return (
-    <div className="mb-10 flex items-center justify-center">
+    <div className="flex items-center justify-center pb-10">
       {isDataLimitDone ? (
         +searchParams.get("page") !== 1 && (
           <button
