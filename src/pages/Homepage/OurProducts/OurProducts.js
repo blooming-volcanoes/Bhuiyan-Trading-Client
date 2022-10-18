@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import bgTop from "../../../assets/Images/bg-top.png";
-import fish1 from "../../../assets/Images/pexels-chevanon-photography-325044.jpg";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import httpCateGoryService from "../../../services/category.service";
-// ..
-
-const data = [{ name: "fish", img: fish1 }];
 
 function OurProducts() {
   const [cateGories, setCateGories] = useState([]);

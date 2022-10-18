@@ -7,6 +7,7 @@ import httpDashboardService from "./../../../services/dashboard.service";
 function Banner() {
   const [headerData, setHeaderData] = useState(null);
   const [loader, setLoader] = useState(false);
+
   useEffect(() => {
     async function getHeaderData() {
       setLoader(true);
@@ -47,6 +48,7 @@ function Banner() {
               <h3 className="text-2xl font-bold text-white md:text-4xl">
                 {headerData?.thirdTitle || "Corporation"}
               </h3>
+
               <button className="banner-btn" type="button">
                 Our Products
               </button>
