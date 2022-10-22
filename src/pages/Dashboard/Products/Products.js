@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import Pagination from "../../../Components/custom/Pagination/Pagination";
+import useDebounce from "../../../hooks/useDebounce";
 import ProductTable from "./../../../Components/dashboard/Table/ProductTable";
 import DashboardLayout from "./../../../layouts/DashboardLayout";
 import httpProductService from "./../../../services/product.service";
@@ -16,6 +18,10 @@ function Products() {
   const [isDataLimitDone, setIsDataLimitDone] = useState(false);
   const [isProductDeleted, setIsProductDeleted] = useState(false);
   const user = useSelector((state) => state.auth.user);
+  const [search, setSearch] = useState(null);
+  const debounceData = useDebounce(search, 800);
+  const [searchLoader, setSearchLoader] = useState(false);
+  const [allPreviousProducts, setAllPreviousProducts] = useState([]);
 
   // load all Products
   useEffect(() => {
@@ -31,14 +37,16 @@ function Products() {
           setIsDataLimitDone(false);
         }
         setAllProducts(data);
+        setAllPreviousProducts(data);
       } catch (error) {
         setLoader(false);
         console.log(error);
       }
       setLoader(false);
     }
+
     loadAllProducts();
-  }, [searchParams, isProductDeleted]);
+  }, [isProductDeleted, searchParams]);
 
   useEffect(() => {
     if (allProducts.length) {
@@ -96,6 +104,33 @@ function Products() {
     });
   };
 
+  // handle product search
+  useEffect(() => {
+    setSearchParams({ page: searchParams.get("page"), searchCount: 1 });
+    async function getSearchResult() {
+      setSearchLoader(true);
+      try {
+        const data = await httpProductService.searchProductByTitle({
+          title: `%${debounceData}%`,
+        });
+
+        setAllProducts(data);
+
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setSearchLoader(false);
+      }
+    }
+
+    if (debounceData) {
+      getSearchResult();
+    } else {
+      setAllProducts(allPreviousProducts);
+    }
+  }, [debounceData, isDataLimitDone]);
+
   return (
     <DashboardLayout>
       <section>
@@ -103,23 +138,46 @@ function Products() {
           All Products
         </h1>
 
+        <div className="mx-8 mt-4 flex w-full justify-center lg:w-2/4 lg:justify-start">
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            className=" flx-1 lg:full w-[400px] rounded border-2 border-gray-400 text-sm shadow focus:ring-0"
+            placeholder="Search example. SAILOR 90 Satellite TV"
+          />
+        </div>
+
         {loader ? (
           <div className="flex h-screen items-center justify-center space-y-4">
             <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
           </div>
+        ) : allProducts.length ? (
+          searchLoader ? (
+            <div className="flex h-screen items-center justify-center space-y-4">
+              <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
+            </div>
+          ) : (
+            <ProductTable
+              handelDeleteProduct={handelDeleteProduct}
+              theadData={tableHeadData}
+              tableData={allProducts}
+            />
+          )
         ) : (
-          <ProductTable
-            handelDeleteProduct={handelDeleteProduct}
-            theadData={tableHeadData}
-            tableData={allProducts}
-          />
+          <div className="mt-10 flex h-full  justify-center space-y-4 font-bold text-gray-500">
+            <h1 className="text-2xl">{allProducts.msg}</h1>
+          </div>
         )}
 
-        <Pagination
-          searchParams={searchParams}
-          setSearchParams={setSearchParams}
-          isDataLimitDone={isDataLimitDone}
-        />
+        {!debounceData && (
+          <div className="mt-7">
+            <Pagination
+              searchParams={searchParams}
+              setSearchParams={setSearchParams}
+              isDataLimitDone={isDataLimitDone}
+            />
+          </div>
+        )}
       </section>
     </DashboardLayout>
   );
