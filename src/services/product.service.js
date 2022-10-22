@@ -49,6 +49,14 @@ class HttpProductService {
     const data = await httpReq.delete(`/gallery/file/${name}`);
     return data;
   }
+  async searchProductByTitle(payload) {
+    const data = await httpReq.post(`/product/search`, payload);
+    return data;
+  }
+  async searchProductByTitleWithPagination(pageNo, payload) {
+    const data = await httpReq.post(`/product/search?page=${pageNo}`, payload);
+    return data;
+  }
 }
 
 const httpProductService = new HttpProductService();

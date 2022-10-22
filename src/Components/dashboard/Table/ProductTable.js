@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function ProductTable({ handelDeleteProduct, theadData, tableData }) {
   return (
     <div className="container mx-auto px-4 sm:px-8">
-      <div className="py-8">
+      <div className="">
         <div className="-mx-4 overflow-x-auto px-4 py-4 sm:-mx-8 sm:px-8">
           <div className="inline-block min-w-full overflow-hidden rounded-lg shadow-md">
             <table className="min-w-full leading-normal">
@@ -13,7 +13,7 @@ function ProductTable({ handelDeleteProduct, theadData, tableData }) {
                   <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
                     ID
                   </th>
-                  {theadData.map((data, i) => (
+                  {theadData?.map((data, i) => (
                     <th
                       key={i}
                       className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700"
@@ -29,7 +29,7 @@ function ProductTable({ handelDeleteProduct, theadData, tableData }) {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((data, i) => (
+                {tableData?.map((data, i) => (
                   <tr key={i}>
                     <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
                       <p className="whitespace-no-wrap h-[40px] overflow-y-auto  font-semibold text-gray-500  scrollbar-hide">
@@ -37,7 +37,7 @@ function ProductTable({ handelDeleteProduct, theadData, tableData }) {
                       </p>
                     </td>
                     <td className="border-b border-gray-200 bg-white px-5 py-2 text-sm">
-                      <p className="whitespace-no-wrap h-[40px] overflow-y-auto  font-semibold text-indigo-500  scrollbar-hide">
+                      <p className="whitespace-no-wrap h-[40px] w-[200px] overflow-y-auto text-xs  font-semibold text-indigo-500  scrollbar-hide">
                         {data?.title}
                       </p>
                     </td>
@@ -72,11 +72,13 @@ function ProductTable({ handelDeleteProduct, theadData, tableData }) {
                       </p>
                     </td>
                     <td className="border-b border-gray-200 bg-white py-2 px-5  text-sm scrollbar-hide">
-                      {data?.subCategoryName?.map((sub) => (
-                        <p className="whitespace-no-wrap flex h-[50px] flex-col  overflow-y-auto text-xs font-semibold text-green-600">
-                          <span>{sub}</span>
-                        </p>
-                      ))}
+                      {typeof data?.subCategoryName === "string"
+                        ? data?.subCategoryName
+                        : data?.subCategoryName?.map((sub) => (
+                            <p className="whitespace-no-wrap flex h-[50px] flex-col  overflow-y-auto text-xs font-semibold text-green-600">
+                              <span>{sub}</span>
+                            </p>
+                          ))}
                     </td>
 
                     <td className="space-x-4 border-b border-gray-200 bg-white px-5 py-1 text-sm">
