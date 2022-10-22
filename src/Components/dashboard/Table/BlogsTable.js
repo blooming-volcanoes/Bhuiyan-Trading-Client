@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function BlogsTable({ handelDeleteBlog, theadData, tableData }) {
   return (
     <div className="container mx-auto px-4 sm:px-8">
-      <div className="py-8">
+      <div>
         <div className="-mx-4 overflow-x-auto px-4 py-4 sm:-mx-8 sm:px-8">
           <div className="inline-block min-w-full overflow-hidden rounded-lg shadow-md">
             <table className="min-w-full leading-normal">
