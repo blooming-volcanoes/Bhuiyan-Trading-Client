@@ -53,11 +53,11 @@ function HomePage() {
       // Posting new Data
       const modified = {
         ...userData,
-        logo: uploadedLogo || "",
+        logo: uploadedLogo || headerData.logo,
         thirdTitle: userData.thirdTitle || headerData?.thirdTitle,
         secondTitle: userData.secondTitle || headerData?.secondTitle,
         mainTitle: userData.mainTitle || headerData?.mainTitle,
-        backgroundImg: uploadedFeature || "",
+        backgroundImg: uploadedFeature || headerData.backgroundImg,
       };
       console.log(modified);
       if (isAlreadyHeadExists) {

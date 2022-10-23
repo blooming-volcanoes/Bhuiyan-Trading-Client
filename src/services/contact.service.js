@@ -13,6 +13,9 @@ class HttpContactService {
   async deleteContactInfo(id) {
     return await httpReq.delete(`/contact/${id}`);
   }
+  async searchContactInfoByTitle(payload) {
+    return await httpReq.post(`/contact/search`, payload);
+  }
 }
 
 const httpContactService = new HttpContactService();

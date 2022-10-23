@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import Pagination from "../../../Components/custom/Pagination/Pagination";
 import ContactUsTable from "../../../Components/dashboard/Table/ContactUsTable";
+import useDebounce from "../../../hooks/useDebounce";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import httpContactService from "./../../../services/contact.service";
 
@@ -15,6 +16,10 @@ function Contact() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isDataLimitDone, setIsDataLimitDone] = useState(false);
   const [isContactInfoDeleted, setIsContactInfoDeleted] = useState(false);
+  const [search, setSearch] = useState(null);
+  const debounceData = useDebounce(search, 800);
+  const [searchLoader, setSearchLoader] = useState(false);
+  const [previousContactInfo, setPreviousContactInfo] = useState([]);
 
   // fetch all the user data
   useEffect(() => {
@@ -30,6 +35,7 @@ function Contact() {
           setIsDataLimitDone(false);
         }
         setAllTableData(data);
+        setPreviousContactInfo(data);
       } catch (error) {
         setLoader(false);
         console.log(error);
@@ -82,6 +88,32 @@ function Contact() {
     });
   }
 
+  // handle product search
+  useEffect(() => {
+    async function getSearchResult() {
+      setSearchLoader(true);
+      try {
+        const data = await httpContactService.searchContactInfoByTitle({
+          title: `%${debounceData}%`,
+        });
+
+        setAllTableData(data);
+
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setSearchLoader(false);
+      }
+    }
+
+    if (debounceData) {
+      getSearchResult();
+    } else {
+      setAllTableData(previousContactInfo);
+    }
+  }, [debounceData]);
+
   return (
     <DashboardLayout>
       <section>
@@ -89,17 +121,36 @@ function Contact() {
           Contact us data table
         </h1>
 
+        <div className="mx-8 mt-4 flex w-full justify-center lg:w-2/4 lg:justify-start">
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            className=" flx-1 lg:full w-[400px] rounded border-2 border-gray-400 text-sm shadow focus:ring-0"
+            placeholder="Search here example. Jhon"
+          />
+        </div>
+
         {/* Table */}
         {loader ? (
           <div className="flex h-screen items-center justify-center space-y-4">
             <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
           </div>
+        ) : allTableData.length ? (
+          searchLoader ? (
+            <div className="flex h-screen items-center justify-center space-y-4">
+              <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
+            </div>
+          ) : (
+            <ContactUsTable
+              handelDelete={handelDelete}
+              theadData={tableHeadData}
+              tableData={allTableData}
+            />
+          )
         ) : (
-          <ContactUsTable
-            handelDelete={handelDelete}
-            theadData={tableHeadData}
-            tableData={allTableData}
-          />
+          <div className="mt-10 flex h-full  justify-center space-y-4 font-bold text-gray-500">
+            <h1 className="text-2xl">{allTableData.msg}</h1>
+          </div>
         )}
         <Pagination
           searchParams={searchParams}
