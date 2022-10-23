@@ -1,28 +1,8 @@
-import { useEffect, useState } from "react";
 // import BannerImg from "../../../assets/Images/bg.jpg";
 import whiteBg from "../../../assets/Images/white-bg.jpg";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
-import httpDashboardService from "./../../../services/dashboard.service";
 
-function Banner() {
-  const [headerData, setHeaderData] = useState(null);
-  const [loader, setLoader] = useState(false);
-
-  useEffect(() => {
-    async function getHeaderData() {
-      setLoader(true);
-      try {
-        const data = await httpDashboardService.getHeaderData();
-        setHeaderData(data);
-      } catch (error) {
-        setLoader(false);
-        console.log(error);
-      }
-      setLoader(false);
-    }
-    getHeaderData();
-  }, []);
-
+function Banner({ headerData, loader }) {
   return (
     <>
       {loader ? (
