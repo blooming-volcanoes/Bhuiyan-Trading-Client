@@ -16,7 +16,7 @@ const PdDetailsAndDescription = ({ product }) => {
       }}
       className="w-full bg-cover bg-center bg-no-repeat pt-5 pl-5 pr-5 lg:w-1/2"
     >
-      <h1 className="mb-2 text-5xl font-bold">{product?.title}</h1>
+      <h1 className="mb-2 text-2xl font-bold">{product?.title}</h1>
       <h3 className="mb-5 text-xl font-bold">{product?.categoryName}</h3>
       <p className="mb-3 font-bold">
         Price: ${" "}
@@ -25,7 +25,13 @@ const PdDetailsAndDescription = ({ product }) => {
         </span>
         /unit
       </p>
-      <p className="mb-10 text-xl">{product?.productDesc}</p>
+      <ul className="list-disc p-2">
+        {product?.productDesc
+          ?.split(".")
+          .map(
+            (line) => line !== "" && <li className="mb-7 text-sm">{line}</li>
+          )}
+      </ul>
       <PdDescriptionAccordion product={product} />
 
       <div className="flex items-center justify-center">

@@ -31,8 +31,8 @@ const Accordion = ({ product }) => {
       </div>
 
       {/* Content */}
-      <div className="max-h-0 overflow-hidden pl-5 transition-all duration-500 peer-checked:max-h-40">
-        <p className="pb-3">{product?.shortDesc}</p>
+      <div className="max-h-0 overflow-hidden pl-5 transition-all duration-500 peer-checked:max-h-full">
+        <p className="p-2">{product?.shortDesc}</p>
       </div>
     </div>
   );

@@ -115,7 +115,7 @@ const Product = () => {
       ) : (
         <PageLayout>
           <div className="bg-gray-100">
-            <Banner bannerImage={imageUrl} />
+            <Banner products={data} bannerImage={imageUrl} />
             <MostPopularProducts
               products={data}
               modifiedSubCategories={modifiedSubCategories}
