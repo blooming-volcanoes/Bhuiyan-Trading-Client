@@ -11,6 +11,7 @@ function Banner({ headerData, loader }) {
         </div>
       ) : (
         <section
+          id="HomeBanner"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
        url(${headerData ? headerData?.backgroundImg : whiteBg})`,
@@ -29,7 +30,17 @@ function Banner({ headerData, loader }) {
                 {headerData?.thirdTitle || "Corporation"}
               </h3>
 
-              <button className="banner-btn" type="button">
+              <button
+                onClick={() =>
+                  window.scrollTo({
+                    top:
+                      document.getElementById("HomeBanner")?.offsetHeight - 100,
+                    behavior: "smooth",
+                  })
+                }
+                className="banner-btn"
+                type="button"
+              >
                 Our Products
               </button>
             </div>
