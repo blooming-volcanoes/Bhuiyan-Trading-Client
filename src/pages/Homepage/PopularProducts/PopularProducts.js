@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import boatPng from "../../../assets/Images/boat.jpg";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
-import httpCateGoryService from "../../../services/category.service";
 const data = [
   {
     type: "Fish",
@@ -11,25 +10,7 @@ const data = [
   },
 ];
 
-function PopularProducts() {
-  const [cateGories, setCateGories] = useState([]);
-  const [loader, setLoader] = useState(false);
-
-  useEffect(() => {
-    setLoader(true);
-    async function getProducts() {
-      try {
-        const data = await httpCateGoryService.getAllCategory();
-        setCateGories(data);
-      } catch (error) {
-        setLoader(false);
-        console.log(error);
-      }
-    }
-    getProducts();
-    setLoader(false);
-  }, [cateGories.length]);
-
+function PopularProducts({ cateGories, loader }) {
   return (
     <section className="py-16" data-aos="fade-up">
       <div className="main-container">

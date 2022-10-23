@@ -1,28 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import bgTop from "../../../assets/Images/bg-top.png";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
-import httpCateGoryService from "../../../services/category.service";
 
-function OurProducts() {
-  const [cateGories, setCateGories] = useState([]);
-  const [loader, setLoader] = useState(false);
-
-  useEffect(() => {
-    setLoader(true);
-    async function getProducts() {
-      try {
-        const data = await httpCateGoryService.getAllCategory();
-        setCateGories(data);
-      } catch (error) {
-        setLoader(false);
-        console.log(error);
-      }
-    }
-    getProducts();
-    setLoader(false);
-  }, [cateGories.length]);
-
+function OurProducts({ cateGories, loader }) {
   return (
     <div
       data-aos="fade-up"
