@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CategoryTable({ theadData, tableData }) {
-  console.log(tableData);
+function CategoryTable({ handelCategoryDelete, theadData, tableData }) {
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
@@ -36,23 +35,30 @@ function CategoryTable({ theadData, tableData }) {
                       ))}
                     </td>
                     <td className="space-x-4 border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                      <Link
-                        to={`/admin/dashboard/categories/edit/${data?.id}`}
-                        className="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900"
-                      >
-                        <span
-                          aria-hidden
-                          className="absolute inset-0 rounded-full bg-green-200 opacity-50"
-                        ></span>
-                        <span className="relative cursor-pointer">Edit</span>
-                      </Link>
-                      {/* <button className="relative inline-block px-3 py-1 font-semibold leading-tight text-white">
-                        <span
-                          aria-hidden
-                          className="absolute inset-0 rounded-full bg-red-500 opacity-75"
-                        ></span>
-                        <span className="relative cursor-pointer">Delete</span>
-                      </button> */}
+                      <div className="flex  space-x-2">
+                        <Link
+                          to={`/admin/dashboard/categories/edit/${data?.id}`}
+                          className="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900"
+                        >
+                          <span
+                            aria-hidden
+                            className="absolute inset-0 rounded-full bg-green-200 opacity-50"
+                          ></span>
+                          <span className="relative cursor-pointer">Edit</span>
+                        </Link>
+                        <button
+                          onClick={() => handelCategoryDelete(data.id)}
+                          className="relative inline-block px-3 py-1 font-semibold leading-tight text-white"
+                        >
+                          <span
+                            aria-hidden
+                            className="absolute inset-0 rounded-full bg-red-500 opacity-75"
+                          ></span>
+                          <span className="relative cursor-pointer">
+                            Delete
+                          </span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
