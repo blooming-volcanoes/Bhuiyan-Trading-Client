@@ -49,7 +49,7 @@ const Product = () => {
       });
   }, [id, searchParams]);
 
-  console.log(isDataLimitDone);
+  console.log(data);
 
   useEffect(() => {
     if (data.length) {
@@ -71,6 +71,7 @@ const Product = () => {
   }, [id, data]);
 
   const handelFilterProductBySubCategory = async (subCategory) => {
+    console.log(subCategory);
     setFilterBySubLoader(true);
     if (subCategory) {
       try {
@@ -114,7 +115,7 @@ const Product = () => {
       ) : (
         <PageLayout>
           <div className="bg-gray-100">
-            <Banner bannerImage={imageUrl} />
+            <Banner products={data} bannerImage={imageUrl} />
             <MostPopularProducts
               products={data}
               modifiedSubCategories={modifiedSubCategories}

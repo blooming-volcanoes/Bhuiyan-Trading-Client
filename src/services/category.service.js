@@ -29,6 +29,10 @@ class HttpCategoryService {
     const data = await httpReq.post("/gallery/bulkUpload/category", payload);
     return data;
   }
+  async deleteCategoryById(id) {
+    const data = await httpReq.delete(`/category/delete/${id}`);
+    return data;
+  }
 }
 
 const httpCateGoryService = new HttpCategoryService();

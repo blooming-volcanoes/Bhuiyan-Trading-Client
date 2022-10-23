@@ -12,7 +12,7 @@ const MostPopularProducts = ({
       {/* Title */}
       <div className="pl-2 md:pl-0">
         <h1 className="text-3xl font-semibold">
-          <span>We are</span>
+          <span>Product Category</span>
           <br />
           <span className="text-2xl lg:text-6xl">
             {products[0]?.categoryName}
@@ -25,6 +25,7 @@ const MostPopularProducts = ({
           <p className="ml-2 text-lg font-bold">All Sub Categories</p>
         </div>
         <Sliders
+          products={products}
           handelFilterProductBySubCategory={handelFilterProductBySubCategory}
           modifiedSubCategories={modifiedSubCategories}
         />
