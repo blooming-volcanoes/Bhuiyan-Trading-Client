@@ -105,9 +105,12 @@ function CategoryEdit() {
   // Submit the form
   const handelSubmit = async (e) => {
     e.preventDefault();
-
-    if (details?.subCategoryName) {
-      const lengthOfNewSub = details.subCategoryName.split(" ").length;
+    console.log(details?.subCategoryName, uploadedGalleryImage);
+    if (
+      details?.subCategoryName?.trim().split(" ").length !==
+      uploadedGalleryImage?.length
+    ) {
+      const lengthOfNewSub = details.subCategoryName?.trim()?.split(" ").length;
       toast.error(
         `Now you need to add ${lengthOfNewSub} Images in Gallery Images`
       );
