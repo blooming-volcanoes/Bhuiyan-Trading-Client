@@ -50,7 +50,7 @@ function OurBlogs() {
           </div>
         ) : (
           <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 lg:grid-cols-3">
-            {blogs.map((blog) => (
+            {blogs?.slice(0, 3)?.map((blog) => (
               <div
                 onClick={() => navigate(`/blog/${blog?.slug}`)}
                 style={{
