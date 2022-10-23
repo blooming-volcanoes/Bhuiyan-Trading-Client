@@ -25,6 +25,7 @@ const MostPopularProducts = ({
           <p className="ml-2 text-lg font-bold">All Sub Categories</p>
         </div>
         <Sliders
+          products={products}
           handelFilterProductBySubCategory={handelFilterProductBySubCategory}
           modifiedSubCategories={modifiedSubCategories}
         />

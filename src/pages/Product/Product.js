@@ -49,7 +49,7 @@ const Product = () => {
       });
   }, [id, searchParams]);
 
-  console.log(isDataLimitDone);
+  console.log(data);
 
   useEffect(() => {
     if (data.length) {
@@ -71,6 +71,7 @@ const Product = () => {
   }, [id, data]);
 
   const handelFilterProductBySubCategory = async (subCategory) => {
+    console.log(subCategory);
     setFilterBySubLoader(true);
     if (subCategory) {
       try {

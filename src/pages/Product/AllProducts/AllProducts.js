@@ -48,7 +48,7 @@ const AllProducts = ({
                     <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-20 "></div>
                     <p
                       to={`/product-detail/${product?.id}`}
-                      className="absolute bottom-0 z-20 ml-3 mb-3 text-xl font-bold text-white"
+                      className="absolute bottom-0 z-20 ml-3 mb-3 text-xl font-bold text-gray-600"
                     >
                       {product.title}
                     </p>
@@ -59,17 +59,23 @@ const AllProducts = ({
           ) : (
             products.map((product) => (
               <Link to={`/product-detail/${product?.id}`} key={product.id}>
-                <div className="relative flex h-[200px] items-end justify-center rounded-lg bg-cover bg-center">
+                <div
+                  style={{
+                    boxShadow:
+                      "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+                  }}
+                  className="relative flex h-[210px] items-end justify-center rounded-lg bg-cover bg-center"
+                >
                   <div>
                     <img
                       className="h-[200px] w-full object-cover"
                       src={product.featureImg}
                       alt=""
                     />
-                    <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-20 "></div>
+                    <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-20"></div>
                     <p
                       to={`/product-detail/${product?.id}`}
-                      className="absolute bottom-0 z-20 ml-3 mb-3 text-xl font-bold text-white"
+                      className="absolute bottom-0 left-0 z-20 w-full bg-white bg-opacity-70 text-center text-lg font-semibold text-black"
                     >
                       {product.title}
                     </p>
