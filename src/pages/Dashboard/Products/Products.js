@@ -106,7 +106,6 @@ function Products() {
 
   // handle product search
   useEffect(() => {
-    setSearchParams({ page: searchParams.get("page"), searchCount: 1 });
     async function getSearchResult() {
       setSearchLoader(true);
       try {
@@ -129,7 +128,7 @@ function Products() {
     } else {
       setAllProducts(allPreviousProducts);
     }
-  }, [debounceData, isDataLimitDone]);
+  }, [debounceData]);
 
   return (
     <DashboardLayout>

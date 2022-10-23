@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import Pagination from "../../../Components/custom/Pagination/Pagination";
+import useDebounce from "../../../hooks/useDebounce";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import httpBlogService from "../../../services/blog.service";
 import BlogsTable from "./../../../Components/dashboard/Table/BlogsTable";
@@ -14,6 +15,10 @@ function Blogs() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isDataLimitDone, setIsDataLimitDone] = useState(false);
   const [isBlogDeleted, setIsBlogDeleted] = useState(false);
+  const [search, setSearch] = useState(null);
+  const debounceData = useDebounce(search, 800);
+  const [searchLoader, setSearchLoader] = useState(false);
+  const [previousAllBlogs, setPreviousAllBlogs] = useState([]);
 
   useEffect(() => {
     async function getAllBlogs() {
@@ -22,14 +27,14 @@ function Blogs() {
         const data = await httpBlogService.getAllBlogsWithPagination(
           searchParams.get("page")
         );
-        setBlogs(
-          data.sort((a, b) => {
-            let firstTime = new Date(a.updated_at);
-            let lastTime = new Date(b.updated_at);
+        const sortedBlogs = data.sort((a, b) => {
+          let firstTime = new Date(a.updated_at);
+          let lastTime = new Date(b.updated_at);
 
-            return lastTime - firstTime;
-          })
-        );
+          return lastTime - firstTime;
+        });
+        setBlogs(sortedBlogs);
+        setPreviousAllBlogs(sortedBlogs);
         if (!data.length || data.length < 10) {
           setIsDataLimitDone(true);
         } else {
@@ -90,6 +95,32 @@ function Blogs() {
     });
   };
 
+  // handle product search
+  useEffect(() => {
+    async function getSearchResult() {
+      setSearchLoader(true);
+      try {
+        const data = await httpBlogService.searchBlogByTheTitle({
+          title: `%${debounceData}%`,
+        });
+
+        setBlogs(data);
+
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setSearchLoader(false);
+      }
+    }
+
+    if (debounceData) {
+      getSearchResult();
+    } else {
+      setBlogs(previousAllBlogs);
+    }
+  }, [debounceData]);
+
   return (
     <DashboardLayout>
       <section>
@@ -97,16 +128,35 @@ function Blogs() {
           All Blogs
         </h1>
 
+        <div className="mx-8 mt-4 flex w-full justify-center lg:w-2/4 lg:justify-start">
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            className=" flx-1 lg:full w-[400px] rounded border-2 border-gray-400 text-sm shadow focus:ring-0"
+            placeholder="Search example. Ships models"
+          />
+        </div>
+
         {loader ? (
           <div className="flex h-screen items-center justify-center space-y-4">
             <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
           </div>
+        ) : blogs.length ? (
+          searchLoader ? (
+            <div className="flex h-screen items-center justify-center space-y-4">
+              <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
+            </div>
+          ) : (
+            <BlogsTable
+              handelDeleteBlog={handelDeleteBlog}
+              theadData={tableHeadData}
+              tableData={blogs}
+            />
+          )
         ) : (
-          <BlogsTable
-            handelDeleteBlog={handelDeleteBlog}
-            theadData={tableHeadData}
-            tableData={blogs}
-          />
+          <div className="mt-10 flex h-full  justify-center space-y-4 font-bold text-gray-500">
+            <h1 className="text-2xl">{blogs.msg}</h1>
+          </div>
         )}
 
         <Pagination

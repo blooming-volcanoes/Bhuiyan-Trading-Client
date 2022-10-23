@@ -3,11 +3,14 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import UploadFile from "../../../Components/custom/Uploaders/UploadFile";
+import httpProductService from "../../../services/product.service";
 import DashboardLayout from "./../../../layouts/DashboardLayout";
 import httpDashboardService from "./../../../services/dashboard.service";
 
 function HomePage() {
   const [uploadedFeature, setUploadedFeature] = useState(null);
+  const [uploadedLogo, setUploadedLogo] = useState(null);
+  const [isLogoSubmitted, setIsLogoSubmitted] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const [isFeatureSubmitted, setIsFeatureSubmitted] = useState(false);
@@ -34,14 +37,29 @@ function HomePage() {
   // Submit the form
   const onSubmit = async (userData) => {
     setLoading(true);
+
     try {
+      // Delete the previous image
+      if (uploadedLogo && headerData.logo) {
+        await httpProductService.deleteGalleryImages(
+          headerData.logo.split("/")[4]
+        );
+      }
+      if (uploadedFeature && headerData.backgroundImg) {
+        await httpProductService.deleteGalleryImages(
+          headerData.backgroundImg.split("/")[4]
+        );
+      }
+      // Posting new Data
       const modified = {
         ...userData,
+        logo: uploadedLogo || "",
         thirdTitle: userData.thirdTitle || headerData?.thirdTitle,
         secondTitle: userData.secondTitle || headerData?.secondTitle,
         mainTitle: userData.mainTitle || headerData?.mainTitle,
         backgroundImg: uploadedFeature || "",
       };
+      console.log(modified);
       if (isAlreadyHeadExists) {
         await httpDashboardService.updateNewHeaderData(headerData.id, modified);
       } else {
@@ -56,9 +74,8 @@ function HomePage() {
     setLoading(false);
     reset();
     setIsFeatureSubmitted(true);
+    setIsLogoSubmitted(true);
   };
-
-  console.log(isAlreadyHeadExists);
 
   return (
     <DashboardLayout>
@@ -116,8 +133,17 @@ function HomePage() {
               {...register("thirdTitle")}
             />
           </label>
-          <label htmlFor="thirdTitle" className="flex flex-col space-y-2">
-            <span id="cateName" className="text-xs font-semibold text-gray-400">
+          <div className="flex flex-col space-y-2">
+            <span className="text-xs font-semibold text-gray-400">Logo</span>
+            <UploadFile
+              isMultiple={false}
+              setUploadedFeature={setUploadedLogo}
+              uploadedFeature={uploadedLogo}
+              isFeatureSubmitted={isLogoSubmitted}
+            />
+          </div>
+          <div className="flex flex-col space-y-2">
+            <span className="text-xs font-semibold text-gray-400">
               Background Image
             </span>
             <UploadFile
@@ -126,7 +152,7 @@ function HomePage() {
               uploadedFeature={uploadedFeature}
               isFeatureSubmitted={isFeatureSubmitted}
             />
-          </label>
+          </div>
 
           {loading ? (
             <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">

@@ -19,6 +19,9 @@ class HttpBlogService {
   async deleteBlogBySlug(slug) {
     return await httpReq.delete(`/post/blog/${slug}`);
   }
+  async searchBlogByTheTitle(payload) {
+    return await httpReq.post(`/post/search`, payload);
+  }
 }
 
 const httpBlogService = new HttpBlogService();
