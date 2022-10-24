@@ -2,6 +2,7 @@ import draftToHtml from "draftjs-to-html";
 import React, { useEffect, useState } from "react";
 import ReactHtmlParser from "react-html-parser";
 import { BsArrowLeft } from "react-icons/bs";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import Moment from "react-moment";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import LoadingButton from "../../Components/custom/Buttons/LoadingButton";
@@ -66,23 +67,31 @@ function BlogPage() {
           </div>
 
           {/* Recent Blog */}
-          <div className="grid  gap-1 md:grid-cols-6 ">
+          <div className="gird-cols-1 grid gap-1 md:grid-cols-6 lg:grid-cols-6">
             {/* blog Image */}
-            <div className="col-span-5 mx-5 md:mx-0">
-              <img
+            <div className="mx-5 md:mx-0 lg:col-span-5">
+              <LazyLoadImage
+                height="100%"
+                width="100%"
+                className="mx-auto h-64 w-full rounded object-cover md:h-96 "
+                effect="blur"
+                src={blog?.featureImg}
+              />
+
+              {/* <img
                 className="mx-auto h-64 w-full rounded object-cover md:h-96 "
                 src={blog?.featureImg}
                 alt=""
-              />
+              /> */}
             </div>
-            <div className="mx-auto ml-4 md:my-auto">
+            <div className="flex w-full items-center justify-center">
               <SocialMedia
                 data={{
                   url: `${process.env.REACT_APP_MAIN_DOMAIN}${location?.pathname}`,
                   title: blog?.title,
                 }}
                 share
-                styles="flex flex-col space-y-4"
+                styles="flex lg:flex-col lg:space-y-4 space-x-2 lg:space-x-0"
               />
             </div>
             {/* blog contents */}
