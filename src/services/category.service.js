@@ -33,6 +33,10 @@ class HttpCategoryService {
     const data = await httpReq.delete(`/category/delete/${id}`);
     return data;
   }
+  async deleteCategoryImageByName(name) {
+    const data = await httpReq.delete(`/gallery/file/category/${name}`);
+    return data;
+  }
 }
 
 const httpCateGoryService = new HttpCategoryService();
