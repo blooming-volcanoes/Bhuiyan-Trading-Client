@@ -17,8 +17,6 @@ function BlogPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location);
-
   useEffect(() => {
     let isMounted = true;
 
@@ -27,7 +25,6 @@ function BlogPage() {
       try {
         const data = await httpBlogService.getSingleBlogBySlug(slug);
         isMounted && setBlog(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       } finally {

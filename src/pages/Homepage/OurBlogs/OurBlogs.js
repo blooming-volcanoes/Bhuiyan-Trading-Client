@@ -36,8 +36,6 @@ function OurBlogs() {
     };
   }, []);
 
-  console.log(blogs);
-
   return (
     <section className="whowe-bg py-8" data-aos="fade-up">
       <div className="main-container">

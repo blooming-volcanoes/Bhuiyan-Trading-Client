@@ -45,8 +45,6 @@ function Contact() {
     loadTableData();
   }, [searchParams, isContactInfoDeleted]);
 
-  console.log(isContactInfoDeleted);
-
   useEffect(() => {
     if (allTableData.length) {
       let keys = [];
@@ -98,8 +96,6 @@ function Contact() {
         });
 
         setAllTableData(data);
-
-        console.log(data);
       } catch (error) {
         console.log(error);
       } finally {

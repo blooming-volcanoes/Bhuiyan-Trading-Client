@@ -181,7 +181,7 @@ function ProductUpload() {
         subCategoryName: subCateString.join(";"),
       };
       setSubmitLoader(true);
-      console.log(modifiedData);
+
       try {
         const data = await httpProductService.addSingleProduct(modifiedData, {
           headers: {

@@ -60,7 +60,6 @@ function Categories() {
   }, [isDeleted]);
 
   function handelCategoryDelete(categoryId) {
-    console.log(categoryId);
     setProductRelatedImages([]);
     setCategoryRelatedProduct([]);
     // get all the products

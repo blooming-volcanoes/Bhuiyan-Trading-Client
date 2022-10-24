@@ -89,7 +89,6 @@ function Products() {
             deletedImages.forEach(async (img) => {
               await httpProductService.deleteGalleryImages(img.split("/")[4]);
             });
-            console.log(data);
             Swal.fire("Saved!", "", "success");
           })
           .catch((error) => {
@@ -114,8 +113,6 @@ function Products() {
         });
 
         setAllProducts(data);
-
-        console.log(data);
       } catch (error) {
         console.log(error);
       } finally {
