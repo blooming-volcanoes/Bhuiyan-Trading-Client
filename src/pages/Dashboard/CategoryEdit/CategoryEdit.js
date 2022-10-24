@@ -150,6 +150,9 @@ function CategoryEdit() {
       );
       if (data.msg) {
         toast.success(data.msg);
+        await httpCateGoryService.deleteCategoryImageByName(
+          deletedFeatureImg?.split("/")[4]
+        );
       }
 
       allProducts.map(async (product) => {
@@ -165,7 +168,7 @@ function CategoryEdit() {
       console.log(error);
     }
     setUpdateLoader(false);
-
+    setDeletedFeatureImg(null);
     setTrackGalleryImageLength(null);
   };
 
