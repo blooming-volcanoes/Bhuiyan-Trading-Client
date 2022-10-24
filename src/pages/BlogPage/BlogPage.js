@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactHtmlParser from "react-html-parser";
 import { BsArrowLeft } from "react-icons/bs";
 import Moment from "react-moment";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import LoadingButton from "../../Components/custom/Buttons/LoadingButton";
 import PageLayout from "../../layouts/PageLayout";
 import SocialMedia from "./../../Components/common/SocialMedia/SocialMedia";
@@ -14,6 +14,9 @@ function BlogPage() {
   const [blog, setBlog] = useState({});
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location);
 
   useEffect(() => {
     let isMounted = true;
@@ -73,7 +76,14 @@ function BlogPage() {
               />
             </div>
             <div className="mx-auto ml-4 md:my-auto">
-              <SocialMedia styles="flex flex-col space-y-4" />
+              <SocialMedia
+                data={{
+                  url: `${process.env.REACT_APP_MAIN_DOMAIN}${location?.pathname}`,
+                  title: blog?.title,
+                }}
+                share
+                styles="flex flex-col space-y-4"
+              />
             </div>
             {/* blog contents */}
           </div>
