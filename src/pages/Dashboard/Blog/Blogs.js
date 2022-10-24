@@ -7,6 +7,7 @@ import useDebounce from "../../../hooks/useDebounce";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import httpBlogService from "../../../services/blog.service";
 import BlogsTable from "./../../../Components/dashboard/Table/BlogsTable";
+import httpProductService from "./../../../services/product.service";
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -67,7 +68,8 @@ function Blogs() {
     }
   }, [blogs]);
 
-  const handelDeleteBlog = (slug) => {
+  const handelDeleteBlog = (blog) => {
+    console.log(blog);
     Swal.fire({
       title: "Are you sure?",
       showDenyButton: true,
@@ -79,8 +81,11 @@ function Blogs() {
       if (result.isConfirmed) {
         setIsBlogDeleted(true);
         httpBlogService
-          .deleteBlogBySlug(slug)
+          .deleteBlogBySlug(blog?.slug)
           .then((data) => {
+            httpProductService
+              .deleteGalleryImages(blog?.featureImg?.split("/")[4])
+              .then(() => {});
             Swal.fire("Saved!", "", "success");
           })
           .catch((error) => {
