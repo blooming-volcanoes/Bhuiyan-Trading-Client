@@ -36,7 +36,6 @@ function EditBlog() {
 
   // Fetch previous Blog
   useEffect(() => {
-    console.log(params.id);
     let isMuted = true;
     async function getSingleBlog() {
       setLoader(true);
@@ -64,8 +63,6 @@ function EditBlog() {
       isMuted = false;
     };
   }, [params]);
-
-  console.log(inputData);
 
   // Set feature Image
   useEffect(() => {

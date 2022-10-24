@@ -59,7 +59,7 @@ function HomePage() {
         mainTitle: userData.mainTitle || headerData?.mainTitle,
         backgroundImg: uploadedFeature || headerData.backgroundImg,
       };
-      console.log(modified);
+
       if (isAlreadyHeadExists) {
         await httpDashboardService.updateNewHeaderData(headerData.id, modified);
       } else {

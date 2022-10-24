@@ -105,7 +105,6 @@ function CategoryEdit() {
   // Submit the form
   const handelSubmit = async (e) => {
     e.preventDefault();
-    console.log(details?.subCategoryName, uploadedGalleryImage);
     if (
       details?.subCategoryName?.trim().split(" ").length !==
       uploadedGalleryImage?.length

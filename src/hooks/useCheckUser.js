@@ -8,13 +8,9 @@ const useCheckUser = () => {
 
   async function checkUser() {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/user/getUser`,
-        {
-          headers: { authorization: `Bearer ${user?.token}` },
-        }
-      );
-      console.log(data);
+      await axios.get(`${process.env.REACT_APP_BASE_URL}/user/getUser`, {
+        headers: { authorization: `Bearer ${user?.token}` },
+      });
     } catch (error) {
       if (error) {
         dispatch(removeUser());

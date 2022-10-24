@@ -96,8 +96,6 @@ function ProductEdit() {
     });
   };
 
-  console.log(deletedImage);
-
   // Send the updated data to the backend
   const handelUpdateForm = async (e) => {
     e.preventDefault();

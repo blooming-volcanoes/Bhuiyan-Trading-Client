@@ -69,7 +69,6 @@ function Blogs() {
   }, [blogs]);
 
   const handelDeleteBlog = (blog) => {
-    console.log(blog);
     Swal.fire({
       title: "Are you sure?",
       showDenyButton: true,
@@ -110,8 +109,6 @@ function Blogs() {
         });
 
         setBlogs(data);
-
-        console.log(data);
       } catch (error) {
         console.log(error);
       } finally {
