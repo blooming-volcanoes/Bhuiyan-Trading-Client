@@ -76,7 +76,7 @@ const Sliders = ({
                       src={modifiedSubCategories[i]?.featureImg}
                       alt=""
                     />
-                    <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-30 "></div>
+                    <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-30"></div>
                     <p className="absolute bottom-0 z-10 ml-3 mb-3 text-xl font-bold text-white">
                       {modifiedSubCategories[i]?.title}
                     </p>

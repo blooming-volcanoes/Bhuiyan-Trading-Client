@@ -3,6 +3,7 @@ import { IoIosArrowDroprightCircle, IoIosSearch } from "react-icons/io";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const AllProducts = ({
   products,
@@ -46,11 +47,16 @@ const AllProducts = ({
                   className="relative flex h-[210px] items-end justify-center rounded-lg bg-cover bg-center"
                 >
                   <div>
-                    <img
+                    <LazyLoadImage
+                      className="h-[200px] w-full object-cover"
+                      effect="blur"
+                      src={product.featureImg}
+                    />
+                    {/* <img
                       className="h-[200px] w-full object-cover"
                       src={product.featureImg}
                       alt=""
-                    />
+                    /> */}
                     <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-20"></div>
                     <p
                       to={`/product-detail/${product?.id}`}
@@ -73,11 +79,16 @@ const AllProducts = ({
                   className="relative flex h-[210px] items-end justify-center rounded-lg bg-cover bg-center"
                 >
                   <div>
-                    <img
+                    <LazyLoadImage
+                      className="h-[200px] w-full object-cover"
+                      effect="blur"
+                      src={product.featureImg}
+                    />
+                    {/* <img
                       className="h-[200px] w-full object-cover"
                       src={product.featureImg}
                       alt=""
-                    />
+                    /> */}
                     <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-20"></div>
                     <p
                       to={`/product-detail/${product?.id}`}

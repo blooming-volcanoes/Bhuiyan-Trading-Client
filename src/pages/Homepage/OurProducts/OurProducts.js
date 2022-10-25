@@ -38,8 +38,6 @@ function OurProducts({ cateGories, loader }) {
                 key={i}
               >
                 <LazyLoadImage
-                  height="100%"
-                  width="100%"
                   className="h-20 w-20 rounded-full  object-cover  md:h-10 md:w-10 lg:h-[60px] lg:w-[60px]"
                   effect="blur"
                   src={category?.featureImg}

@@ -12,6 +12,7 @@ import "swiper/css/thumbs";
 import "../styles/ProductDetails.css";
 
 // import required modules
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { FreeMode, Lazy, Navigation, Thumbs } from "swiper";
 
 const PdImageSliders = ({ product }) => {
@@ -36,7 +37,12 @@ const PdImageSliders = ({ product }) => {
       >
         {galleryImages?.map((img) => (
           <SwiperSlide>
-            <img className="!h-[400px] !object-contain" src={img} alt="" />
+            <LazyLoadImage
+              className="!h-[400px] !object-contain"
+              effect="blur"
+              src={img}
+            />
+            {/* <img className="!h-[400px] !object-contain" src={img} alt="" /> */}
           </SwiperSlide>
         ))}
       </Swiper>
@@ -52,11 +58,16 @@ const PdImageSliders = ({ product }) => {
       >
         {galleryImages?.map((img) => (
           <SwiperSlide>
-            <img
+            <LazyLoadImage
+              className="!h-[100px] cursor-pointer !object-contain"
+              effect="blur"
+              src={img}
+            />
+            {/* <img
               className="!h-[100px] cursor-pointer !object-contain"
               src={img}
               alt=""
-            />
+            /> */}
           </SwiperSlide>
         ))}
       </Swiper>
