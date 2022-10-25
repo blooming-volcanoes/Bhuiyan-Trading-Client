@@ -84,7 +84,7 @@ function BlogPage() {
             <div className="flex w-full items-center justify-center">
               <SocialMedia
                 data={{
-                  url: `${process.env.REACT_APP_MAIN_DOMAIN}${location?.pathname}`,
+                  url: `https://bhuiyantrad.com${location?.pathname}`,
                   title: blog?.title,
                 }}
                 share
