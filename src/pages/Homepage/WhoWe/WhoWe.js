@@ -1,4 +1,5 @@
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import whowe from "../../../assets/Images/whowe.png";
 
 export default function WhoWe() {
@@ -21,7 +22,14 @@ export default function WhoWe() {
             </p>
           </div>
           <div className="p-4" data-aos="zoom-in-left">
-            <img className="w-full rounded-lg" src={whowe} alt="" />
+            <LazyLoadImage
+              height="100%"
+              width="100%"
+              className="w-full rounded-lg"
+              effect="blur"
+              src={whowe}
+            />
+            {/* <img className="w-full rounded-lg" src={whowe} alt="" /> */}
           </div>
         </div>
       </div>

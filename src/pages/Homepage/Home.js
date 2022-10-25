@@ -6,6 +6,7 @@ import httpDashboardService from "../../services/dashboard.service";
 import Banner from "./Banner/Banner";
 import Future from "./Future/Future";
 import OurBlogs from "./OurBlogs/OurBlogs";
+import OurBrands from "./OurBrands/OurBrands";
 import OurProducts from "./OurProducts/OurProducts";
 import PopularProducts from "./PopularProducts/PopularProducts";
 import ShipEquipment from "./ShipEquipment/ShipEquipment";
@@ -61,6 +62,7 @@ function Home() {
       <Future />
       <ShipEquipment />
       <OurBlogs />
+      <OurBrands />
       <PopularProducts cateGories={cateGories} loader={categoryLoader} />
       <Footer />
     </>

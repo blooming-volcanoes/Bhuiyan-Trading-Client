@@ -1,4 +1,5 @@
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import shipment from "../../../assets/Images/shipequipment.jpg";
 
 export default function ShipEquipment() {
@@ -10,7 +11,14 @@ export default function ShipEquipment() {
       <div className="main-container">
         <div className="grid-cols-2 items-center gap-x-0 md:grid md:gap-x-10 md:gap-y-0 lg:gap-y-0">
           <div>
-            <img className="mb-4 md:mb-0 lg:mb-0" src={shipment} alt="" />
+            <LazyLoadImage
+              height="100%"
+              width="100%"
+              className="mb-4 md:mb-0 lg:mb-0"
+              effect="blur"
+              src={shipment}
+            />
+            {/* <img className="mb-4 md:mb-0 lg:mb-0" src={shipment} alt="" /> */}
           </div>
           <div className="py-3 ">
             <h3 className="text-4xl font-bold text-white">Our Research</h3>

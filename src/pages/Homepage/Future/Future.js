@@ -1,4 +1,5 @@
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import future from "../../../assets/Images/future.png";
 
 export default function Future() {
@@ -7,7 +8,14 @@ export default function Future() {
       <div className="main-container">
         <div className="grid-cols-2 items-center md:grid">
           <div className="">
-            <img className="w-full p-4" src={future} alt="" />
+            <LazyLoadImage
+              height="100%"
+              width="100%"
+              className="w-full p-4"
+              effect="blur"
+              src={future}
+            />
+            {/* <img className="w-full p-4" src={future} alt="" /> */}
           </div>
           <div className="">
             <p className="text-justify text-xl font-bold text-black">
