@@ -1,6 +1,7 @@
 import draftToHtml from "draftjs-to-html";
 import React, { useEffect, useState } from "react";
 import ReactHtmlParser from "react-html-parser";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import Moment from "react-moment";
 import { Link, useSearchParams } from "react-router-dom";
 import bgTop from "../../assets/Images/bg-top.png";
@@ -89,11 +90,16 @@ function LatestNews() {
           <>
             <div className="main-container grid grid-cols-1 py-10 md:grid-cols-2 lg:grid-cols-2 lg:gap-y-0">
               {/* blog Image */}
-              <img
+              <LazyLoadImage
+                className="mx-auto w-full rounded object-contain md:w-[500px] lg:w-[500px]"
+                effect="blur"
+                src={smallBlogs[0]?.featureImg}
+              />
+              {/* <img
                 className="mx-auto w-full rounded object-contain md:w-[500px] lg:w-[500px]"
                 src={smallBlogs[0]?.featureImg}
                 alt=""
-              />
+              /> */}
 
               {/* blog contents */}
               <div>
@@ -134,11 +140,16 @@ function LatestNews() {
                   className="space-y-2 rounded-lg border bg-white py-4 px-2 shadow-lg"
                   key={i}
                 >
-                  <img
+                  <LazyLoadImage
+                    className="w-full rounded object-contain md:h-[300px] lg:h-[180px]"
+                    effect="blur"
+                    src={blog?.featureImg}
+                  />
+                  {/* <img
                     className="w-full rounded object-contain md:h-[300px] lg:h-[180px]"
                     src={blog?.featureImg}
                     alt=""
-                  />
+                  /> */}
                   <Link
                     to={`/blog/${blog?.slug}`}
                     className="block text-sm font-light hover:text-blue-600 hover:underline"

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 
@@ -25,11 +26,18 @@ function PopularProducts({ cateGories, loader }) {
                 className="relative block"
                 key={category.id}
               >
-                <img
+                <LazyLoadImage
+                  height="100%"
+                  width="100%"
+                  className="h-[100px] w-full overflow-hidden rounded-lg object-cover lg:w-[400px]"
+                  effect="blur"
+                  src={category?.featureImg}
+                />
+                {/* <img
                   className="h-[100px] w-full overflow-hidden rounded-lg object-cover lg:w-[400px]"
                   src={category?.featureImg}
                   alt=""
-                />
+                /> */}
                 <div className="absolute bottom-0 top-0 left-0 right-0 z-[10] w-full rounded-lg bg-black bg-opacity-50"></div>
                 <p className="center absolute bottom-0 z-[12] w-full p-2 text-center  text-2xl font-medium text-white">
                   {category.categoryName}

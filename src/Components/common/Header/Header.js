@@ -1,5 +1,6 @@
 import "animate.css";
 import React, { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/Images/logo.png";
@@ -40,11 +41,18 @@ const Header = ({ color }) => {
       <nav className="main-container items-center justify-between md:flex">
         <div className="rounded-b-lg bg-white px-2 pt-5 pb-3">
           <Link to="/">
-            <img
+            <LazyLoadImage
+              height="100%"
+              width="100%"
+              className="h-16 object-contain md:w-[100px] lg:w-[100px]"
+              effect="blur"
+              src={headerData?.logo || logo}
+            />
+            {/* <img
               className="h-16  object-contain md:w-[100px] lg:w-[100px]"
               src={headerData?.logo || logo}
               alt=""
-            />
+            /> */}
           </Link>
         </div>
 

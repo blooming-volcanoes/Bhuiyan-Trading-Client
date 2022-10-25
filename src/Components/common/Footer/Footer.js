@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdCall, MdLocationOn, MdMarkEmailRead } from "react-icons/md";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/Images/logo.png";
 import httpCateGoryService from "../../../services/category.service";
@@ -30,7 +31,13 @@ function Footer() {
         {/* Contact Us */}
         <ul className="mx-auto mb-4 space-y-2 lg:mx-0">
           <li className="mb-4 w-[150px] rounded bg-white p-2">
-            <img src={logo} alt="" />
+            <LazyLoadImage
+              height="100%"
+              width="100%"
+              effect="blur"
+              src={logo}
+            />
+            {/* <img src={logo} alt="" /> */}
           </li>
 
           <SocialMedia styles="flex items-center space-x-4" />
