@@ -73,11 +73,13 @@ function OurBrands() {
         >
           {brands.map((brand, i) => (
             <SwiperSlide key={i}>
-              <LazyLoadImage
-                effect="blur"
-                className="mx-auto w-[200px] grayscale"
-                src={brand.logo}
-              />
+              <div className="mx-auto w-[200px] ">
+                <LazyLoadImage
+                  effect="blur"
+                  className="grayscale"
+                  src={brand.logo}
+                />
+              </div>
               {/* <img
                 className="mx-auto w-[200px] grayscale"
                 src={brand.logo}
