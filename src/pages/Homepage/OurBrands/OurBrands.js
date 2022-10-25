@@ -14,6 +14,7 @@ import "swiper/css/pagination";
 
 import { Autoplay, FreeMode, Navigation, Pagination } from "swiper";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import "./OurBrands.css";
 
 const brands = [
@@ -72,11 +73,16 @@ function OurBrands() {
         >
           {brands.map((brand, i) => (
             <SwiperSlide key={i}>
-              <img
+              <LazyLoadImage
+                effect="blur"
+                className="mx-auto w-[200px] grayscale"
+                src={brand.logo}
+              />
+              {/* <img
                 className="mx-auto w-[200px] grayscale"
                 src={brand.logo}
                 alt=""
-              />
+              /> */}
             </SwiperSlide>
           ))}
         </Swiper>
