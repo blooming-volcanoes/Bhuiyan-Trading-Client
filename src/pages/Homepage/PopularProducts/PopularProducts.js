@@ -1,14 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Link } from "react-router-dom";
-import boatPng from "../../../assets/Images/boat.jpg";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
-const data = [
-  {
-    type: "Fish",
-    img: boatPng,
-  },
-];
 
 function PopularProducts({ cateGories, loader }) {
   return (
@@ -29,7 +22,7 @@ function PopularProducts({ cateGories, loader }) {
             {cateGories.map((category) => (
               <Link
                 to={`/product/${category.id}?page=1`}
-                className="relative"
+                className="relative block"
                 key={category.id}
               >
                 <img
@@ -37,7 +30,8 @@ function PopularProducts({ cateGories, loader }) {
                   src={category?.featureImg}
                   alt=""
                 />
-                <p className="center absolute bottom-0 left-0 right-0 w-full bg-black bg-opacity-10 p-2 text-2xl font-medium text-white">
+                <div className="absolute bottom-0 top-0 left-0 right-0 z-[10] w-full rounded-lg bg-black bg-opacity-50"></div>
+                <p className="center absolute bottom-0 z-[12] w-full p-2 text-center  text-2xl font-medium text-white">
                   {category.categoryName}
                 </p>
               </Link>
