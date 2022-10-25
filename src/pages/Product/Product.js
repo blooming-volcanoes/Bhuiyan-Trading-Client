@@ -10,6 +10,7 @@ import LoadingButton from "../../Components/custom/Buttons/LoadingButton";
 import PageLayout from "./../../layouts/PageLayout";
 import httpCateGoryService from "./../../services/category.service";
 import httpProductService from "./../../services/product.service";
+import OurBrands from "./../Homepage/OurBrands/OurBrands";
 
 const Product = () => {
   const [imageUrl] = useState(bannerImage);
@@ -133,6 +134,7 @@ const Product = () => {
               />
             )}
           </div>
+          <OurBrands />
         </PageLayout>
       )}
     </>
