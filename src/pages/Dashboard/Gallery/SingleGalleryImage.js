@@ -11,6 +11,9 @@ function SingleGalleryImage({ handelDeleteImage, image }) {
     setCopyUrl(image);
     navigator.clipboard.writeText(image);
     toast.success("Link Copied !!!");
+    setTimeout(() => {
+      setCopyUrl(null);
+    }, 2000);
   }
 
   return (
