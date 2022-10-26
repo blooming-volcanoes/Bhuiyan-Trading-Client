@@ -10,7 +10,7 @@ const inputs = [
   {
     name: "name",
     type: "text",
-    placeholder: "Type your full name",
+    placeholder: "Name",
   },
   {
     name: "prevPassword",
@@ -49,6 +49,10 @@ function UserProfile() {
     e.preventDefault();
     if (userData.currentPassword.length && !userData.prevPassword.length) {
       toast.error("Must need to put your previous password");
+      return;
+    }
+    if (!userData.name.length) {
+      toast.error("Name filed is empty");
       return;
     }
     let modifiedData;
