@@ -1,7 +1,8 @@
 import React from "react";
+import DashboardLayout from "../../../layouts/DashboardLayout";
 
 function UserProfile() {
-  return <div>userProfile</div>;
+  return <DashboardLayout>userProfile</DashboardLayout>;
 }
 
 export default UserProfile;

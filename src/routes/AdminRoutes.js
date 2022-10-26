@@ -15,12 +15,14 @@ import NotFound from "../pages/NotFound";
 import PostBlog from "./../pages/Dashboard/Blog/PostBlog";
 import Categories from "./../pages/Dashboard/Categories/Categories";
 import Gallery from "./../pages/Dashboard/Gallery/Gallery";
+import UserProfile from "./../pages/Dashboard/Profile/UserProfile";
 
 function AdminRoutes() {
   return (
     <Routes>
       <Route index element={<Dashboard />} />
       <Route path="/products/all" element={<Products />} />
+      <Route path="/user/profile" element={<UserProfile />} />
       <Route path="/categories/all" element={<Categories />} />
       <Route path="/categories/edit/:id" element={<CategoryEdit />} />
       <Route path="/product/edit/:id" element={<ProductEdit />} />
