@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 import DashboardLayout from "../../../layouts/DashboardLayout";
+import { addUser } from "../../../redux/auth/authAction";
+import httpUserService from "./../../../services/user.service";
 
 const inputs = [
   {
     name: "name",
     type: "text",
-    placeholder: "Type your full name",
+    placeholder: "Name",
   },
   {
     name: "prevPassword",
@@ -21,11 +25,12 @@ const inputs = [
 ];
 
 function UserProfile() {
-  const { user } = useSelector((state) => state.auth.user);
-  console.log(user);
+  const { user } = useSelector((state) => state.auth);
+  const [loader, setLoader] = useState(false);
+  const dispatch = useDispatch();
 
   const [userData, setUserData] = useState({
-    name: user?.name,
+    name: user?.user?.name,
     prevPassword: "",
     currentPassword: "",
   });
@@ -40,9 +45,51 @@ function UserProfile() {
     });
   }
 
-  async function handelUpdateUserInfo() {}
-
-  console.log(userData);
+  async function handelUpdateUserInfo(e) {
+    e.preventDefault();
+    if (userData.currentPassword.length && !userData.prevPassword.length) {
+      toast.error("Must need to put your previous password");
+      return;
+    }
+    if (!userData.name.length) {
+      toast.error("Name filed is empty");
+      return;
+    }
+    let modifiedData;
+    if (!userData.currentPassword.length) {
+      modifiedData = { name: userData.name };
+    } else {
+      modifiedData = userData;
+    }
+    setLoader(true);
+    try {
+      const data = await httpUserService.updateUserInfo(modifiedData, {
+        headers: {
+          authorization: `Bearer ${user?.token}`,
+        },
+      });
+      console.log(data);
+      const newUserObject = {
+        ...user,
+        user: { ...user.user, name: userData.name },
+      };
+      dispatch(addUser(newUserObject));
+      setUserData((prev) => {
+        return {
+          ...prev,
+          name: newUserObject.user.name,
+          prevPassword: "",
+          currentPassword: "",
+        };
+      });
+      toast.success(data.msg);
+    } catch (error) {
+      toast.error(error?.response?.data);
+      console.log(error?.response);
+    } finally {
+      setLoader(false);
+    }
+  }
 
   return (
     <DashboardLayout>
@@ -57,8 +104,12 @@ function UserProfile() {
             onSubmit={handelUpdateUserInfo}
             className="relative mx-5 w-full space-y-4 rounded border-2 bg-white p-4 shadow-lg md:w-[600px] lg:w-[600px]"
           >
-            {inputs.map((input) => (
-              <label htmlFor={input.name} className="flex flex-col space-y-2">
+            {inputs.map((input, i) => (
+              <label
+                key={i}
+                htmlFor={input.name}
+                className="flex flex-col space-y-2"
+              >
                 <span
                   id={input.name}
                   className="text-xs font-semibold text-gray-400"
@@ -70,19 +121,28 @@ function UserProfile() {
                   autoComplete="off"
                   value={userData[input.name]}
                   type={input.type}
-                  required
                   id={input.name}
                   name={input.name}
                   className="rounded-lg border-gray-300 text-sm"
                 />
               </label>
             ))}
-            <button
-              className="dashboard-btn w-full flex-1 border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
-              type="submit"
-            >
-              Update
-            </button>
+            {loader ? (
+              <div className="flex justify-center space-y-4 rounded border border-gray-300 p-2 shadow">
+                <LoadingButton
+                  styles="flex justify-center"
+                  svg="w-10 h-10 text-indigo-500"
+                />
+              </div>
+            ) : (
+              <button
+                disabled={loader}
+                className="dashboard-btn w-full flex-1 border-green-500 bg-green-400 hover:border-green-500 hover:text-green-500 disabled:cursor-not-allowed"
+                type="submit"
+              >
+                update
+              </button>
+            )}
           </form>
         </div>
       </section>
