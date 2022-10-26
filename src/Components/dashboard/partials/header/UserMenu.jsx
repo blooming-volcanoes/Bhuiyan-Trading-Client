@@ -112,7 +112,7 @@ function UserMenu() {
             <li>
               <Link
                 className="flex items-center py-1 px-3 text-sm font-medium text-indigo-500 hover:text-indigo-600"
-                to="/"
+                to="/admin/dashboard/user/profile"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 Settings

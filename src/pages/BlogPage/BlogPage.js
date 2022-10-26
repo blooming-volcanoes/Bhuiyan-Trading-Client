@@ -47,7 +47,7 @@ function BlogPage() {
         <section>
           {/* latest News Banner */}
 
-          <div className="">
+          <div className="my-10">
             <div className="mx-5 flex h-full min-h-[300px] max-w-4xl items-center md:mx-auto">
               <div className="mt-20">
                 <h1 className="text-4xl font-medium">{blog?.title}</h1>
