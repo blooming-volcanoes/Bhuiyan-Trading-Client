@@ -1,6 +1,6 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
-import React, { Suspense, useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import "./styles/css/style.css";
@@ -10,8 +10,11 @@ import LoadingButton from "./Components/custom/Buttons/LoadingButton";
 import "./Components/dashboard/charts/ChartjsConfig";
 import useCheckUser from "./hooks/useCheckUser";
 import NotFound from "./pages/NotFound";
-import AdminRoutes from "./routes/AdminRoutes";
-import PublicRoutes from "./routes/PublicRoutes";
+// import AdminRoutes from "./routes/AdminRoutes";
+// import PublicRoutes from "./routes/PublicRoutes";
+
+const AdminRoutes = lazy(() => import("./routes/AdminRoutes"));
+const PublicRoutes = lazy(() => import("./routes/PublicRoutes"));
 
 AOS.init();
 
