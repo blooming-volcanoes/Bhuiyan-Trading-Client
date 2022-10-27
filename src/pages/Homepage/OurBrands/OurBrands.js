@@ -25,7 +25,6 @@ function OurBrands() {
       try {
         const data = await httpBrandService.getAllBrands();
         setAllBrands(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       } finally {

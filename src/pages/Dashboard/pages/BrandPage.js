@@ -52,8 +52,7 @@ function BrandPage() {
     }
     setLoader(true);
     try {
-      const data = await httpBrandService.postBrand(userData);
-      console.log(data);
+      await httpBrandService.postBrand(userData);
       toast.success("Brand added Successfully");
       setIsLogoSubmitted(true);
       setUserData({
