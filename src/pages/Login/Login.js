@@ -41,7 +41,7 @@ function Login() {
         timer: 1500,
       });
       data.user.password = null;
-      console.log(data);
+
       dispatch(addUser(data));
     } catch (error) {
       dispatch(authLoading(false));
