@@ -7,6 +7,7 @@ import CateGoryUpload from "../pages/Dashboard/CategoryUpload/CateGoryUpload";
 import Contact from "../pages/Dashboard/Contact/Contact";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import GalleryUpload from "../pages/Dashboard/Gallery/GalleryUpload";
+import BrandPage from "../pages/Dashboard/pages/BrandPage";
 import HomePage from "../pages/Dashboard/pages/HomePage";
 import ProductEdit from "../pages/Dashboard/Products/ProductEdit";
 import Products from "../pages/Dashboard/Products/Products";
@@ -33,6 +34,7 @@ function AdminRoutes() {
       <Route path="/blog/edit/:slug" element={<EditBlog />} />
       <Route path="/blogs" element={<Blogs />} />
       <Route path="/pages/home" element={<HomePage />} />
+      <Route path="/pages/brand" element={<BrandPage />} />
       <Route path="/gallery/upload" element={<GalleryUpload />} />
       <Route path="/gallery" element={<Gallery />} />
       <Route path="*" element={<NotFound />} />

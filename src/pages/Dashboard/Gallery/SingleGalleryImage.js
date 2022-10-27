@@ -4,7 +4,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { BiCopy } from "react-icons/bi";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-function SingleGalleryImage({ handelDeleteImage, image }) {
+function SingleGalleryImage({ handelDeleteImage, brandId, image }) {
   const [copyUrl, setCopyUrl] = useState(null);
 
   function handelCopyUrl(image) {
@@ -60,7 +60,7 @@ function SingleGalleryImage({ handelDeleteImage, image }) {
         )}
 
         <div
-          onClick={() => handelDeleteImage(image)}
+          onClick={() => handelDeleteImage(image, brandId)}
           className="flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-[50%] bg-white transition-all hover:scale-110"
         >
           <AiOutlineDelete className="text-xl" />
