@@ -94,7 +94,7 @@ const Sliders = ({
           >
             <img
               className="rounded"
-              src="https://static.vecteezy.com/system/resources/previews/001/738/717/large_2x/cosmetic-white-background-for-product-presentation-free-photo.jpg"
+              src="https://api.bhuiyantrad.com/uploads/1666880778115-314988044-pngtree-gray-simple-gradient-background-image_557031.jpg"
               alt=""
             />
             <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-25 "></div>

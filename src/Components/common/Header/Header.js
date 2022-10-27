@@ -39,7 +39,7 @@ const Header = ({ color }) => {
       className="animate__fadeInDown animate__animated fixed top-0 z-10 w-full shadow-md"
     >
       <nav className="main-container items-center justify-between md:flex">
-        <div className="rounded-b-lg bg-white px-2 pt-5 pb-3">
+        <div className="px-2 pt-5 pb-3">
           <Link to="/">
             <LazyLoadImage
               height="100%"
