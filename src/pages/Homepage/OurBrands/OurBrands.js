@@ -1,11 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import adidas from "../../../assets/Images/adidas.png";
-import nike from "../../../assets/Images/nike.png";
-import twitter from "../../../assets/Images/twitter.png";
-import uber from "../../../assets/Images/uber.png";
-import youtube from "../../../assets/Images/youtube.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -15,32 +10,32 @@ import "swiper/css/pagination";
 import { Autoplay, FreeMode, Navigation, Pagination } from "swiper";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
+import httpBrandService from "./../../../services/brand.service";
 import "./OurBrands.css";
 
-const brands = [
-  {
-    name: "uber",
-    logo: uber,
-  },
-  {
-    name: "twitter",
-    logo: twitter,
-  },
-  {
-    name: "youtube",
-    logo: youtube,
-  },
-  {
-    name: "adidas",
-    logo: adidas,
-  },
-  {
-    name: "nike",
-    logo: nike,
-  },
-];
-
 function OurBrands() {
+  const [isBrandLoading, setIsBrandLoading] = useState(false);
+  const [allBrands, setAllBrands] = useState([]);
+
+  //   get All Brand
+  useEffect(() => {
+    async function getAlLBrands() {
+      setIsBrandLoading(true);
+      try {
+        const data = await httpBrandService.getAllBrands();
+        setAllBrands(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsBrandLoading(false);
+      }
+    }
+    getAlLBrands();
+  }, []);
+
+  console.log(allBrands);
   return (
     <section className="bg-gray-100 py-20">
       <div
@@ -53,41 +48,52 @@ function OurBrands() {
         </div>
 
         {/* Brand names */}
-        <Swiper
-          slidesPerView={1}
-          spaceBetween={30}
-          freeMode={true}
-          autoplay={{
-            delay: 2000,
-          }}
-          breakpoints={{
-            640: {
-              slidesPerView: 3,
-            },
-          }}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[FreeMode, Pagination, Autoplay, Navigation]}
-          className="mySwiper"
-        >
-          {brands.map((brand, i) => (
-            <SwiperSlide key={i}>
-              <div className="mx-auto w-[200px] ">
-                <LazyLoadImage
-                  effect="blur"
-                  className="grayscale"
-                  src={brand.logo}
-                />
-              </div>
-              {/* <img
+
+        {isBrandLoading ? (
+          <div className="flex h-full items-center justify-center space-y-4">
+            <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
+          </div>
+        ) : allBrands.length <= 0 ? (
+          <div className="mt-10 flex h-full  justify-center space-y-4 font-bold text-gray-500">
+            <h1 className="text-2xl">No Brand uploaded yet!!!</h1>
+          </div>
+        ) : (
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            freeMode={true}
+            autoplay={{
+              delay: 2000,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 3,
+              },
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[FreeMode, Pagination, Autoplay, Navigation]}
+            className="mySwiper"
+          >
+            {allBrands?.map((brand, i) => (
+              <SwiperSlide key={i}>
+                <div className="mx-auto w-[200px] ">
+                  <LazyLoadImage
+                    effect="blur"
+                    className="grayscale"
+                    src={brand.logo}
+                  />
+                </div>
+                {/* <img
                 className="mx-auto w-[200px] grayscale"
                 src={brand.logo}
                 alt=""
               /> */}
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </div>
     </section>
   );
