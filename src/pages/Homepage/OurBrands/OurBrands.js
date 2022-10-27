@@ -34,7 +34,6 @@ function OurBrands() {
     getAlLBrands();
   }, []);
 
-  console.log(allBrands);
   return (
     <section className="bg-gray-100 py-20">
       <div
