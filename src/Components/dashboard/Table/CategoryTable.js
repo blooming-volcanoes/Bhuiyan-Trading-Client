@@ -47,7 +47,7 @@ function CategoryTable({ handelCategoryDelete, theadData, tableData }) {
                           <span className="relative cursor-pointer">Edit</span>
                         </Link>
                         <button
-                          onClick={() => handelCategoryDelete(data.id)}
+                          onClick={() => handelCategoryDelete(data)}
                           className="relative inline-block px-3 py-1 font-semibold leading-tight text-white"
                         >
                           <span

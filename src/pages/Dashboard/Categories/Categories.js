@@ -59,11 +59,11 @@ function Categories() {
     deleteAllProductRelatedImages();
   }, [isDeleted]);
 
-  function handelCategoryDelete(categoryId) {
+  function handelCategoryDelete(category) {
     setProductRelatedImages([]);
     setCategoryRelatedProduct([]);
     // get all the products
-    httpProductService.getAllProductByCateGory(categoryId).then((data) => {
+    httpProductService.getAllProductByCateGory(category.id).then((data) => {
       setCategoryRelatedProduct(data);
       for (let i = 0; i < data.length; i++) {
         const product = data[i];
@@ -85,10 +85,30 @@ function Categories() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         httpCateGoryService
-          .deleteCategoryById(categoryId)
+          .deleteCategoryById(category.id)
           .then((data) => {
             Swal.fire("Saved!", "", "success");
             setIsDeleted(true);
+            category.galleryImg.forEach(async (element) => {
+              if (element?.split("/")[3] === "category") {
+                await httpCateGoryService.deleteCategoryImageByName(
+                  element?.split("/")[4]
+                );
+              } else {
+                await httpProductService.deleteGalleryImages(
+                  element.split("/")[4]
+                );
+              }
+            });
+            if (category.featureImg.split("/")[3] === "category") {
+              httpCateGoryService
+                .deleteCategoryImageByName(category.featureImg?.split("/")[4])
+                .then(() => {});
+            } else {
+              httpProductService
+                .deleteGalleryImages(category.featureImg?.split("/")[4])
+                .then(() => {});
+            }
             setProductRelatedImages([]);
             setCategoryRelatedProduct([]);
           })
