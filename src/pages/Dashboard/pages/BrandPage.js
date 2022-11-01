@@ -88,7 +88,6 @@ function BrandPage() {
 
   //   Delete Brand
   function handelDeleteBrand(image, id) {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       showDenyButton: true,

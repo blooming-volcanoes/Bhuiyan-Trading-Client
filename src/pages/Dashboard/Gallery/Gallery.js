@@ -26,7 +26,6 @@ function Gallery() {
           limit
         );
         isMuted && setAllImages(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       } finally {

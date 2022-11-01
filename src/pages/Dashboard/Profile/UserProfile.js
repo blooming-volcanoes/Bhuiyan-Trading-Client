@@ -68,7 +68,7 @@ function UserProfile() {
           authorization: `Bearer ${user?.token}`,
         },
       });
-      console.log(data);
+
       const newUserObject = {
         ...user,
         user: { ...user.user, name: userData.name },
