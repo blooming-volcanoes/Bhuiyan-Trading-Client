@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import httpProductService from "../../../services/product.service";
 
 function FeatureUplaod({
   file,
@@ -21,6 +22,19 @@ function FeatureUplaod({
     reader.onload = (readerEvent) => {
       setReadFeatureImage(readerEvent.target.result);
     };
+  }
+
+  async function handelChangeFeatureImage(e) {
+    if (readFeatureImage) {
+      await httpProductService.deleteGalleryImages(
+        readFeatureImage.split("/")[4]
+      );
+    }
+
+    e.stopPropagation();
+    setFile(null);
+    setReadFeatureImage(null);
+    setUploadedFeature(null);
   }
 
   return (
@@ -54,12 +68,7 @@ function FeatureUplaod({
           <button
             type="button"
             disabled={featureLoader}
-            onClick={(e) => {
-              e.stopPropagation();
-              setFile(null);
-              setReadFeatureImage(null);
-              setUploadedFeature(null);
-            }}
+            onClick={handelChangeFeatureImage}
             className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
           >
             Change
