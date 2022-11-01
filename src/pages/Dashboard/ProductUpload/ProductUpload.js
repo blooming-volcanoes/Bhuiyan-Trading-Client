@@ -196,6 +196,25 @@ function ProductUpload() {
       } catch (error) {
         setSubmitLoader(false);
         toast.error("Internal Server Error");
+
+        uploadedGalleryImage.forEach(async (img) => {
+          await httpProductService.deleteGalleryImages(img.split("/")[4]);
+        });
+
+        await httpProductService.deleteGalleryImages(
+          uploadedFeature.split("/")[4]
+        );
+
+        // Gallery Image States
+        setGalleryFiles(null);
+        setRenderGalleryImages(null);
+        setUploadedGalleryImage(null);
+        setTrackGalleryImageLength(null);
+        // Feature Image states
+        setFeatureFile(null);
+        setReadFeatureImage(null);
+        setUploadedFeature(null);
+
         console.log(error);
       }
       setSubmitLoader(false);
