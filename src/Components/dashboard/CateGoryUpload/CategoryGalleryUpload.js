@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import httpCateGoryService from "./../../../services/category.service";
 
 function CategoryGalleryUpload({
   setGalleryFiles,
@@ -36,6 +37,19 @@ function CategoryGalleryUpload({
     setRenderGalleryImages(res);
   };
 
+  async function handelClearAllGalleryImages(e) {
+    e.stopPropagation();
+    if (renderGalleryImages.length) {
+      renderGalleryImages.forEach(async (img) => {
+        await httpCateGoryService.deleteCategoryImageByName(img?.split("/")[4]);
+      });
+    }
+
+    setGalleryFiles(null);
+    setRenderGalleryImages(null);
+    setUploadedGalleryImage(null);
+  }
+
   return (
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
       <p className="text-center text-xs text-indigo-500">
@@ -71,12 +85,7 @@ function CategoryGalleryUpload({
           <button
             disabled={galleryLoader}
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setGalleryFiles(null);
-              setRenderGalleryImages(null);
-              setUploadedGalleryImage(null);
-            }}
+            onClick={handelClearAllGalleryImages}
             className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
           >
             Change
