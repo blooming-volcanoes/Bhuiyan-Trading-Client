@@ -11,6 +11,7 @@ const AllProducts = ({
   handelProductBySearch,
   isDataLimitDone,
 }) => {
+  console.log(filteredProductsBySubCate);
   const [searchParams, setSearchParams] = useSearchParams();
   return (
     <div className="main-container py-20">

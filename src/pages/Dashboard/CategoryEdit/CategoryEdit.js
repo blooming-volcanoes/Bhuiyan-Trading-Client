@@ -164,6 +164,12 @@ function CategoryEdit() {
       navigate(-1);
     } catch (error) {
       setUpdateLoader(false);
+      uploadedGalleryImage.forEach(async (img) => {
+        await httpCateGoryService.deleteCategoryImageByName(img?.split("/")[4]);
+      });
+      await httpCateGoryService.deleteCategoryImageByName(
+        uploadedFeature?.split("/")[4]
+      );
       toast.error("Internal Server Error");
       console.log(error);
     }

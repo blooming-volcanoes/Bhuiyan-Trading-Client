@@ -110,6 +110,25 @@ function CateGoryUpload() {
         } else {
           toast.error("Internal Server Error");
         }
+        uploadedGalleryImage.forEach(async (img) => {
+          await httpCateGoryService.deleteCategoryImageByName(
+            img?.split("/")[4]
+          );
+        });
+
+        await httpCateGoryService.deleteCategoryImageByName(
+          uploadedFeatureImage?.split("/")[4]
+        );
+        // Gallery Image States
+        setGalleryFiles(null);
+        setRenderGalleryImages(null);
+        setUploadedGalleryImage(null);
+        setTrackGalleryImageLength(null);
+
+        // Feature Image States
+        setFeatureFile(null);
+        setRenderFeatureImage(null);
+        setUploadedFeatureImage(null);
         console.log(error);
       }
       setSubmitLoader(false);
