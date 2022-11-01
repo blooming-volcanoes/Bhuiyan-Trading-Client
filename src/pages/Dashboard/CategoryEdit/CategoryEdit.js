@@ -106,10 +106,10 @@ function CategoryEdit() {
   const handelSubmit = async (e) => {
     e.preventDefault();
     if (
-      details?.subCategoryName?.trim().split(" ").length !==
+      details?.subCategoryName?.trim().split(",").length !==
       uploadedGalleryImage?.length
     ) {
-      const lengthOfNewSub = details.subCategoryName?.trim()?.split(" ").length;
+      const lengthOfNewSub = details.subCategoryName?.trim()?.split(",").length;
       toast.error(
         `Now you need to add ${lengthOfNewSub} Images in Gallery Images`
       );
@@ -126,7 +126,7 @@ function CategoryEdit() {
       currentSub =
         prevCategory.subCategoryName.join(";") +
         ";" +
-        details?.subCategoryName.trim().split(" ").join(";");
+        details?.subCategoryName.trim().split(",").join(";");
     } else {
       currentSub = prevCategory.subCategoryName.join(";");
     }
@@ -147,8 +147,9 @@ function CategoryEdit() {
         prevCategory.id,
         modifiedDetails
       );
-      if (data.msg) {
-        toast.success(data.msg);
+      toast.success(data.msg);
+
+      if (deletedFeatureImg) {
         await httpCateGoryService.deleteCategoryImageByName(
           deletedFeatureImg?.split("/")[4]
         );

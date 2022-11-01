@@ -76,11 +76,11 @@ function CateGoryUpload() {
 
   const onSubmit = async (userInput) => {
     if (
-      trackGalleryImageLength !== userInput.subCategoryName.split(" ")?.length
+      trackGalleryImageLength !== userInput.subCategoryName.split(",")?.length
     ) {
       toast.error(
         `You need to add only ${
-          userInput.subCategoryName.split(" ")?.length
+          userInput.subCategoryName.split(",")?.length
         } Images in Gallery`
       );
 
@@ -92,7 +92,7 @@ function CateGoryUpload() {
         const modifiedData = {
           ...userInput,
           categoryName: userInput.categoryName.trim(),
-          subCategoryName: userInput.subCategoryName.split(" ").join(";"),
+          subCategoryName: userInput.subCategoryName.split(",").join(";"),
           featureImg: uploadedFeatureImage,
           galleryImg: uploadedGalleryImage?.join(";"),
         };
