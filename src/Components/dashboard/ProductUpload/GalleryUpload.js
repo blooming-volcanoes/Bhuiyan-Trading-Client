@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import httpProductService from "../../../services/product.service";
 
 function GalleryUpload({
   setGalleryFiles,
@@ -55,6 +56,19 @@ function GalleryUpload({
     }
   }, [selectMulti?.length]);
 
+  async function handelClearAllGalleryImages(e) {
+    e.stopPropagation();
+    if (renderGalleryImages.length) {
+      renderGalleryImages.forEach(async (img) => {
+        await httpProductService.deleteGalleryImages(img.split("/")[4]);
+      });
+    }
+    setSelectMulti([]);
+    setGalleryFiles(null);
+    setRenderGalleryImages(null);
+    setUploadedGalleryImage(null);
+  }
+
   return (
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
       <div
@@ -105,13 +119,7 @@ function GalleryUpload({
           <button
             disabled={galleryLoader}
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setSelectMulti([]);
-              setGalleryFiles(null);
-              setRenderGalleryImages(null);
-              setUploadedGalleryImage(null);
-            }}
+            onClick={handelClearAllGalleryImages}
             className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
           >
             Clear All

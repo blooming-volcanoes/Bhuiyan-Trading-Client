@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import httpCateGoryService from "../../../services/category.service";
 
 function CateGoryFeature({
   featureFile,
@@ -22,6 +23,19 @@ function CateGoryFeature({
       setRenderFeatureImage(readerEvent.target.result);
     };
   };
+
+  async function handelClearAllFeatureImages(e) {
+    e.stopPropagation();
+    if (renderFeatureImage) {
+      await httpCateGoryService.deleteCategoryImageByName(
+        renderFeatureImage?.split("/")[4]
+      );
+    }
+
+    setRenderFeatureImage(null);
+    setFeatureFile(null);
+    setUploadedFeatureImage(null);
+  }
 
   return (
     <div className="space-y-4 rounded border border-gray-300 p-2 shadow">
@@ -54,12 +68,7 @@ function CateGoryFeature({
           <button
             disabled={featureImageLoader}
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setRenderFeatureImage(null);
-              setFeatureFile(null);
-              setUploadedFeatureImage(null);
-            }}
+            onClick={handelClearAllFeatureImages}
             className="dashboard-btn border-red-500 bg-red-400 hover:border-red-500 hover:text-red-500 disabled:cursor-not-allowed"
           >
             Change
