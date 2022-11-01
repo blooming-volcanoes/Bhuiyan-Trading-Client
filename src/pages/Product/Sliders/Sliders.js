@@ -26,7 +26,7 @@ const Sliders = ({
         const data = await httpCateGoryService.getProductBySubCategory(
           cate.title.trim()
         );
-        if (data.length) {
+        if (data?.length) {
           setIsIncludes((prev) => {
             return {
               ...prev,
