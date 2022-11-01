@@ -1,5 +1,4 @@
 import React from "react";
-import { IoIosArrowDroprightCircle, IoIosSearch } from "react-icons/io";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
@@ -8,32 +7,12 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 const AllProducts = ({
   products,
   filteredProductsBySubCate,
-  handelProductBySearch,
   isDataLimitDone,
 }) => {
   console.log(filteredProductsBySubCate);
   const [searchParams, setSearchParams] = useSearchParams();
   return (
     <div className="main-container py-20">
-      <div className="flex flex-col items-center justify-between lg:flex-row">
-        {/* title and serch box */}
-        <div className="mb-4 flex items-center justify-end pl-2 md:pl-0">
-          <IoIosArrowDroprightCircle className="text-xl font-bold" />
-          <p className="ml-2 text-lg font-bold">All Products</p>
-        </div>
-        {/* search box */}
-        <div className="relative mb-10 flex pr-2 md:pr-0">
-          <input
-            className="w-full rounded-xl border-slate-300 sm:w-80 md:w-80 lg:w-80"
-            type="text"
-            onChange={(e) => handelProductBySearch(e.target.value)}
-            name="searchproduct"
-            id=""
-            placeholder="Search products"
-          />
-          <IoIosSearch className="absolute right-4 top-3 text-xl font-bold lg:right-2" />
-        </div>
-      </div>
       {/* products */}
       <div className="mb-10 grid grid-cols-1 gap-y-3 gap-x-10 md:grid-cols-2 md:gap-y-4 md:gap-x-5 lg:grid-cols-4 lg:gap-y-9 lg:gap-x-9">
         {products.length > 0 ? (
