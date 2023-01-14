@@ -74,22 +74,23 @@ function OurBrands() {
             modules={[FreeMode, Pagination, Autoplay, Navigation]}
             className="mySwiper"
           >
-            {allBrands?.map((brand, i) => (
-              <SwiperSlide key={i}>
-                <div className="mx-auto w-[200px] ">
-                  <LazyLoadImage
-                    effect="blur"
-                    className="grayscale"
+            {allBrands.length > 0 &&
+              allBrands?.map((brand, i) => (
+                <SwiperSlide key={i}>
+                  <div className="mx-auto w-[200px] ">
+                    <LazyLoadImage
+                      effect="blur"
+                      className="grayscale"
+                      src={brand.logo}
+                    />
+                  </div>
+                  <img
+                    className="mx-auto w-[200px] grayscale"
                     src={brand.logo}
+                    alt=""
                   />
-                </div>
-                {/* <img
-                className="mx-auto w-[200px] grayscale"
-                src={brand.logo}
-                alt=""
-              /> */}
-              </SwiperSlide>
-            ))}
+                </SwiperSlide>
+              ))}
           </Swiper>
         )}
       </div>
