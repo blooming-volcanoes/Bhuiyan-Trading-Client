@@ -184,20 +184,21 @@ function BrandPage() {
             <div className="flex h-full items-center justify-center space-y-4">
               <LoadingButton styles="" svg="w-16 h-16 text-indigo-500" />
             </div>
-          ) : allBrands.length <= 0 ? (
+          ) : allBrands?.length <= 0 ? (
             <div className="mt-10 flex h-full  justify-center space-y-4 font-bold text-gray-500">
               <h1 className="text-2xl">No Brand uploaded yet!!!</h1>
             </div>
           ) : (
             <div className="mx-5 flex flex-wrap items-center justify-between space-x-4">
-              {allBrands.map((brand) => (
-                <SingleGalleryImage
-                  handelDeleteImage={handelDeleteBrand}
-                  brandId={brand?.id}
-                  key={brand?.name}
-                  image={brand?.logo}
-                />
-              ))}
+              {allBrands?.length > 0 &&
+                allBrands?.map((brand) => (
+                  <SingleGalleryImage
+                    handelDeleteImage={handelDeleteBrand}
+                    brandId={brand?.id}
+                    key={brand?.name}
+                    image={brand?.logo}
+                  />
+                ))}
             </div>
           )}
         </div>
