@@ -119,7 +119,7 @@ const Sliders = ({
           >
             <img
               className="rounded"
-              src="https://api.bhuiyantrad.com/uploads/1666880778115-314988044-pngtree-gray-simple-gradient-background-image_557031.jpg"
+              src="https://i.ibb.co/qk6LRfc/12628435-5026563.jpg"
               alt=""
             />
             <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full rounded bg-black bg-opacity-25 "></div>
