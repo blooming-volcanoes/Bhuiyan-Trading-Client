@@ -7,7 +7,6 @@ import logo from "../../../assets/Images/logo.png";
 import { removeUser } from "./../../../redux/auth/authAction";
 let Links = [
   { name: "Home", link: "/" },
-  { name: "About Us", link: "/about-us" },
   { name: "Latest News", link: "/latestNews?page=1" },
   { name: "Contact Us", link: "/contact" },
 ];
