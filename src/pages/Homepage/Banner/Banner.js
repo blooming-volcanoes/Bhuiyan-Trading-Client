@@ -1,5 +1,4 @@
-// import BannerImg from "../../../assets/Images/bg.jpg";
-import whiteBg from "../../../assets/Images/white-bg.jpg";
+import whiteBg from "../../../assets/Images/main-bg.jpeg";
 import LoadingButton from "../../../Components/custom/Buttons/LoadingButton";
 
 function Banner({ headerData, loader }) {

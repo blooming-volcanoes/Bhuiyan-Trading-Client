@@ -46,7 +46,7 @@ const Header = ({ color }) => {
               width="100%"
               className="h-16 object-contain md:w-[100px] lg:w-[100px]"
               effect="blur"
-              src={headerData?.logo || logo}
+              src={logo}
             />
             {/* <img
               className="h-16  object-contain md:w-[100px] lg:w-[100px]"
