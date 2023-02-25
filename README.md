@@ -1,6 +1,9 @@
-# Marine Supply Store
+# Bhuiyan Trading
 
 This is an e-commerce site that stocks various marine automation, navigation, hydraulic pumps, and motors. The project was built using ReactJS, Redux, NodeJS, React-Router, MySQL, and Figma.
+
+![image](https://user-images.githubusercontent.com/80216813/221365280-6cd6d176-10f3-497b-b80c-feec0413c3a8.png)
+
 
 ## Features
 
